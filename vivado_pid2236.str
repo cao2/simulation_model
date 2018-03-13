@@ -1,0 +1,370 @@
+/*
+
+Vivado v2017.2 (64-bit)
+SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+
+Process ID: 2236
+License: Customer
+
+Current time: 	8/3/17 12:08:56 PM EDT
+Time zone: 	Eastern Standard Time (America/New_York)
+
+OS: Windows 7
+OS Version: 6.1
+OS Architecture: amd64
+Available processors (cores): 8
+
+Screen size: 1920x1080
+Screen resolution (DPI): 96
+Available screens: 1
+Available disk space: 497 GB
+Default font: family=Dialog,name=Dialog,style=plain,size=12
+
+Java version: 	1.8.0_112 64-bit
+Java home: 	C:/Xilinx/Vivado/2017.2/tps/win64/jre
+JVM executable location: 	C:/Xilinx/Vivado/2017.2/tps/win64/jre/bin/java.exe
+Java library paths: C:/Xilinx/Vivado/2017.2/bin/unwrapped/win64.o;C:/Windows/Sun/Java/bin;C:/Windows/system32;C:/Windows;C:/Xilinx/Vivado/2017.2/bin;C:/Xilinx/Vivado/2017.2/lib/win64.o;C:/Xilinx/Vivado/2017.2/tps/win64/jre/bin/server;C:/Xilinx/Vivado/2017.2/tps/win64/jre/bin;C:/Xilinx/SDK/2017.2/bin;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/bin/nt64;C:/Xilinx/Vivado/2017.2/ids_lite/ISE/lib/nt64;C:/Xilinx/Vivado_HLS/2017.2/bin;C:/Program Files (x86)/AMD APP/bin/x86_64;C:/Program Files (x86)/AMD APP/bin/x86;C:/Windows/system32;C:/Windows;C:/Windows/System32/Wbem;C:/Windows/System32/WindowsPowerShell/v1.0/;C:/Program Files/MATLAB/R2013a/runtime/win64;C:/Program Files/MATLAB/R2013a/bin;C:/Program Files/Microsoft/Web Platform Installer/;C:/Program Files (x86)/Microsoft ASP.NET/ASP.NET Web Pages/v1.0/;C:/Program Files (x86)/Windows Kits/8.0/Windows Performance Toolkit/;C:/Program Files/Microsoft SQL Server/110/Tools/Binn/;C:/Program Files (x86)/ATI Technologies/ATI.ACE/Core-Static;C:/Program Files (x86)/PharosSystems/Core;C:/MinGW/bin;C:/iverilog/bin;C:/iverilog/gtkwave/bin;C:/Program Files (x86)/Notepad++;C:/Program Files (x86)/Skype/Phone/;C:/Xilinx/Vivado/2017.2/tps/mingw/6.2.0/win64.o/nt/bin;C:/Xilinx/Vivado/2017.2/tps/mingw/6.2.0/win64.o/nt/libexec/gcc/x86_64-w64-mingw32/6.2.0;.
+
+User name: 	cao2
+User home directory: C:/Users/cao2
+User working directory: C:/Users/cao2/Desktop/soci/soci/soc_ic
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: C:/Xilinx/Vivado
+HDI_APPROOT: C:/Xilinx/Vivado/2017.2
+RDI_DATADIR: C:/Xilinx/Vivado/2017.2/data
+RDI_BINDIR: C:/Xilinx/Vivado/2017.2/bin
+
+User preferences location: C:/Users/cao2/AppData/Roaming/Xilinx/Vivado
+Vivado preferences directory: C:/Users/cao2/AppData/Roaming/Xilinx/Vivado/2017.2/vivado.xml
+Vivado layouts directory: C:/Users/cao2/AppData/Roaming/Xilinx/Vivado/2017.2/layouts
+PlanAhead jar location: 	C:/Xilinx/Vivado/2017.2/lib/classes/planAhead.jar
+Vivado Look & Feel: 	[Synthetica - the extended Synth Look and Feel. - ui.g.i.H]
+Engine tmp dir: 	C:/Users/cao2/Desktop/soci/soci/soc_ic/.Xil/Vivado-2236-ENB222-PC2
+
+GUI allocated memory:	180 MB
+GUI max memory:		3,052 MB
+Engine allocated memory: 633 MB
+
+*/
+
+// TclEventType: START_GUI
+// TclEventType: PROJECT_OPEN_DIALOG
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// [GUI Memory]: 54 MB (+53706kb) [00:00:05]
+// [Engine Memory]: 534 MB (+408168kb) [00:00:05]
+// bs:g (cg:JFrame):  Open Project : addNotify
+// Opening Vivado Project: C:\Users\cao2\Desktop\soci\soci\soc_ic\soc_ic.xpr. Version: Vivado v2017.2 
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+// Tcl Message: open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_COMPLETED
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [Engine Memory]: 629 MB (+72286kb) [00:00:08]
+// [GUI Memory]: 69 MB (+12923kb) [00:00:08]
+// [GUI Memory]: 81 MB (+9006kb) [00:00:09]
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'. 
+// Project name: soc_ic; location: C:/Users/cao2/Desktop/soci/soci/soc_ic; part: xc7a35tcpg236-1
+// HMemoryUtils.trashcanNow. Engine heap size: 633 MB. GUI used memory: 39 MB. Current time: 8/3/17 12:08:56 PM EDT
+dismissDialog("Open Project"); // bs:g (cg:JFrame)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 15 seconds
+selectButton(PAResourceQtoS.SyntheticaStateMonitor_CANCEL, "Cancel"); // h:k (JPanel:JComponent, cg:JFrame)
+// bs:g (cg:JFrame):  Resetting Runs : addNotify
+selectButton("PAResourceQtoS.StateMonitor_OK_TO_CANCEL_YOUR_RUNNING_SYNTHESIS_Cancel Process", "Cancel Process"); // JButton:AbstractButton (JPanel:JComponent, G:JDialog)
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// Tcl Message: reset_run synth_2 
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+dismissDialog("Resetting Runs"); // bs:g (cg:JFrame)
+// PAPropertyPanels.initPanels (proc.vhd) elapsed time: 0.2s
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, proc(rtl) (proc.vhd)]", 1, true); // B:i (D:JPanel, cg:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, proc(rtl) (proc.vhd)]", 1, true, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, proc(rtl) (proc.vhd), cache_ent : l1_cache(rtl) (cache.vhd)]", 2, true); // B:i (D:JPanel, cg:JFrame) - Node
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, proc(rtl) (proc.vhd), cache_ent : l1_cache(rtl) (cache.vhd), snp_res_fifo : fifo(rtl) (fifo.vhd)]", 3, false, false, false, false, false, true); // B:i (D:JPanel, cg:JFrame) - Double Click
+// HMemoryUtils.trashcanNow. Engine heap size: 656 MB. GUI used memory: 42 MB. Current time: 8/3/17 12:09:26 PM EDT
+// Elapsed time: 70 seconds
+selectCodeEditor("cache.vhd", 247, 415); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey(null, null, 'z');
+selectCodeEditor("cache.vhd", 172, 414, false, false, false, true, false); // bI:J (JPanel:JComponent, cg:JFrame) - Popup Trigger
+selectMenuItem(RDIResourceCommand.RDICommands_CUT, "Cut"); // ac:JMenuItem (ai:JPopupMenu, Popup:JWindow)
+selectCodeEditor("cache.vhd", 314, 22); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "cache.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 117, 46); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 132, 300); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 83, 314); // bI:J (JPanel:JComponent, cg:JFrame)
+// [GUI Memory]: 86 MB (+1442kb) [00:02:08]
+selectCodeEditor("cache.vhd", 78, 316); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 112, 320); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 134, 348); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 110, 332); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 316, 94); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "cache.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 81, 261); // bI:J (JPanel:JComponent, cg:JFrame)
+// [Engine Memory]: 665 MB (+4328kb) [00:02:35]
+selectCodeEditor("cache.vhd", 76, 315); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 116, 316); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 111, 315); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 111, 315, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 111, 314); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 116, 328); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 116, 328, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 116, 328); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 108, 318); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 317, 113); // bI:J (JPanel:JComponent, cg:JFrame)
+typeControlKey((HResource) null, "cache.vhd", 'v'); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 81, 246); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// TclEventType: DG_GRAPH_GENERATED
+// Elapsed time: 30 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Simulation, Run Simulation]", 10, false); // u:M (JViewport:JComponent, cg:JFrame)
+expandTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Implementation]", 5); // u:M (JViewport:JComponent, cg:JFrame)
+selectMenuItem(PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL, "Run Behavioral Simulation"); // ac:JMenuItem (ai:JPopupMenu, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_SIMULATION_RUN_BEHAVIORAL
+// e:bs (cg:JFrame):  Run Simulation : addNotify
+// TclEventType: LAUNCH_SIM
+// TclEventType: FILE_SET_OPTIONS_CHANGE
+// Tcl Message: launch_simulation 
+// Tcl Message: INFO: [SIM-utils-51] Simulation object is 'sim_1' INFO: [SIM-utils-54] Inspecting design source files for 'top' in fileset 'sim_1'... INFO: [USF-XSim-97] Finding global include files... INFO: [USF-XSim-98] Fetching design files from 'sim_1'... INFO: [USF-XSim-2] XSim::Compile design INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav' 
+// TclEventType: LAUNCH_SIM_LOG
+// Tcl Message: INFO: [USF-XSim-69] 'compile' step finished in '1' seconds INFO: [USF-XSim-3] XSim::Elaborate design INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav' 
+// TclEventType: LAUNCH_SIM
+// TclEventType: LOAD_FEATURE
+// [GUI Memory]: 92 MB (+1374kb) [00:03:30]
+// Tcl Message: run_program: Time (s): cpu = 00:00:01 ; elapsed = 00:00:05 . Memory (MB): peak = 898.738 ; gain = 0.000 
+// Tcl Message: INFO: [USF-XSim-69] 'elaborate' step finished in '6' seconds INFO: [USF-XSim-4] XSim::Simulate design INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav' INFO: [USF-XSim-98] *** Running xsim 
+// Tcl Message:    with args "top_behav -key {Behavioral:sim_1:Functional:top} -tclbatch {top.tcl} -log {simulate.log}" 
+// Tcl Message: INFO: [USF-XSim-8] Loading simulator feature 
+// Tcl Message: Vivado Simulator 2017.2 
+// TclEventType: SIMULATION_CREATE_SIMULATION_OBJECT
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// Tcl Message: Time resolution is 1 ps 
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: WAVEFORM_OPEN_WCFG
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Waveform: addNotify
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// Tcl Message: source top.tcl 
+// Tcl Message: # set curr_wave [current_wave_config] # if { [string length $curr_wave] == 0 } { #   if { [llength [get_objects]] > 0} { #     add_wave / #     set_property needs_save false [current_wave_config] #   } else { #      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console." #   } # } 
+// TclEventType: WAVEFORM_MODEL_EVENT
+// HMemoryUtils.trashcanNow. Engine heap size: 675 MB. GUI used memory: 51 MB. Current time: 8/3/17 12:12:18 PM EDT
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: WAVEFORM_UPDATE_TITLE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// TclEventType: SIMULATION_CLEAR_CURRENT_LINE
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: WAVEFORM_UPDATE_COMMANDS
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: WAVEFORM_MODEL_EVENT
+// TclEventType: WAVEFORM_UPDATE_WAVEFORM
+// TclEventType: SIMULATION_UPDATE_LATEST_TIME
+// TclEventType: SIMULATION_CURRENT_SCOPE_CHANGED
+// TclEventType: SIMULATION_UPDATE_OBJECT_TREE
+// TclEventType: SIMULATION_UPDATE_SIMULATION_STATE
+// Tcl Message: # run 1000ns 
+// Tcl Message: INFO: [USF-XSim-96] XSim completed. Design snapshot 'top_behav' loaded. INFO: [USF-XSim-97] XSim simulation ran for 1000ns 
+// Tcl Message: launch_simulation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:10 . Memory (MB): peak = 901.027 ; gain = 2.289 
+// 'd' command handler elapsed time: 10 seconds
+// Elapsed time: 10 seconds
+dismissDialog("Run Simulation"); // e:bs (cg:JFrame)
+selectButton(PAResourceTtoZ.TaskBanner_CLOSE, (String) null); // k:JideButton (JPanel:JComponent, cg:JFrame)
+closeTask("Simulation", "Behavioral Simulation - Functional - sim_1 - top", "DesignTask.SIMULATION");
+// x:aN (cg:JFrame): Confirm Close: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, x:aN)
+// TclEventType: WAVEFORM_CLOSE_WCFG
+// TclEventType: SIMULATION_CLOSE_SIMULATION
+// [GUI Memory]: 101 MB (+4620kb) [00:03:37]
+// Tcl Message: close_sim 
+// Tcl Message: INFO: [Simtcl 6-16] Simulation closed 
+dismissDialog("Confirm Close"); // x:aN (cg:JFrame)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 14, false); // u:M (JViewport:JComponent, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bs:g (cg:JFrame):  Starting Design Runs : addNotify
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_2 
+// Tcl Message: [Thu Aug  3 12:12:27 2017] Launched synth_2... Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log 
+dismissDialog("Starting Design Runs"); // bs:g (cg:JFrame)
+// [Engine Memory]: 715 MB (+17849kb) [00:03:54]
+// HMemoryUtils.trashcanNow. Engine heap size: 715 MB. GUI used memory: 45 MB. Current time: 8/3/17 12:12:41 PM EDT
+// Elapsed time: 26 seconds
+selectCodeEditor("cache.vhd", 70, 333); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 70, 333, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 198, 391); // bI:J (JPanel:JComponent, cg:JFrame)
+selectTab(PAResourceItoN.LogView_TABBED_PANE, (HResource) null, "Synthesis", 0); // i:JideTabbedPane (A:aJ, cg:JFrame)
+// Elapsed time: 83 seconds
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 199, 196); // n:bI (JPanel:JComponent, cg:JFrame)
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 199, 196, false, false, false, false, true); // n:bI (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 150, 197); // n:bI (JPanel:JComponent, cg:JFrame)
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 150, 197, false, false, false, false, true); // n:bI (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 152, 248); // n:bI (JPanel:JComponent, cg:JFrame)
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 152, 248, false, false, false, false, true); // n:bI (JPanel:JComponent, cg:JFrame) - Double Click
+// Elapsed time: 26 seconds
+selectCodeEditor(PAResourceItoN.LogMonitor_MONITOR, 328, 218); // n:bI (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 25 seconds
+selectTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_2 ; constrs_1 ; Running synth_design... ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ; Thu Aug 03 12:12:38 EDT 2017 ; 00:00:00 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7a35tcpg236-1 ; Vivado Synthesis Defaults", 2, (String) null, 16, true); // V:af (JViewport:JComponent, cg:JFrame) - Node
+// PAPropertyPanels.initPanels (synth_2) elapsed time: 0.4s
+selectTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_2 ; constrs_1 ; Running synth_design... ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ; Thu Aug 03 12:12:38 EDT 2017 ; 00:00:00 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7a35tcpg236-1 ; Vivado Synthesis Defaults", 2, (String) null, 16, true, false, false, false, false, true); // V:af (JViewport:JComponent, cg:JFrame) - Double Click - Node
+selectTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_2 ; constrs_1 ; Running synth_design... ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ; Thu Aug 03 12:12:38 EDT 2017 ; 00:00:00 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7a35tcpg236-1 ; Vivado Synthesis Defaults", 2, "Running synth_design...", 2, true); // V:af (JViewport:JComponent, cg:JFrame) - Node
+expandTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_2 ; constrs_1 ; Running synth_design... ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ; Thu Aug 03 12:12:38 EDT 2017 ; 00:00:00 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7a35tcpg236-1 ; Vivado Synthesis Defaults", 2); // V:af (JViewport:JComponent, cg:JFrame)
+selectTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_2 ; constrs_1 ; Running synth_design... ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ;  ; Thu Aug 03 12:12:38 EDT 2017 ; 00:00:00 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7a35tcpg236-1 ; Vivado Synthesis Defaults", 2, "Running synth_design...", 2, true, false, false, false, false, true); // V:af (JViewport:JComponent, cg:JFrame) - Double Click - Node
+selectTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_1 ; constrs_1 ; Synthesis Out-of-date ;  ;  ;  ;  ;  ;  ;  ; 836335 ; 450230 ; 0.0 ; 0 ; 0 ; Thu Jul 13 17:55:06 EDT 2017 ; 07:52:40 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7z020clg484-1 ; Vivado Synthesis Defaults", 0, "synth_1", 0, true); // V:af (JViewport:JComponent, cg:JFrame) - Node
+selectTreeTable(PAResourceEtoH.ExpRunTreePanel_EXP_RUN_TREE_TABLE, "synth_1 ; constrs_1 ; Synthesis Out-of-date ;  ;  ;  ;  ;  ;  ;  ; 836335 ; 450230 ; 0.0 ; 0 ; 0 ; Thu Jul 13 17:55:06 EDT 2017 ; 07:52:40 ; Vivado Synthesis Defaults (Vivado Synthesis 2017) ; xc7z020clg484-1 ; Vivado Synthesis Defaults", 0, "synth_1", 0, true, false, false, false, true, false); // V:af (JViewport:JComponent, cg:JFrame) - Popup Trigger - Node
+selectMenuItem(RDIResourceCommand.RDICommands_DELETE, "Delete"); // ac:JMenuItem (ai:JPopupMenu, cg:JFrame)
+// Run Command: RDIResourceCommand.RDICommands_DELETE
+// e:g (cg:JFrame): Delete Runs: addNotify
+selectButton(RDIResource.BaseDialog_OK, "Delete"); // a:JButton (JPanel:JComponent, e:g)
+// e:g (cg:JFrame): Delete Runs: addNotify
+// bs:g (e:g):  Deleting Runs : addNotify
+// TclEventType: RUN_DELETE
+// Tcl Message: delete_runs "synth_1" 
+// TclEventType: RUN_DELETE
+// Tcl Message: INFO: [Vivado 12-3261] Dependent run, 'impl_1', will be deleted with parent run, 'synth_1'. 
+// TclEventType: RUN_DELETE
+dismissDialog("Deleting Runs"); // bs:g (e:g)
+// Elapsed time: 18 seconds
+selectCheckBox(PAResourceItoN.MsgView_INFORMATION_MESSAGES, (String) null, false); // g:JCheckBox (JPanel:JComponent, cg:JFrame): FALSE
+// Elapsed time: 76 seconds
+selectCodeEditor("cache.vhd", 126, 269); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 126, 269, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 216, 364); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 216, 364, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 215, 373); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 238, 367); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 238, 366, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 239, 366); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 509, 288); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 20 seconds
+selectCodeEditor("cache.vhd", 144, 229); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 144, 229, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+// Elapsed time: 20 seconds
+selectCodeEditor("cache.vhd", 293, 349); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 293, 349, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 367, 373); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 212, 125); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 213, 125, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 213, 125); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 131, 111); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 131, 111, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 131, 111); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 155, 78); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 155, 78, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 155, 78); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 179, 111); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 179, 111, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 179, 111); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 241, 364); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 26 seconds
+selectCodeEditor("cache.vhd", 182, 364); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 181, 383); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 183, 313); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 198, 225); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 198, 225, false, false, false, false, true); // bI:J (JPanel:JComponent, cg:JFrame) - Double Click
+selectCodeEditor("cache.vhd", 198, 225); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 14 seconds
+selectCodeEditor("cache.vhd", 182, 332); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 181, 350); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 124, 265); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 25 seconds
+selectButton(PAResourceQtoS.SyntheticaStateMonitor_CANCEL, "Cancel"); // h:k (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_ANALYSIS_MSG_RESET
+// bs:g (cg:JFrame):  Resetting Runs : addNotify
+selectButton("PAResourceQtoS.StateMonitor_OK_TO_CANCEL_YOUR_RUNNING_SYNTHESIS_Cancel Process", "Cancel Process"); // JButton:AbstractButton (JPanel:JComponent, G:JDialog)
+// TclEventType: RUN_MODIFY
+// TclEventType: RUN_RESET
+// Tcl Message: reset_run synth_2 
+// TclEventType: RUN_RESET
+// TclEventType: RUN_MODIFY
+// TclEventType: DG_GRAPH_GENERATED
+dismissDialog("Resetting Runs"); // bs:g (cg:JFrame)
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, Synthesis, Run Synthesis]", 14, false); // u:M (JViewport:JComponent, cg:JFrame)
+// Run Command: PAResourceCommand.PACommandNames_RUN_SYNTHESIS
+// bs:g (cg:JFrame):  Starting Design Runs : addNotify
+// TclEventType: RUN_LAUNCH
+// TclEventType: RUN_MODIFY
+// Tcl Message: launch_runs synth_2 
+// Tcl Message: [Thu Aug  3 12:19:41 2017] Launched synth_2... Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log 
+dismissDialog("Starting Design Runs"); // bs:g (cg:JFrame)
+// Elapsed time: 404 seconds
+selectTree(PAResourceEtoH.FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE, "[, RTL Analysis, Open Elaborated Design]", 12, true); // u:M (JViewport:JComponent, cg:JFrame) - Node
+// Run Command: PAResourceCommand.PACommandNames_GOTO_RTL_DESIGN
+// x:aN (cg:JFrame): Elaborate Design: addNotify
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a:JButton (JPanel:JComponent, x:aN)
+// bs:g (cg:JFrame):  Open Elaborated Design : addNotify
+dismissDialog("Elaborate Design"); // x:aN (cg:JFrame)
+// TclEventType: ELABORATE_START
+// Tcl Message: synth_design -rtl -name rtl_1 
+// Tcl Message: Command: synth_design -rtl -name rtl_1 Starting synth_design Using part: xc7a35tcpg236-1 Top: proc 
+// HMemoryUtils.trashcanNow. Engine heap size: 816 MB. GUI used memory: 51 MB. Current time: 8/3/17 12:26:31 PM EDT
+// [Engine Memory]: 816 MB (+68595kb) [00:17:46]
+// [Engine Memory]: 876 MB (+19900kb) [00:17:51]
+// [Engine Memory]: 1,019 MB (+104094kb) [00:17:56]
+// HMemoryUtils.trashcanNow. Engine heap size: 1,362 MB. GUI used memory: 49 MB. Current time: 8/3/17 12:26:46 PM EDT
+// [Engine Memory]: 1,432 MB (+378854kb) [00:18:01]
+// [Engine Memory]: 2,403 MB (+943752kb) [00:18:06]
+// [Engine Memory]: 2,702 MB (+187323kb) [00:18:11]
+// Elapsed time: 161 seconds
+selectButton(RDIResource.ProgressDialog_BACKGROUND, "Background"); // a:JButton (JPanel:JComponent, bs:g)
+// 'dH' command handler elapsed time: 162 seconds
+// Elapsed time: 17 seconds
+selectCodeEditor("cache.vhd", 21, 219); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 67, 112); // bI:J (JPanel:JComponent, cg:JFrame)
+// Elapsed time: 14 seconds
+selectCodeEditor("cache.vhd", 53, 230); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 116, 358); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 145, 371); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 238, 382); // bI:J (JPanel:JComponent, cg:JFrame)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+selectButton("HStatusBar_ProgressStatusItem_Cancel", "Cancel"); // NullButton:JButton (NullPanel:JPanel, cg:JFrame)
+// Elapsed time: 13 seconds
+selectCodeEditor("cache.vhd", 141, 355); // bI:J (JPanel:JComponent, cg:JFrame)
+selectCodeEditor("cache.vhd", 238, 391); // bI:J (JPanel:JComponent, cg:JFrame)
+selectButton(PAResourceQtoS.SyntheticaStateMonitor_CANCEL, "Cancel"); // h:k (JPanel:JComponent, cg:JFrame)
+// HMemoryUtils.trashcanNow. Engine heap size: 2,727 MB. GUI used memory: 49 MB. Current time: 8/3/17 12:30:51 PM EDT
+// HMemoryUtils.trashcanNow. Engine heap size: 2,780 MB. GUI used memory: 48 MB. Current time: 8/3/17 12:31:06 PM EDT
+// HMemoryUtils.trashcanNow. Engine heap size: 2,807 MB. GUI used memory: 48 MB. Current time: 8/3/17 12:31:21 PM EDT
+// [Engine Memory]: 2,844 MB (+6574kb) [00:22:41]
+// HMemoryUtils.trashcanNow. Engine heap size: 2,904 MB. GUI used memory: 49 MB. Current time: 8/3/17 12:31:56 PM EDT
+// [Engine Memory]: 3,042 MB (+58540kb) [00:23:16]
+// [Engine Memory]: 3,326 MB (+138155kb) [00:23:21]
+// HMemoryUtils.trashcanNow. Engine heap size: 3,384 MB. GUI used memory: 49 MB. Current time: 8/3/17 12:32:11 PM EDT
+// [Engine Memory]: 4,036 MB (+570908kb) [00:23:31]
+// [Engine Memory]: 4,950 MB (+745931kb) [00:23:36]
+// HMemoryUtils.trashcanNow. Engine heap size: 5,001 MB. GUI used memory: 49 MB. Current time: 8/3/17 12:32:26 PM EDT
+// [Engine Memory]: 5,649 MB (+473952kb) [00:23:46]
+// [Engine Memory]: 6,056 MB (+130578kb) [00:23:51]
+// HMemoryUtils.trashcanNow. Engine heap size: 6,312 MB. GUI used memory: 48 MB. Current time: 8/3/17 12:32:41 PM EDT
+// [Engine Memory]: 6,429 MB (+73145kb) [00:23:56]
+// Elapsed time: 222 seconds
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "cancel", true); // ak:X (Q:ag, cg:JFrame)
+applyEnter(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "cancel"); // ak:X (Q:ag, cg:JFrame)
+setText(RDIResource.CommandsInput_TYPE_TCL_COMMAND_HERE, "cance"); // ak:X (Q:ag, cg:JFrame)
+selectCodeEditor(RDIResource.TclConsoleView_TCL_CONSOLE_CODE_EDITOR, 303, 112); // dv:J (JPanel:JComponent, cg:JFrame)

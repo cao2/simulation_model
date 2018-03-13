@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/imports/new/32arbiter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity arbiter32
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity top

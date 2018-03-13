@@ -1,0 +1,200 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Aug  3 12:34:27 2017
+# Process ID: 5632
+# Current directory: C:/Users/cao2/Desktop/soci/soci/soc_ic
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5284 C:\Users\cao2\Desktop\soci\soci\soc_ic\soc_ic.xpr
+# Log file: C:/Users/cao2/Desktop/soci/soci/soc_ic/vivado.log
+# Journal file: C:/Users/cao2/Desktop/soci/soci/soc_ic\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr
+update_compile_order -fileset sources_1
+reset_run synth_2
+synth_design -rtl -name rtl_1
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+close_design
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_simulation
+source top.tcl
+close_sim
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top top [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+set_param synth.elaboration.rodinMoreOptions "rt::set_parameter maxRomAddrWidth 50"
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top l1_cache [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+# Disabling source management mode.  This is to allow the top design properties to be set without GUI intervention.
+set_property source_mgmt_mode None [current_project]
+set_property top top [current_fileset]
+# Re-enabling previously disabled source management mode.
+set_property source_mgmt_mode All [current_project]
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+set_property is_enabled false [get_files  C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc]
+set_property board_part xilinx.com:kc705:part0:1.5 [current_project]
+launch_runs impl_2
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+file mkdir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new
+close [ open C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc w ]
+add_files -fileset constrs_1 C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {clk_IBUF_inst/O}]
+reset_run synth_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+close_project
+open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+set_property is_enabled false [get_files  C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc]
+remove_files  -fileset constrs_1 C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc
+add_files -fileset constrs_1 -norecurse C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+reset_run synth_2
+launch_runs synth_2
+wait_on_run synth_2
+reset_run synth_2
+launch_runs impl_2
+wait_on_run impl_2
+open_run impl_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close_design
+reset_run synth_2
+launch_runs impl_2 -to_step write_bitstream
+wait_on_run impl_2
+create_run impl_3 -parent_run synth_2 -flow {Vivado Implementation 2017} -strategy {Vivado Implementation Defaults}
+current_run [get_runs impl_3]
+set_property part xc7a35tcpg236-1 [current_project]
+reset_run synth_2
+launch_runs impl_3 -to_step write_bitstream

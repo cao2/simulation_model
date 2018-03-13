@@ -1,0 +1,529 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Aug 10 12:43:36 2017
+# Process ID: 1336
+# Current directory: C:/Users/cao2/Desktop/soci/soci/soc_ic
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5356 C:\Users\cao2\Desktop\soci\soci\soc_ic\soc_ic.xpr
+# Log file: C:/Users/cao2/Desktop/soci/soci/soc_ic/vivado.log
+# Journal file: C:/Users/cao2/Desktop/soci/soci/soc_ic\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'.
+open_project: Time (s): cpu = 00:00:15 ; elapsed = 00:00:35 . Memory (MB): peak = 816.258 ; gain = 123.703
+update_compile_order -fileset sources_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 13:03:03 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 13:03:03 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+set_property top top [current_fileset]
+update_compile_order -fileset sources_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 13:56:08 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 13:56:08 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+set_property top l1_cache [current_fileset]
+update_compile_order -fileset sources_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 14:09:36 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 14:09:36 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+set_property top top [current_fileset]
+update_compile_order -fileset sources_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 14:27:44 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 14:27:44 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 14:36:13 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 14:36:13 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 14:47:00 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 14:47:00 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 15:08:08 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 15:08:08 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 15:17:46 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 15:17:46 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1
+[Thu Aug 10 15:33:58 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 15:33:58 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 16:04:48 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 16:04:48 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 16:15:09 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 16:15:09 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 16:24:02 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 16:24:02 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 16:43:21 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 16:43:21 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 16:56:11 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 16:56:11 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 17:08:26 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 17:08:26 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 17:19:09 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 17:19:09 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1
+[Thu Aug 10 17:33:01 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 17:33:01 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 17:46:38 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run impl_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 17:47:20 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 17:47:20 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 17:57:10 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 17:57:10 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 18:18:06 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 18:18:06 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 18:20:08 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 18:20:08 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 18:33:49 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 18:33:49 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 18:46:28 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 18:46:28 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 21:03:35 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 21:03:35 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Thu Aug 10 21:24:35 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Thu Aug 10 21:24:35 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 00:44:19 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 00:44:19 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 01:39:51 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 01:39:51 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 15:38:20 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 15:38:20 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 15:50:43 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 15:50:43 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 16:02:08 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 16:02:08 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+update_compile_order -fileset sources_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 16:18:01 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 16:18:01 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+update_compile_order -fileset sources_1
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 16:38:29 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 16:38:29 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 16:39:05 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 16:39:05 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+reset_run synth_3
+launch_runs impl_1 -to_step write_bitstream
+[Fri Aug 11 17:04:46 2017] Launched synth_3...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_3/runme.log
+[Fri Aug 11 17:04:46 2017] Launched impl_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_1/runme.log
+open_run impl_1
+INFO: [Netlist 29-17] Analyzing 437 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2017.2
+INFO: [Device 21-403] Loading part xc7k325tffg900-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/cao2/Desktop/soci/soci/soc_ic/.Xil/Vivado-1336-ENB222-PC2/dcp1/top.xdc]
+Finished Parsing XDC File [C:/Users/cao2/Desktop/soci/soci/soc_ic/.Xil/Vivado-1336-ENB222-PC2/dcp1/top.xdc]
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1448.781 ; gain = 92.797
+Restored from archive | CPU: 7.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1448.781 ; gain = 92.797
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 40 instances were transformed.
+  RAM32M => RAM32M (RAMS32, RAMS32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32): 40 instances
+
+open_run: Time (s): cpu = 00:00:34 ; elapsed = 00:00:26 . Memory (MB): peak = 1585.199 ; gain = 594.848
+open_report: Time (s): cpu = 00:00:30 ; elapsed = 00:00:08 . Memory (MB): peak = 1813.770 ; gain = 228.570
+create_ip -name microblaze -vendor xilinx.com -library ip -version 10.0 -module_name microblaze_0 -dir c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip
+set_property -dict [list CONFIG.C_I_LMB {0} CONFIG.C_USE_ICACHE {1} CONFIG.C_ICACHE_ALWAYS_USED {1} CONFIG.C_USE_DCACHE {0} CONFIG.C_DCACHE_ADDR_TAG {0}] [get_ips microblaze_0]
+generate_target {instantiation_template} [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'microblaze_0'...
+update_compile_order -fileset sources_1
+generate_target all [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'microblaze_0'...
+export_ip_user_files -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -no_script -sync -force -quiet
+create_ip_run [get_files -of_objects [get_fileset sources_1] c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+launch_runs  microblaze_0_synth_1
+[Tue Aug 15 18:01:05 2017] Launched microblaze_0_synth_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/microblaze_0_synth_1/runme.log
+export_simulation -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -directory C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files -ipstatic_source_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/modelsim} {questa=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/questa} {riviera=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/riviera} {activehdl=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property -dict [list CONFIG.C_D_LMB {0} CONFIG.C_DEBUG_ENABLED {0} CONFIG.C_USE_ICACHE {0} CONFIG.C_USE_DCACHE {0} CONFIG.C_ADDR_TAG_BITS {0}] [get_ips microblaze_0]
+generate_target all [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'microblaze_0'...
+ERROR: [filemgmt 56-285] srcscanner execution failed with return code 2.
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'microblaze_0'...
+ERROR: [Common 17-39] 'generate_target' failed due to earlier errors.
+convert_ips [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [filemgmt 56-106] Converting IP 'microblaze_0' into core container format.
+INFO: [filemgmt 56-101] Creating core container 'c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0.xcix' for IP 'microblaze_0'
+export_ip_user_files -of_objects  [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -sync -lib_map_path [list {modelsim=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/modelsim} {questa=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/questa} {riviera=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/riviera} {activehdl=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/activehdl}] -force -quiet
+set_property coreContainer.enable 1 [current_project]
+set_property -dict [list CONFIG.C_D_LMB {1}] [get_ips microblaze_0]
+generate_target all [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'microblaze_0'...
+catch { config_ip_cache -export [get_ips -all microblaze_0] }
+export_ip_user_files -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -no_script -sync -force -quiet
+reset_run microblaze_0_synth_1
+launch_runs  microblaze_0_synth_1
+[Tue Aug 15 18:14:40 2017] Launched microblaze_0_synth_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/microblaze_0_synth_1/runme.log
+export_simulation -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -directory C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files -ipstatic_source_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/modelsim} {questa=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/questa} {riviera=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/riviera} {activehdl=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property -dict [list CONFIG.C_USE_ICACHE {1} CONFIG.C_USE_DCACHE {1} CONFIG.C_DCACHE_ALWAYS_USED {1} CONFIG.C_DCACHE_USE_WRITEBACK {0} CONFIG.C_ADDR_TAG_BITS {17} CONFIG.C_DCACHE_ADDR_TAG {17}] [get_ips microblaze_0]
+generate_target all [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'microblaze_0'...
+generate_target: Time (s): cpu = 00:00:03 ; elapsed = 00:00:07 . Memory (MB): peak = 2445.512 ; gain = 0.000
+catch { config_ip_cache -export [get_ips -all microblaze_0] }
+export_ip_user_files -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -no_script -sync -force -quiet
+reset_run microblaze_0_synth_1
+launch_runs  microblaze_0_synth_1
+[Tue Aug 15 18:16:24 2017] Launched microblaze_0_synth_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/microblaze_0_synth_1/runme.log
+export_simulation -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -directory C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files -ipstatic_source_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/modelsim} {questa=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/questa} {riviera=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/riviera} {activehdl=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property -dict [list CONFIG.C_ICACHE_ALWAYS_USED {0} CONFIG.C_DCACHE_ALWAYS_USED {0}] [get_ips microblaze_0]
+generate_target all [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'microblaze_0'...
+catch { config_ip_cache -export [get_ips -all microblaze_0] }
+export_ip_user_files -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -no_script -sync -force -quiet
+reset_run microblaze_0_synth_1
+launch_runs  microblaze_0_synth_1
+[Tue Aug 15 18:18:24 2017] Launched microblaze_0_synth_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/microblaze_0_synth_1/runme.log
+export_simulation -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -directory C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files -ipstatic_source_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/modelsim} {questa=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/questa} {riviera=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/riviera} {activehdl=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+set_property -dict [list CONFIG.C_ICACHE_HIGHADDR {0x3FFFFFF} CONFIG.C_USE_ICACHE {0} CONFIG.C_ALLOW_ICACHE_WR {0} CONFIG.C_USE_DCACHE {0} CONFIG.C_ALLOW_DCACHE_WR {0} CONFIG.C_ADDR_TAG_BITS {0} CONFIG.C_DCACHE_ADDR_TAG {0}] [get_ips microblaze_0]
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'C_ICACHE_HIGHADDR' from '0x000000003FFFFFFF' to '0x3FFFFFF' has been ignored for IP 'microblaze_0'
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'C_ALLOW_ICACHE_WR' from '1' to '0' has been ignored for IP 'microblaze_0'
+WARNING: [IP_Flow 19-3374] An attempt to modify the value of disabled parameter 'C_ALLOW_DCACHE_WR' from '1' to '0' has been ignored for IP 'microblaze_0'
+generate_target all [get_files  c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci]
+INFO: [IP_Flow 19-1686] Generating 'Instantiation Template' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Synthesis' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Simulation' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Miscellaneous' target for IP 'microblaze_0'...
+INFO: [IP_Flow 19-1686] Generating 'Change Log' target for IP 'microblaze_0'...
+generate_target: Time (s): cpu = 00:00:02 ; elapsed = 00:00:07 . Memory (MB): peak = 2525.324 ; gain = 0.000
+catch { config_ip_cache -export [get_ips -all microblaze_0] }
+export_ip_user_files -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -no_script -sync -force -quiet
+reset_run microblaze_0_synth_1
+launch_runs  microblaze_0_synth_1
+[Tue Aug 15 18:22:58 2017] Launched microblaze_0_synth_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/microblaze_0_synth_1/runme.log
+export_simulation -of_objects [get_files c:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/ip/microblaze_0/microblaze_0.xci] -directory C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/sim_scripts -ip_user_files_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files -ipstatic_source_dir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.ip_user_files/ipstatic -lib_map_path [list {modelsim=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/modelsim} {questa=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/questa} {riviera=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/riviera} {activehdl=C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.cache/compile_simlib/activehdl}] -use_ip_compiled_libs -force -quiet
+close_project
+create_project project_1 C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1 -part xc7k325tffg900-2
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'.
+set_property board_part xilinx.com:kc705:part0:1.5 [current_project]
+create_bd_design "design_1"
+Wrote  : <C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd> 
+create_bd_design: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2538.219 ; gain = 0.000
+update_compile_order -fileset sources_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:10.0 microblaze_0
+endgroup
+startgroup
+set_property -dict [list CONFIG.C_ICACHE_BASEADDR.VALUE_SRC PROPAGATED CONFIG.C_ICACHE_HIGHADDR.VALUE_SRC PROPAGATED CONFIG.C_ICACHE_ALWAYS_USED.VALUE_SRC USER CONFIG.C_DCACHE_BASEADDR.VALUE_SRC PROPAGATED CONFIG.C_DCACHE_HIGHADDR.VALUE_SRC PROPAGATED CONFIG.C_DCACHE_ALWAYS_USED.VALUE_SRC USER] [get_bd_cells microblaze_0]
+set_property -dict [list CONFIG.C_D_AXI {1} CONFIG.C_USE_BARREL {1} CONFIG.C_USE_DIV {1} CONFIG.C_USE_HW_MUL {1} CONFIG.C_USE_FPU {1} CONFIG.C_USE_ICACHE {1} CONFIG.C_CACHE_BYTE_SIZE {32768} CONFIG.C_ICACHE_LINE_LEN {8} CONFIG.C_ICACHE_ALWAYS_USED {1} CONFIG.C_USE_DCACHE {1} CONFIG.C_DCACHE_ALWAYS_USED {1} CONFIG.C_USE_BRANCH_TARGET_CACHE {1} CONFIG.C_ADDR_TAG_BITS {16} CONFIG.C_DCACHE_ADDR_TAG {18}] [get_bd_cells microblaze_0]
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.0 mig_7series_0
+endgroup
+set_property -name {CONFIG.XML_INPUT_FILE} -value  {mig_a.prj} -objects [get_bd_cells mig_7series_0]
+mig_a.prj
+set_property -name {CONFIG.RESET_BOARD_INTERFACE} -value  {Custom} -objects [get_bd_cells mig_7series_0]
+Custom
+set_property -name {CONFIG.MIG_DONT_TOUCH_PARAM} -value  {Custom} -objects [get_bd_cells mig_7series_0]
+Custom
+set_property -name {CONFIG.BOARD_MIG_PARAM} -value  {Custom} -objects [get_bd_cells mig_7series_0]
+Custom
+apply_bd_automation -rule xilinx.com:bd_rule:microblaze -config {local_mem "64KB" ecc "None" cache "8KB" debug_module "Debug Only" axi_periph "Enabled" axi_intc "1" clk "/mig_7series_0/ui_clk (100 MHz)" }  [get_bd_cells microblaze_0]
+apply_bd_automation: Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2538.219 ; gain = 0.000
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_timer:2.0 axi_timer_0
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_uartlite:2.0 axi_uartlite_0
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config {Master "/microblaze_0 (Periph)" intc_ip "/microblaze_0_axi_periph" Clk_xbar "Auto" Clk_master "Auto" Clk_slave "Auto" }  [get_bd_intf_pins axi_timer_0/S_AXI]
+</axi_timer_0/S_AXI/Reg> is being mapped into </microblaze_0/Data> at <0x41C00000 [ 64K ]>
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config {Master "/microblaze_0 (Periph)" intc_ip "/microblaze_0_axi_periph" Clk_xbar "Auto" Clk_master "Auto" Clk_slave "Auto" }  [get_bd_intf_pins axi_uartlite_0/S_AXI]
+</axi_uartlite_0/S_AXI/Reg> is being mapped into </microblaze_0/Data> at <0x40600000 [ 64K ]>
+apply_bd_automation -rule xilinx.com:bd_rule:board -config {Board_Interface "rs232_uart ( UART ) " }  [get_bd_intf_pins axi_uartlite_0/UART]
+INFO: [board_rule 100-100] set_property CONFIG.USE_BOARD_FLOW true [get_bd_cells /axi_uartlite_0]
+INFO: [board_rule 100-100] set_property CONFIG.UARTLITE_BOARD_INTERFACE rs232_uart [get_bd_cells /axi_uartlite_0]
+INFO: [board_rule 100-100] create_bd_intf_port -mode Master -vlnv xilinx.com:interface:uart_rtl:1.0 rs232_uart
+INFO: [board_rule 100-100] connect_bd_intf_net /rs232_uart /axi_uartlite_0/UART
+endgroup
+regenerate_bd_layout -routing
+connect_bd_net [get_bd_pins axi_uartlite_0/interrupt] [get_bd_pins microblaze_0_xlconcat/In1]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_bram_ctrl:4.0 axi_bram_ctrl_0
+INFO: [xilinx.com:ip:axi_bram_ctrl:4.0-2] design_1_axi_bram_ctrl_0_0: In IP Integrator, please note that memory depth value gets calculated based on the Data Width of the IP and Address range selected in the Address Editor.Incase a validation error occured on the range of this parameter, please check if the selected Data width and the Address Range are valid. For valid Data width and memory depth values, please refer to the AXI BRAM Controller Product Guide.
+INFO: [xilinx.com:ip:axi_bram_ctrl:4.0-1] design_1_axi_bram_ctrl_0_0: In IP Integrator, The Maximum address range supported is 2G. Selecting the address range more than 2G in the address editor may resets the value of Memory depth to default value (1024). please refer to the AXI BRAM Controller Product Guide.
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.3 blk_mem_gen_0
+endgroup
+delete_bd_objs [get_bd_cells blk_mem_gen_0]
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:blk_mem_gen:8.3 blk_mem_gen_0
+endgroup
+connect_bd_intf_net [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTA] [get_bd_intf_pins axi_bram_ctrl_0/BRAM_PORTA]
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+WARNING: [IP_Flow 19-4067] Ignoring invalid widget type specified checkbox.Providing a default widget
+startgroup
+set_property -dict [list CONFIG.Memory_Type {True_Dual_Port_RAM} CONFIG.Enable_B {Use_ENB_Pin} CONFIG.Use_RSTB_Pin {true} CONFIG.Port_B_Clock {100} CONFIG.Port_B_Write_Rate {50} CONFIG.Port_B_Enable_Rate {100}] [get_bd_cells blk_mem_gen_0]
+endgroup
+connect_bd_intf_net [get_bd_intf_pins blk_mem_gen_0/BRAM_PORTB] [get_bd_intf_pins axi_bram_ctrl_0/BRAM_PORTB]
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config {Master "/microblaze_0 (Cached)" intc_ip "Auto" Clk_xbar "Auto" Clk_master "Auto" Clk_slave "Auto" }  [get_bd_intf_pins mig_7series_0/S_AXI]
+</mig_7series_0/memmap/memaddr> is being mapped into </microblaze_0/Data> at <0x80000000 [ 1G ]>
+</mig_7series_0/memmap/memaddr> is being mapped into </microblaze_0/Instruction> at <0x80000000 [ 1G ]>
+apply_bd_automation -rule xilinx.com:bd_rule:board -config {Board_Interface "reset ( FPGA Reset ) " }  [get_bd_pins mig_7series_0/sys_rst]
+INFO: [board_rule 100-100] set_property CONFIG.RESET_BOARD_INTERFACE reset [get_bd_cells /mig_7series_0]
+INFO: [board_rule 100-100] create_bd_port -dir I reset -type rst
+INFO: [board_rule 100-100] set_property CONFIG.POLARITY  /reset
+INFO: [board_rule 100-100] connect_bd_net /reset /mig_7series_0/sys_rst
+INFO: [board_rule 100-100] set_property CONFIG.POLARITY ACTIVE_HIGH /reset
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config {Master "/microblaze_0 (Cached)" intc_ip "Auto" Clk_xbar "Auto" Clk_master "Auto" Clk_slave "Auto" }  [get_bd_intf_pins axi_bram_ctrl_0/S_AXI]
+</axi_bram_ctrl_0/S_AXI/Mem0> is being mapped into </microblaze_0/Data> at <0xC0000000 [ 8K ]>
+</axi_bram_ctrl_0/S_AXI/Mem0> is being mapped into </microblaze_0/Instruction> at <0xC0000000 [ 8K ]>
+startgroup
+create_bd_port -dir I -type clk sys_clk_p
+connect_bd_net [get_bd_pins /mig_7series_0/sys_clk_p] [get_bd_ports sys_clk_p]
+WARNING: [BD 41-1306] The connection to interface pin /mig_7series_0/sys_clk_p is being overridden by the user. This pin will not be connected as a part of interface connection SYS_CLK
+set_property CONFIG.FREQ_HZ 200000000 [get_bd_ports sys_clk_p]
+endgroup
+startgroup
+create_bd_port -dir I -type clk sys_clk_n
+connect_bd_net [get_bd_pins /mig_7series_0/sys_clk_n] [get_bd_ports sys_clk_n]
+WARNING: [BD 41-1306] The connection to interface pin /mig_7series_0/sys_clk_n is being overridden by the user. This pin will not be connected as a part of interface connection SYS_CLK
+set_property CONFIG.FREQ_HZ 200000000 [get_bd_ports sys_clk_n]
+endgroup
+startgroup
+make_bd_intf_pins_external  [get_bd_intf_pins mig_7series_0/DDR3]
+endgroup
+regenerate_bd_layout -routing
+regenerate_bd_layout
+regenerate_bd_layout -routing
+regenerate_bd_layout -routing
+regenerate_bd_layout
+regenerate_bd_layout
+regenerate_bd_layout
+file mkdir C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/constrs_1
+file mkdir C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/constrs_1/new
+close [ open C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/constrs_1/new/system.xdc w ]
+add_files -fileset constrs_1 C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/constrs_1/new/system.xdc
+open_bd_design {C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd}
+set_property range 512M [get_bd_addr_segs {microblaze_0/Instruction/SEG_mig_7series_0_memaddr}]
+set_property range 512M [get_bd_addr_segs {microblaze_0/Data/SEG_mig_7series_0_memaddr}]
+save_bd_design
+Wrote  : <C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd> 
+Wrote  : <C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/ui/bd_1f5defd0.ui> 
+make_wrapper -files [get_files C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd] -top
+INFO: [xilinx.com:ip:axi_intc:4.1-1] /microblaze_0_axi_intc: The AXI INTC core has been configured to operate with synchronous clocks.
+WARNING: [xilinx.com:ip:axi_intc:4.1-6] /microblaze_0_axi_intc: Property SENSITIVITY = "NULL" for interrupt input 0 not recognized - using default interrupt type Rising Edge. Please change this manually if necessary.
+WARNING: [xilinx.com:ip:axi_intc:4.1-6] /microblaze_0_axi_intc: Property SENSITIVITY = "NULL" for interrupt input 0 not recognized - using default interrupt type Rising Edge. Please change this manually if necessary.
+INFO: [xilinx.com:ip:microblaze:10.0-16] /microblaze_0: Setting D-cache cacheable area base address C_DCACHE_BASEADDR to 0x80000000 and high address C_DCACHE_HIGHADDR to 0xFFFFFFFF.
+INFO: [xilinx.com:ip:microblaze:10.0-16] /microblaze_0: Setting I-cache cacheable area base address C_ICACHE_BASEADDR to 0x80000000 and high address C_ICACHE_HIGHADDR to 0xFFFFFFFF.
+INFO: [xilinx.com:ip:microblaze:10.0-16] /microblaze_0: Setting D-cache cacheable area base address C_DCACHE_BASEADDR to 0x80000000 and high address C_DCACHE_HIGHADDR to 0xFFFFFFFF.
+INFO: [xilinx.com:ip:microblaze:10.0-16] /microblaze_0: Setting I-cache cacheable area base address C_ICACHE_BASEADDR to 0x80000000 and high address C_ICACHE_HIGHADDR to 0xFFFFFFFF.
+Wrote  : <C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/design_1.bd> 
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/blk_mem_gen_0/addra'(32) to net 'axi_bram_ctrl_0_BRAM_PORTA_ADDR'(13) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/blk_mem_gen_0/addrb'(32) to net 'axi_bram_ctrl_0_BRAM_PORTB_ADDR'(13) - Only lower order bits will be connected.
+Verilog Output written to : C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1.v
+Verilog Output written to : C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v
+make_wrapper: Time (s): cpu = 00:00:11 ; elapsed = 00:00:12 . Memory (MB): peak = 2538.219 ; gain = 0.000
+add_files -norecurse C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v
+update_compile_order -fileset sources_1
+launch_runs synth_1
+INFO: [BD 41-1662] The design 'design_1.bd' is already validated. Therefore parameter propagation will not be re-run.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/blk_mem_gen_0/addra'(32) to net 'axi_bram_ctrl_0_BRAM_PORTA_ADDR'(13) - Only lower order bits will be connected.
+WARNING: [BD 41-235] Width mismatch when connecting pin: '/blk_mem_gen_0/addrb'(32) to net 'axi_bram_ctrl_0_BRAM_PORTB_ADDR'(13) - Only lower order bits will be connected.
+Verilog Output written to : C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1.v
+Verilog Output written to : C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1_wrapper.v
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block mig_7series_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_axi_intc .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_xlconcat .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block mdm_1 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block rst_mig_7series_0_100M .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_timer_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_uartlite_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_bram_ctrl_0 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block blk_mem_gen_0 .
+Exporting to file c:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hw_handoff/design_1_axi_smc_0.hwh
+Generated Block Design Tcl file c:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hw_handoff/design_1_axi_smc_0_bd.tcl
+Generated Hardware Definition File c:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/ip/design_1_axi_smc_0/bd_0/hdl/design_1_axi_smc_0.hwdef
+INFO: [BD 41-1029] Generation completed for the IP Integrator block axi_smc .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_axi_periph/xbar .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_local_memory/dlmb_v10 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_local_memory/ilmb_v10 .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_local_memory/dlmb_bram_if_cntlr .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_local_memory/ilmb_bram_if_cntlr .
+INFO: [BD 41-1029] Generation completed for the IP Integrator block microblaze_0_local_memory/lmb_bram .
+Exporting to file C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hw_handoff/design_1.hwh
+Generated Block Design Tcl file C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hw_handoff/design_1_bd.tcl
+Generated Hardware Definition File C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.srcs/sources_1/bd/design_1/hdl/design_1.hwdef
+[Thu Aug 17 17:48:07 2017] Launched design_1_rst_mig_7series_0_100M_0_synth_1, design_1_axi_smc_0_synth_1, design_1_blk_mem_gen_0_1_synth_1, design_1_axi_bram_ctrl_0_0_synth_1, design_1_axi_uartlite_0_0_synth_1, design_1_axi_timer_0_0_synth_1, design_1_mdm_1_0_synth_1, design_1_mig_7series_0_0_synth_1, design_1_microblaze_0_0_synth_1, design_1_microblaze_0_xlconcat_0_synth_1, design_1_dlmb_v10_0_synth_1, design_1_xbar_0_synth_1, design_1_ilmb_v10_0_synth_1, design_1_microblaze_0_axi_intc_0_synth_1, design_1_dlmb_bram_if_cntlr_0_synth_1, design_1_ilmb_bram_if_cntlr_0_synth_1, design_1_lmb_bram_0_synth_1...
+Run output will be captured here:
+design_1_rst_mig_7series_0_100M_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_rst_mig_7series_0_100M_0_synth_1/runme.log
+design_1_axi_smc_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_axi_smc_0_synth_1/runme.log
+design_1_blk_mem_gen_0_1_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_blk_mem_gen_0_1_synth_1/runme.log
+design_1_axi_bram_ctrl_0_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_axi_bram_ctrl_0_0_synth_1/runme.log
+design_1_axi_uartlite_0_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_axi_uartlite_0_0_synth_1/runme.log
+design_1_axi_timer_0_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_axi_timer_0_0_synth_1/runme.log
+design_1_mdm_1_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_mdm_1_0_synth_1/runme.log
+design_1_mig_7series_0_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_mig_7series_0_0_synth_1/runme.log
+design_1_microblaze_0_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_microblaze_0_0_synth_1/runme.log
+design_1_microblaze_0_xlconcat_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_microblaze_0_xlconcat_0_synth_1/runme.log
+design_1_dlmb_v10_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_dlmb_v10_0_synth_1/runme.log
+design_1_xbar_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_xbar_0_synth_1/runme.log
+design_1_ilmb_v10_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_ilmb_v10_0_synth_1/runme.log
+design_1_microblaze_0_axi_intc_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_microblaze_0_axi_intc_0_synth_1/runme.log
+design_1_dlmb_bram_if_cntlr_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_dlmb_bram_if_cntlr_0_synth_1/runme.log
+design_1_ilmb_bram_if_cntlr_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_ilmb_bram_if_cntlr_0_synth_1/runme.log
+design_1_lmb_bram_0_synth_1: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/design_1_lmb_bram_0_synth_1/runme.log
+[Thu Aug 17 17:48:08 2017] Launched synth_1...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/project_1/project_1.runs/synth_1/runme.log
+launch_runs: Time (s): cpu = 00:00:21 ; elapsed = 00:00:34 . Memory (MB): peak = 2601.930 ; gain = 63.711

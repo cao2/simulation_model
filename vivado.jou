@@ -1,0 +1,89 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Fri Mar  2 16:11:26 2018
+# Process ID: 1312
+# Current directory: C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent11984 C:\Users\cao2\Desktop\soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc\soc_ic.xpr
+# Log file: C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/vivado.log
+# Journal file: C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.xpr
+update_compile_order -fileset sources_1
+launch_simulation
+add_files -norecurse -scan_for_includes {C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_cacheline.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_write.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/arbiter2_full.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/ibufgds_inst.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/32fifo_at.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_cutomized_b.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/arbiter6_full.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/arbiter_2layer.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/real_mem.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/fifo_ack.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/b_c_arbiter6.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_customized.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/32fifo.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/32arbiter.vhd}
+import_files -norecurse {C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_cacheline.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_write.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/arbiter2_full.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/ibufgds_inst.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/32fifo_at.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_cutomized_b.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/arbiter6_full.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/arbiter_2layer.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/real_mem.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/fifo_ack.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/b_c_arbiter6.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/monitor_customized.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/32fifo.vhd C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/new/32arbiter.vhd}
+update_compile_order -fileset sources_1
+launch_runs synth_2 -jobs 4
+wait_on_run synth_2
+reset_run synth_2
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+close_sim
+set_property is_enabled true [get_files  C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/soc_ic.srcs/sources_1/imports/new/32arbiter.vhd]
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+add_wave {{/top/monitor_data}} 
+restart
+run all
+add_wave {{/top/mon_array[0]}} {{/top/mon_array[1]}} {{/top/mon_array[2]}} {{/top/mon_array[3]}} {{/top/mon_array[4]}} {{/top/mon_array[5]}} {{/top/mon_array[6]}} {{/top/mon_array[7]}} {{/top/mon_array[8]}} {{/top/mon_array[9]}} {{/top/mon_array[10]}} {{/top/mon_array[11]}} {{/top/mon_array[12]}} {{/top/mon_array[13]}} {{/top/mon_array[14]}} {{/top/mon_array[15]}} {{/top/mon_array[16]}} {{/top/mon_array[17]}} {{/top/mon_array[18]}} {{/top/mon_array[19]}} {{/top/mon_array[20]}} {{/top/mon_array[21]}} {{/top/mon_array[22]}} {{/top/mon_array[23]}} {{/top/mon_array[24]}} {{/top/mon_array[25]}} {{/top/mon_array[26]}} {{/top/mon_array[27]}} {{/top/mon_array[28]}} {{/top/mon_array[29]}} {{/top/mon_array[30]}} {{/top/mon_array[31]}} 
+restart
+run all
+save_wave_config {C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+add_wave {{/top/trace_ip/we}} 
+add_wave {{/top/trace_ip/re}} 
+restart
+run 10 us
+add_wave {{/top/trace_ip/control_out}} 
+restart
+run 10 us
+save_wave_config {C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+save_wave_config {C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+add_wave {{/top/trace_ip/control_re}} 
+restart
+run 10 us
+save_wave_config {C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/cao2/Desktop/soc_ic-624a37ff94e4230f8be2857323d822a4516bf3bc/top_behav.wcfg
+source top.tcl

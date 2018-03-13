@@ -1,0 +1,992 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Thu Aug  3 12:34:27 2017
+# Process ID: 5632
+# Current directory: C:/Users/cao2/Desktop/soci/soci/soc_ic
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent5284 C:\Users\cao2\Desktop\soci\soci\soc_ic\soc_ic.xpr
+# Log file: C:/Users/cao2/Desktop/soci/soci/soc_ic/vivado.log
+# Journal file: C:/Users/cao2/Desktop/soci/soci/soc_ic\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'.
+update_compile_order -fileset sources_1
+reset_run synth_2
+synth_design -rtl -name rtl_1
+Command: synth_design -rtl -name rtl_1
+Starting synth_design
+Using part: xc7a35tcpg236-1
+Top: proc
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 927.422 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'proc' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:40]
+INFO: [Synth 8-638] synthesizing module 'l1_cache' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:41]
+INFO: [Synth 8-638] synthesizing module 'fifo' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo.vhd:22]
+	Parameter FIFO_DEPTH bound to: 256 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'fifo' (1#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo.vhd:22]
+INFO: [Synth 8-638] synthesizing module 'b_fifo' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:22]
+	Parameter FIFO_DEPTH bound to: 256 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'b_fifo' (2#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:22]
+INFO: [Synth 8-638] synthesizing module 'arbiter2' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:25]
+WARNING: [Synth 8-6014] Unused sequential element cmd_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:40]
+INFO: [Synth 8-256] done synthesizing module 'arbiter2' (3#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:25]
+INFO: [Synth 8-638] synthesizing module 'fifo__parameterized0' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo.vhd:22]
+	Parameter FIFO_DEPTH bound to: 8 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'fifo__parameterized0' (3#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo.vhd:22]
+WARNING: [Synth 8-6014] Unused sequential element mcu_write_req_reg[val] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:301]
+WARNING: [Synth 8-6014] Unused sequential element mcu_write_req_reg[cmd] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:301]
+WARNING: [Synth 8-6014] Unused sequential element mcu_write_req_reg[tag] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:301]
+WARNING: [Synth 8-6014] Unused sequential element mcu_write_req_reg[id] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:301]
+WARNING: [Synth 8-6014] Unused sequential element mcu_write_req_reg[adr] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:301]
+WARNING: [Synth 8-6014] Unused sequential element mcu_write_req_reg[dat] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:301]
+WARNING: [Synth 8-6014] Unused sequential element snpreq_reg[val] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:336]
+WARNING: [Synth 8-6014] Unused sequential element snpreq_reg[cmd] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:336]
+WARNING: [Synth 8-6014] Unused sequential element snpreq_reg[tag] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:336]
+WARNING: [Synth 8-6014] Unused sequential element snpreq_reg[id] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:336]
+WARNING: [Synth 8-6014] Unused sequential element snpreq_reg[dat] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:336]
+WARNING: [Synth 8-6014] Unused sequential element snp_wt_reg[val] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:365]
+WARNING: [Synth 8-6014] Unused sequential element snp_wt_reg[cmd] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:365]
+WARNING: [Synth 8-6014] Unused sequential element snp_wt_reg[tag] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:365]
+WARNING: [Synth 8-6014] Unused sequential element snp_wt_reg[id] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:365]
+WARNING: [Synth 8-6014] Unused sequential element snp_wt_reg[adr] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:365]
+WARNING: [Synth 8-6014] Unused sequential element snp_wt_reg[dat] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:365]
+WARNING: [Synth 8-6014] Unused sequential element prev_st_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element idx_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element upreq_reg[val] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:458]
+WARNING: [Synth 8-6014] Unused sequential element upreq_reg[cmd] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:458]
+WARNING: [Synth 8-6014] Unused sequential element upreq_reg[tag] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:458]
+WARNING: [Synth 8-6014] Unused sequential element upreq_reg[id] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:458]
+WARNING: [Synth 8-6014] Unused sequential element upreq_reg[dat] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:458]
+WARNING: [Synth 8-6014] Unused sequential element idx_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:571]
+WARNING: [Synth 8-6014] Unused sequential element memcont_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:572]
+WARNING: [Synth 8-6014] Unused sequential element shifter_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element turn_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:560]
+WARNING: [Synth 8-3848] Net snp_mem_hit in module/entity l1_cache does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:87]
+WARNING: [Synth 8-3848] Net snp_mem_ack in module/entity l1_cache does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:89]
+WARNING: [Synth 8-3848] Net usnp_mem_hit in module/entity l1_cache does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:87]
+WARNING: [Synth 8-3848] Net usnp_mem_ack in module/entity l1_cache does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:79]
+WARNING: [Synth 8-3848] Net snp_wt_ack in module/entity l1_cache does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:112]
+WARNING: [Synth 8-3848] Net ssf_re in module/entity l1_cache does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:57]
+INFO: [Synth 8-256] done synthesizing module 'l1_cache' (4#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:41]
+INFO: [Synth 8-638] synthesizing module 'cpu_test_rwt' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:25]
+WARNING: [Synth 8-614] signal 'id_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:43]
+INFO: [Synth 8-638] synthesizing module 'rndgen' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/soc/rndgen.vhd:17]
+WARNING: [Synth 8-614] signal 'seed_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/soc/rndgen.vhd:20]
+WARNING: [Synth 8-6014] Unused sequential element SEED_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/soc/rndgen.vhd:32]
+INFO: [Synth 8-256] done synthesizing module 'rndgen' (5#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/soc/rndgen.vhd:17]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: non-constant operand to 'image [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:272]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: non-constant operand to 'image [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:267]
+WARNING: [Synth 8-614] signal 'id_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:65]
+WARNING: [Synth 8-614] signal 'id_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:78]
+WARNING: [Synth 8-614] signal 'en' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:78]
+WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:70]
+WARNING: [Synth 8-6014] Unused sequential element b_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:69]
+WARNING: [Synth 8-6014] Unused sequential element t7_r_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:129]
+WARNING: [Synth 8-6014] Unused sequential element t7_cmd_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:135]
+WARNING: [Synth 8-6014] Unused sequential element t7_adr_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:148]
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[val] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:168]
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[cmd] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:168]
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[tag] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:168]
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[id] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:168]
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[adr] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:168]
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[dat] was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:168]
+WARNING: [Synth 8-6014] Unused sequential element st_prev_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element t7_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element dcnt_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element dflg_reg was removed. 
+INFO: [Synth 8-256] done synthesizing module 'cpu_test_rwt' (6#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:25]
+INFO: [Synth 8-638] synthesizing module 'cpu_test_pwrt' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:190]
+WARNING: [Synth 8-614] signal 'id_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:195]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: non-constant operand to 'image [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:272]
+WARNING: [Synth 8-312] ignoring unsynthesizable construct: non-constant operand to 'image [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:267]
+WARNING: [Synth 8-614] signal 'sim_end' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:216]
+WARNING: [Synth 8-614] signal 'id_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:216]
+WARNING: [Synth 8-614] signal 'id_i' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:230]
+WARNING: [Synth 8-6014] Unused sequential element count_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:221]
+WARNING: [Synth 8-6014] Unused sequential element b_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:220]
+WARNING: [Synth 8-6014] Unused sequential element t6_cpuid_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:277]
+WARNING: [Synth 8-6014] Unused sequential element t6_r_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:283]
+WARNING: [Synth 8-6014] Unused sequential element t6_cmd_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:286]
+WARNING: [Synth 8-6014] Unused sequential element t6_devid_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:294]
+WARNING: [Synth 8-6014] Unused sequential element st_prev_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[val] was removed. 
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[cmd] was removed. 
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[tag] was removed. 
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[id] was removed. 
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[adr] was removed. 
+WARNING: [Synth 8-6014] Unused sequential element prev_req_reg[dat] was removed. 
+WARNING: [Synth 8-6014] Unused sequential element t6_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element dflg_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element dcnt_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element c1_reg was removed. 
+WARNING: [Synth 8-6014] Unused sequential element c2_reg was removed. 
+WARNING: [Synth 8-3848] Net r in module/entity cpu_test_pwrt does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:191]
+INFO: [Synth 8-256] done synthesizing module 'cpu_test_pwrt' (7#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:190]
+INFO: [Synth 8-638] synthesizing module 'arbiter6' [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:34]
+WARNING: [Synth 8-614] signal 's_ack1' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:40]
+WARNING: [Synth 8-614] signal 's_ack2' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:40]
+WARNING: [Synth 8-614] signal 's_ack3' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:40]
+WARNING: [Synth 8-614] signal 's_ack4' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:40]
+WARNING: [Synth 8-614] signal 's_ack5' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:40]
+WARNING: [Synth 8-614] signal 's_ack6' is read in the process but is not in the sensitivity list [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:40]
+WARNING: [Synth 8-6014] Unused sequential element s_token_reg was removed.  [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:43]
+INFO: [Synth 8-256] done synthesizing module 'arbiter6' (8#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd:34]
+WARNING: [Synth 8-3848] Net cpu_req[val] in module/entity proc does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:41]
+WARNING: [Synth 8-3848] Net cpu_req[cmd] in module/entity proc does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:41]
+WARNING: [Synth 8-3848] Net cpu_req[tag] in module/entity proc does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:41]
+WARNING: [Synth 8-3848] Net cpu_req[id] in module/entity proc does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:41]
+WARNING: [Synth 8-3848] Net cpu_req[adr] in module/entity proc does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:41]
+WARNING: [Synth 8-3848] Net cpu_req[dat] in module/entity proc does not have driver. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:41]
+INFO: [Synth 8-256] done synthesizing module 'proc' (9#1) [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:40]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[val]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][7]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][6]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][5]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][4]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][3]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][2]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][1]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[cmd][0]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][7]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][6]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][5]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][4]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][3]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][2]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][1]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[tag][0]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][7]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][6]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][5]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][4]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][3]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][2]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][1]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[id][0]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][31]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][30]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][29]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][28]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][27]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][26]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][25]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][24]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][23]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][22]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][21]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][20]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][19]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][18]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][17]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][16]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][15]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][14]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][13]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][12]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][11]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][10]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][9]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][8]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][7]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][6]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][5]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][4]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][3]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][2]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][1]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[adr][0]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][31]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][30]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][29]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][28]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][27]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][26]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][25]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][24]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][23]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][22]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][21]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][20]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][19]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][18]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][17]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][16]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][15]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][14]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][13]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][12]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][11]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][10]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][9]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][8]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][7]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][6]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][5]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][4]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][3]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][2]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][1]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_res_i[dat][0]
+WARNING: [Synth 8-3331] design cpu_test_pwrt has unconnected port cpu_req_ack_i
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[val]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][7]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][6]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][5]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][4]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][3]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][2]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][1]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[tag][0]
+WARNING: [Synth 8-3331] design cpu_test_rwt has unconnected port cpu_res_i[id][7]
+INFO: [Common 17-14] Message 'Synth 8-3331' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:23 ; elapsed = 00:00:23 . Memory (MB): peak = 1519.051 ; gain = 591.629
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+WARNING: [Synth 8-3295] tying undriven pin snp_res_fifo:ReadEn to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:116]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[val] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][7] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][6] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][5] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][4] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][3] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][2] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][1] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[cmd][0] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][7] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][6] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][5] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][4] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][3] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][2] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][1] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[tag][0] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][7] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][6] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][5] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][4] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][3] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][2] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][1] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[id][0] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][31] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][30] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][29] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][28] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][27] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][26] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][25] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][24] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][23] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][22] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][21] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][20] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][19] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][18] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][17] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][16] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][15] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][14] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][13] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][12] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][11] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][10] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][9] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][8] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][7] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][6] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][5] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][4] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][3] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][2] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][1] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[adr][0] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][31] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][30] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][29] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][28] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][27] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][26] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][25] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][24] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][23] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][22] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][21] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][20] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][19] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][18] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][17] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][16] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][15] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][14] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][13] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][12] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][11] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][10] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][9] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][8] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][7] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][6] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][5] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][4] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][3] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][2] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][1] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+WARNING: [Synth 8-3295] tying undriven pin cpu_req_arbiter:din1[dat][0] to constant 0 [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:114]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:28 ; elapsed = 00:00:27 . Memory (MB): peak = 1519.051 ; gain = 591.629
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a35tcpg236-1
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc]
+WARNING: [Vivado 12-584] No ports matched 'rx_in'. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:267]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:267]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'rx_in'. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:268]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:268]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'tx_out'. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:269]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:269]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+WARNING: [Vivado 12-584] No ports matched 'tx_out'. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:270]
+CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc:270]
+Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
+Finished Parsing XDC File [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc]
+Completed Processing XDC Constraints
+
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+RTL Elaboration Complete:  : Time (s): cpu = 00:02:02 ; elapsed = 00:01:43 . Memory (MB): peak = 2492.918 ; gain = 1565.496
+25 Infos, 290 Warnings, 4 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:02:02 ; elapsed = 00:01:43 . Memory (MB): peak = 2492.918 ; gain = 1565.496
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 12:37:38 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+close_design
+close_design: Time (s): cpu = 00:00:06 ; elapsed = 00:00:05 . Memory (MB): peak = 2492.918 ; gain = 0.000
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 12:47:06 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_simulation
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-54] Inspecting design source files for 'top' in fileset 'sim_1'...
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav'
+"xvhdl -m64 --relax -prj top_vhdl.prj"
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter2_ack.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity arbiter2_ack
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity arbiter6
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6_ack.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity arbiter6_ack
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter7.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity arbiter7
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_arbiter2.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity b_arbiter2
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_arbiter6.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity b_arbiter6
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity b_fifo
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/bmsg_fifo_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity bmsg_fifo_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd" into library xil_defaultlib
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/cache_req_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity cache_req_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/soc/rndgen.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity rndgen
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/uart/fifo.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo_uart
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo_snp.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity fifo_snp
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity toper_chan_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/per_upreq_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity per_upreq_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/msg_fifo_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity msg_fifo_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/per_write_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity per_write_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/wb_m.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity wb_m
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity ic
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/new/real_mem.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity real_mem
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/mem.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity memory
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/mod_m_counter.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity mod_m_counter
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/AppData/Roaming/Xilinx/Vivado/peripharals/peripharals.srcs/sources_1/imports/2017paper/peripheral.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity peripheral
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/pwr.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity pwr
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart_rx.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity uart_rx
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart_tx.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity uart_tx
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity uart
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity uart_peripheral
+INFO: [VRFC 10-163] Analyzing VHDL file "C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity top
+INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav'
+Vivado Simulator 2017.2
+Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2017.2/bin/unwrapped/win64.o/xelab.exe -wto 6548fe0fd4804121b3dbb23e569029be --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot top_behav xil_defaultlib.top -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+WARNING: [VRFC 10-730] function return type array bounds do not match function return value array bounds [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:154]
+WARNING: [VRFC 10-730] function return type array bounds do not match function return value array bounds [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:154]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package ieee.std_logic_textio
+Compiling package xil_defaultlib.defs
+Compiling package xil_defaultlib.util
+Compiling package xil_defaultlib.test
+Compiling architecture rtl of entity xil_defaultlib.fifo [\fifo(fifo_depth=16)\]
+Compiling architecture rtl of entity xil_defaultlib.pwr [pwr_default]
+Compiling architecture rtl of entity xil_defaultlib.toper_chan_m [toper_chan_m_default]
+Compiling architecture rtl of entity xil_defaultlib.b_fifo [b_fifo_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo [fifo_default]
+Compiling architecture rtl of entity xil_defaultlib.per_upreq_m [per_upreq_m_default]
+Compiling architecture rtl of entity xil_defaultlib.msg_fifo_m [msg_fifo_m_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_snp [fifo_snp_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter6_ack [arbiter6_ack_default]
+Compiling architecture rtl of entity xil_defaultlib.per_write_m [per_write_m_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter2_ack [arbiter2_ack_default]
+Compiling architecture rtl of entity xil_defaultlib.b_arbiter6 [b_arbiter6_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter6 [arbiter6_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter7 [arbiter7_default]
+Compiling architecture rtl of entity xil_defaultlib.b_arbiter2 [b_arbiter2_default]
+Compiling architecture rtl of entity xil_defaultlib.bmsg_fifo_m [bmsg_fifo_m_default]
+Compiling architecture rtl of entity xil_defaultlib.wb_m [wb_m_default]
+Compiling architecture rtl of entity xil_defaultlib.cache_req_m [cache_req_m_default]
+Compiling architecture rtl of entity xil_defaultlib.ic [ic_default]
+Compiling architecture arch of entity xil_defaultlib.mod_m_counter [\mod_m_counter(n=9,m=326)\]
+Compiling architecture arch of entity xil_defaultlib.uart_rx [uart_rx_default]
+Compiling architecture arch of entity xil_defaultlib.fifo_uart [\fifo_uart(w=5)\]
+Compiling architecture arch of entity xil_defaultlib.uart_tx [uart_tx_default]
+Compiling architecture str_arch of entity xil_defaultlib.uart [uart_default]
+Compiling architecture rtl of entity xil_defaultlib.uart_peripheral [uart_peripheral_default]
+Compiling architecture rtl of entity xil_defaultlib.rndgen [rndgen_default]
+Compiling architecture rtl of entity xil_defaultlib.peripheral [peripheral_default]
+Compiling architecture rtl of entity xil_defaultlib.real_mem [real_mem_default]
+Compiling architecture rtl of entity xil_defaultlib.memory [memory_default]
+Compiling architecture tb of entity xil_defaultlib.top
+Built simulation snapshot top_behav
+
+****** Webtalk v2017.2 (64-bit)
+  **** SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+  **** IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+    ** Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
+
+source C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav/xsim.dir/top_behav/webtalk/xsim_webtalk.tcl -notrace
+INFO: [Common 17-186] 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav/xsim.dir/top_behav/webtalk/usage_statistics_ext_xsim.xml' has been successfully sent to Xilinx on Thu Aug  3 13:01:15 2017. For additional details about this file, please refer to the WebTalk help file at C:/Xilinx/Vivado/2017.2/doc/webtalk_introduction.html.
+INFO: [Common 17-206] Exiting Webtalk at Thu Aug  3 13:01:15 2017...
+INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.sim/sim_1/behav'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "top_behav -key {Behavioral:sim_1:Functional:top} -tclbatch {top.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Vivado Simulator 2017.2
+Time resolution is 1 ps
+source top.tcl
+# set curr_wave [current_wave_config]
+# if { [string length $curr_wave] == 0 } {
+#   if { [llength [get_objects]] > 0} {
+#     add_wave /
+#     set_property needs_save false [current_wave_config]
+#   } else {
+#      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+#   }
+# }
+# run 1000ns
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'top_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:04 ; elapsed = 00:00:08 . Memory (MB): peak = 2492.918 ; gain = 0.000
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:01:29 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:02:24 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:08:12 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:15:39 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:20:22 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:30:25 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:37:57 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:38:29 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:41:46 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:48:25 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:50:22 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 13:55:59 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 14:00:06 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Thu Aug  3 14:05:28 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+set_property top top [current_fileset]
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+[Thu Aug  3 21:13:58 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Thu Aug  3 21:13:58 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Fri Aug  4 09:10:59 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Fri Aug  4 09:10:59 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 15:39:51 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 15:39:51 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+set_param synth.elaboration.rodinMoreOptions "rt::set_parameter maxRomAddrWidth 50"
+rt::set_parameter maxRomAddrWidth 50
+set_property top l1_cache [current_fileset]
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 16:50:35 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 16:50:35 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Sun Aug  6 16:52:28 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+set_property top top [current_fileset]
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 17:07:28 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 17:07:28 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+set_property is_enabled false [get_files  C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc]
+set_property board_part xilinx.com:kc705:part0:1.5 [current_project]
+WARNING: [Project 1-153] The current project part 'xc7a35tcpg236-1' does not match with the 'XILINX.COM:KC705:PART0:1.5' board part settings. The project part will be reset to 'XILINX.COM:KC705:PART0:1.5' board part.
+INFO: [Project 1-152] Project part set to kintex7 (xc7k325tffg900-2)
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [filemgmt 56-285] srcscanner execution failed with return code -1.
+launch_runs impl_2
+[Sun Aug  6 17:15:27 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 17:15:27 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+launch_runs impl_2 -to_step write_bitstream
+[Sun Aug  6 17:33:49 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+file mkdir C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new
+close [ open C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc w ]
+add_files -fileset constrs_1 C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 17:46:37 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 17:46:37 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 18:30:21 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 18:30:21 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 19:11:01 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 19:11:01 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 19:17:12 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 19:17:12 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets {clk_IBUF_inst/O}]
+ERROR: [Common 17-53] User Exception: No open design. Please open an elaborated, synthesized or implemented design before executing this command.
+reset_run synth_2
+launch_runs impl_2 -to_step write_bitstream
+[Sun Aug  6 19:59:03 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 19:59:03 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2 -to_step write_bitstream
+[Sun Aug  6 20:37:00 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 20:37:00 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 23:04:25 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 23:04:25 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Sun Aug  6 23:08:06 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Sun Aug  6 23:08:06 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 00:14:09 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 00:14:09 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 00:37:29 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 00:37:29 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 01:09:53 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 01:09:53 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+launch_runs impl_2 -to_step write_bitstream
+[Mon Aug  7 01:33:24 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 01:42:21 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 01:42:21 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 02:08:36 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 02:08:36 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+launch_runs impl_2 -to_step write_bitstream
+[Mon Aug  7 02:36:31 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+close_project
+open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2017.2/data/ip'.
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 11:56:28 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 11:56:28 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+launch_runs impl_2 -to_step write_bitstream
+[Mon Aug  7 12:03:29 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+set_property is_enabled false [get_files  C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc]
+remove_files  -fileset constrs_1 C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc
+WARNING: [filemgmt 20-1445] Cannot import file 'C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc' on top of itself. Importing a file from the imported source directory can cause this problem.
+add_files -fileset constrs_1 -norecurse C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/imports/soc_ic/Basys3_Master.xdc
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 12:24:43 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 12:24:43 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+update_compile_order -fileset sources_1
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 12:26:08 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 12:26:08 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+launch_runs impl_2 -to_step write_bitstream
+[Mon Aug  7 14:28:21 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+reset_run synth_2
+launch_runs synth_2
+WARNING: [filemgmt 20-1318] Duplicate Design Unit 'arbiter2(rtl)' found in library 'xil_defaultlib'
+	(Active) Duplicate found at line 25 of file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd
+Duplicate found in file C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/arbiter2.vhd
+[Mon Aug  7 14:40:03 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+reset_run synth_2
+launch_runs impl_2
+[Mon Aug  7 15:19:59 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 15:19:59 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+open_run impl_2
+INFO: [Netlist 29-17] Analyzing 492 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2017.2
+INFO: [Device 21-403] Loading part xc7k325tffg900-2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [C:/Users/cao2/Desktop/soci/soci/soc_ic/.Xil/Vivado-5632-ENB222-PC2/dcp1/top.xdc]
+Finished Parsing XDC File [C:/Users/cao2/Desktop/soci/soci/soc_ic/.Xil/Vivado-5632-ENB222-PC2/dcp1/top.xdc]
+Reading XDEF placement.
+Reading placer database...
+Reading XDEF routing.
+Read XDEF File: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2492.918 ; gain = 0.000
+Restored from archive | CPU: 8.000000 secs | Memory: 0.000000 MB |
+Finished XDEF File Restore: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 2492.918 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 18 instances were transformed.
+  RAM32M => RAM32M (RAMS32, RAMS32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32): 18 instances
+
+open_run: Time (s): cpu = 00:00:28 ; elapsed = 00:00:25 . Memory (MB): peak = 2492.918 ; gain = 0.000
+open_report: Time (s): cpu = 00:00:24 ; elapsed = 00:00:07 . Memory (MB): peak = 2492.918 ; gain = 0.000
+launch_runs impl_2 -to_step write_bitstream
+[Mon Aug  7 15:44:23 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+close_design
+reset_run synth_2
+launch_runs impl_2 -to_step write_bitstream
+[Mon Aug  7 15:51:42 2017] Launched synth_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/synth_2/runme.log
+[Mon Aug  7 15:51:42 2017] Launched impl_2...
+Run output will be captured here: C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.runs/impl_2/runme.log
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [filemgmt 56-285] srcscanner execution failed with return code -1.
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd:]
+ERROR: [Common 17-180] Spawn failed: No error
+ERROR: [filemgmt 56-285] srcscanner execution failed with return code -1.
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd:]
+WARNING: [filemgmt 56-199] Attempt to get parsing info during refresh. "On-the-fly" syntax checking information may be incorrect. [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd:]
+create_run impl_3 -parent_run synth_2 -flow {Vivado Implementation 2017} -strategy {Vivado Implementation Defaults}
+Run is defaulting to parent run srcset: sources_1
+Run is defaulting to parent run constrset: constrs_1
+Run is defaulting to parent run part: xc7k325tffg900-2
+current_run [get_runs impl_3]
+set_property part xc7a35tcpg236-1 [current_project]
+INFO: [Project 1-154] The current project board 'xilinx.com:kc705:part0:1.5' is reset to empty (None). Use 'Project Settings' part selector (GUI) or issue set_property Tcl Command to set the board again.
+reset_run synth_2
+launch_runs impl_3 -to_step write_bitstream

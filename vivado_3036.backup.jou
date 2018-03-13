@@ -1,0 +1,31 @@
+#-----------------------------------------------------------
+# Vivado v2017.2 (64-bit)
+# SW Build 1909853 on Thu Jun 15 18:39:09 MDT 2017
+# IP Build 1909766 on Thu Jun 15 19:58:00 MDT 2017
+# Start of session at: Tue Nov 14 21:33:10 2017
+# Process ID: 3036
+# Current directory: C:/Users/cao2/Desktop/soci/soci/soc_ic
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent564 C:\Users\cao2\Desktop\soci\soci\soc_ic\soc_ic.xpr
+# Log file: C:/Users/cao2/Desktop/soci/soci/soc_ic/vivado.log
+# Journal file: C:/Users/cao2/Desktop/soci/soci/soc_ic\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.xpr
+update_compile_order -fileset sources_1
+launch_runs impl_2 -jobs 8
+wait_on_run impl_2
+reset_run impl_2
+reset_run synth_2 -prev_step 
+launch_runs impl_2 -jobs 8
+wait_on_run impl_2
+reset_run synth_2
+set_param synth.elaboration.rodinMoreOptions "rtl::set_parameter maxRomAddrWidth 100"
+launch_runs synth_2 -jobs 8
+wait_on_run synth_2
+set_param synth.elaboration.rodinMoreOptions "rt::set_parameter maxRomAddrWidth 100"
+reset_run synth_2
+launch_runs synth_2 -jobs 8
+wait_on_run synth_2
+reset_run synth_2
+launch_runs impl_2 -jobs 8
+wait_on_run impl_2

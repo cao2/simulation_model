@@ -1,0 +1,5 @@
+set_property SRC_FILE_INFO {cfile:C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/constrs_1/new/kinect7.xdc rfile:../soc_ic.srcs/constrs_1/new/kinect7.xdc id:1} [current_design]
+set_property src_info {type:XDC file:1 line:10 export:INPUT save:INPUT read:READ} [current_design]
+set_property LOC BUFGCTRL_X0Y0 [get_cells xilinx_pad_inst_cb]
+set_property src_info {type:XDC file:1 line:11 export:INPUT save:INPUT read:READ} [current_design]
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets reset_IBUF]

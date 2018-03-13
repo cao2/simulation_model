@@ -1,0 +1,66 @@
+Vivado Simulator 2017.2
+Copyright 1986-1999, 2001-2016 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2017.2/bin/unwrapped/win64.o/xelab.exe -wto 6548fe0fd4804121b3dbb23e569029be --debug typical --relax --mt 2 -L xil_defaultlib -L secureip --snapshot top_behav xil_defaultlib.top -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+WARNING: [VRFC 10-730] function return type array bounds do not match function return value array bounds [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:158]
+WARNING: [VRFC 10-730] function return type array bounds do not match function return value array bounds [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:158]
+WARNING: [VRFC 10-730] function return type array bounds do not match function return value array bounds [C:/Users/cao2/Desktop/soci/soci/soc_ic/soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd:158]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package ieee.std_logic_textio
+Compiling package xil_defaultlib.defs
+Compiling package xil_defaultlib.util
+Compiling package xil_defaultlib.test
+Compiling package unisim.vcomponents
+Compiling architecture rtl of entity xil_defaultlib.fifo32 [fifo32_default]
+Compiling architecture behavioral of entity xil_defaultlib.monitor_customized [monitor_customized_default]
+Compiling architecture behavioral of entity xil_defaultlib.monitor_customized_B [monitor_customized_b_default]
+Compiling architecture rtl of entity xil_defaultlib.monitor_axi_read [monitor_axi_read_default]
+Compiling architecture rtl of entity xil_defaultlib.monitor_axi_write [monitor_axi_write_default]
+Compiling architecture behavioral of entity xil_defaultlib.monitor_cacheline [monitor_cacheline_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo [\fifo(fifo_depth=250)\]
+Compiling architecture rtl of entity xil_defaultlib.fifo [\fifo(fifo_depth=18)\]
+Compiling architecture rtl of entity xil_defaultlib.b_fifo [b_fifo_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter2 [arbiter2_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter6 [arbiter6_default]
+Compiling architecture rtl of entity xil_defaultlib.b_c_arbiter6 [b_c_arbiter6_default]
+Compiling architecture rtl of entity xil_defaultlib.l1_cache [l1_cache_default]
+Compiling architecture rtl of entity xil_defaultlib.rndgen [rndgen_default]
+Compiling architecture rwt of entity xil_defaultlib.cpu_test [cpu_test_default_uniq_0]
+Compiling architecture pwrt of entity xil_defaultlib.cpu_test [cpu_test_default_uniq_1]
+Compiling architecture rtl of entity xil_defaultlib.proc [proc_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo [\fifo(fifo_depth=16)\]
+Compiling architecture rtl of entity xil_defaultlib.pwr [pwr_default]
+Compiling architecture rtl of entity xil_defaultlib.toper_chan_m [toper_chan_m_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo [fifo_default]
+Compiling architecture rtl of entity xil_defaultlib.per_upreq_m [per_upreq_m_default]
+Compiling architecture rtl of entity xil_defaultlib.msg_fifo_m [msg_fifo_m_default]
+Compiling architecture rtl of entity xil_defaultlib.fifo_snp [\fifo_snp(fifo_depth=150)\]
+Compiling architecture rtl of entity xil_defaultlib.arbiter6_ack [arbiter6_ack_default]
+Compiling architecture rtl of entity xil_defaultlib.per_write_m [per_write_m_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter2_ack [arbiter2_ack_default]
+Compiling architecture rtl of entity xil_defaultlib.b_arbiter6 [b_arbiter6_default]
+Compiling architecture rtl of entity xil_defaultlib.arbiter7 [arbiter7_default]
+Compiling architecture rtl of entity xil_defaultlib.b_arbiter2 [b_arbiter2_default]
+Compiling architecture rtl of entity xil_defaultlib.bmsg_fifo_m [bmsg_fifo_m_default]
+Compiling architecture rtl of entity xil_defaultlib.wb_m [wb_m_default]
+Compiling architecture rtl of entity xil_defaultlib.cache_req_m [cache_req_m_default]
+Compiling architecture rtl of entity xil_defaultlib.ic [ic_default]
+Compiling architecture rtl of entity xil_defaultlib.peripheral [peripheral_default]
+Compiling architecture arch of entity xil_defaultlib.mod_m_counter [\mod_m_counter(n=9,m=326)\]
+Compiling architecture arch of entity xil_defaultlib.uart_rx [uart_rx_default]
+Compiling architecture arch of entity xil_defaultlib.fifo_uart [\fifo_uart(w=5)\]
+Compiling architecture arch of entity xil_defaultlib.uart_tx [uart_tx_default]
+Compiling architecture str_arch of entity xil_defaultlib.uart [uart_default]
+Compiling architecture rtl of entity xil_defaultlib.uart_peripheral [uart_peripheral_default]
+Compiling architecture rtl of entity xil_defaultlib.real_mem [real_mem_default]
+Compiling architecture rtl of entity xil_defaultlib.memory [memory_default]
+Compiling architecture tb of entity xil_defaultlib.top
+Built simulation snapshot top_behav

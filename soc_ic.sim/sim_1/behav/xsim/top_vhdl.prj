@@ -1,0 +1,50 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/defs.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/util.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/uart/fifo.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/32arbiter.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/arbiter2.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter2_ack.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/arbiter2_full.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter6_ack.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/arbiter6_full.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/arbiter7.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_arbiter2.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_arbiter6.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/b_c_arbiter6.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/b_fifo.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/bmsg_fifo_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/cache.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/test.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/cache_req_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/soc/rndgen.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/soci/soci/soc_rnd/soc_rnd.srcs/sources_1/imports/2017paper/cpu_test.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/fifo_snp.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/toper_chan_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/per_upreq_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/msg_fifo_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/per_write_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/wb_m.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/oven/soc/ic.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/real_mem.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/mem.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/mod_m_counter.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/monitor.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/monitor_cacheline.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/monitor_customized.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/monitor_cutomized_b.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/new/monitor_write.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/AppData/Roaming/Xilinx/Vivado/peripharals/peripharals.srcs/sources_1/imports/2017paper/peripheral.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/proc.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/pwr.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart_rx.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart_tx.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/uart.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Downloads/uart/uart/project_1/project_1.srcs/sources_1/new/uart_wrapper.vhd" \
+"../../../../soc_ic.srcs/sources_1/imports/cao2/Desktop/2017paper/top.vhd" \
+
+# Do not sort compile order
+nosort
