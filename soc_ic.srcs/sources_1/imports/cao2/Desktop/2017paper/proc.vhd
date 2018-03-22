@@ -148,5 +148,5 @@ begin
   rwt_res <= cpu_res when is_rw_cmd(cpu_res) else ZERO_MSG;
   pwrt_res <= cpu_res when is_pwr_cmd(cpu_res) else ZERO_MSG;
 
-  done_o <= rwt_done and pwrt_done;
+  done_o <= '0';
 end rtl;

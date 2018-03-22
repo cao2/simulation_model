@@ -7,9 +7,14 @@ entity monitor_customized_B is
 	Port(
 		clk           : in  STD_LOGIC;
 		rst           : in  STD_LOGIC;
-
-		master_id     : in IP_T;
-		slave_id      : in  IP_T;
+		
+		----Configurations
+        cmd_en : in  std_logic_vector (4 downto 0);
+        tag_en : in  std_logic_vector (7 downto 0);
+        id_en : in  std_logic_vector (7 downto 0);
+        		
+		link_id     : in std_logic_vector((monitor_width-1) downto 0);
+		--slave_id      : in  IP_T;
 		msg_i         : in  BMSG_T;
 		msg_o         : out BMSG_T;
 		transaction_o : out TST_T
@@ -29,8 +34,8 @@ begin
 			if msg_i.val = '1' then
 				tmp_t.val      := '1';
 				tmp_t.cmd      := msg_i.cmd;
-				tmp_t.sender   := master_id;
-				tmp_t.receiver := slave_id;
+				tmp_t.linkID   := link_id;
+				
 				tmp_t.tag := msg_i.tag;
 				if msg_i.adr = adr then
 					tmp_t.adr := "00";
@@ -47,8 +52,13 @@ begin
 --				else
 --					tmp_t.id := "10";
 --				end if;
-tmp_t.id := msg_i.id;
-				transaction_o <= tmp_t;
+                tmp_t.id := msg_i.id;
+                if (((msg_i.tag and tag_en)=msg_i.tag) 
+                and ((msg_i.id and id_en)=msg_i.id) and 
+                                ((cmd_en(0)='1' and msg_i.cmd="01000000") or (cmd_en(1)='1' and msg_i.cmd="10000000")
+                                or (cmd_en(2)='1' and msg_i.cmd="00100000") or (cmd_en(3)='1' and msg_i.cmd="00010000")  )) then
+				    transaction_o <= tmp_t;
+				end if;
 			end if;
 
 		end if;

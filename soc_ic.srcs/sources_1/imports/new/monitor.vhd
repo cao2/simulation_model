@@ -7,9 +7,13 @@ entity monitor_axi_read is
 	Port(
 		clk           : in  STD_LOGIC;
 		rst           : in  STD_LOGIC;
+		----Configurations
+		cmd_en : in  std_logic_vector (4 downto 0);
+		tag_en : in  std_logic_vector (7 downto 0);
+		id_en : in  std_logic_vector (7 downto 0);
+		
 		----AXI interface
-		master_id     : in  IP_T;
-		slave_id      : in  IP_T;
+		link_id: in std_logic_vector((monitor_width-1) downto 0);
 		tag_i : in std_logic_vector(7 downto 0);
 		id_i          : in  std_logic_vector(7 downto 0);
 		---write address channel
@@ -72,8 +76,7 @@ begin
 			elsif st = two then
 				if rvalid_i = '1' then
 				    tmp_transaction.val := '1';
-					tmp_transaction.sender   := master_id;
-					tmp_transaction.receiver := slave_id;
+					tmp_transaction.linkID   := link_id;
 					tmp_transaction.cmd      := '0';
                     tmp_transaction.tag :=tag_i;
                     tmp_transaction.id:= id_i;
@@ -85,13 +88,15 @@ begin
 						tmp_transaction.adr := "10";
 					end if;
 					st                  := three;
-					transaction_o<= tmp_transaction;
-					tst_t_o <= (tmp_transaction.val, 
-					tmp_transaction.sender, 
-					tmp_transaction.receiver, 
-					READ_CMD,
-					 tmp_traNsaction.tag,
-					 tmp_transaction.id, tmp_transaction.adr);
+					if (((tag_i and tag_en)=tag_i) 
+                                                        and ((id_i and id_en)=id_i) and cmd_en(1)='1') then
+					   transaction_o<= tmp_transaction;
+					   tst_t_o <= (tmp_transaction.val, 
+					   tmp_transaction.linkID, 
+					   "00000001",
+					   tmp_traNsaction.tag,
+					   tmp_transaction.id, tmp_transaction.adr);
+					 end if;
 				end if;
 			elsif st = three then
 			transaction_o.val<='0';
@@ -101,16 +106,17 @@ begin
 					---, do we need to check that?
 					if rdvalid_i = '1' and rlast_i = '1' then
 						if rres_i = "00" then
-							tmp_transaction.sender   := slave_id;
-							tmp_transaction.receiver := master_id;
+							tmp_transaction.linkID   := link_id;
 							tmp_transaction.cmd      := '1';
+							if (((tag_i and tag_en)=tag_i) 
+                                and ((id_i and id_en)=id_i) and cmd_en(1)='1') then
 							transaction_o            <= tmp_transaction;
 							tst_t_o <= (tmp_transaction.val, 
-                                                tmp_transaction.sender, 
-                                                tmp_transaction.receiver, 
-                                                READ_CMD,
+                                                tmp_transaction.linkID, 
+                                                "00000010",
                                                  tmp_traNsaction.tag,
                                                  tmp_transaction.id, tmp_transaction.adr);
+                            end if;
 							st                       := one;
 						end if;
 						st            := one;

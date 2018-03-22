@@ -5,7 +5,7 @@ use work.defs.all;
 
 entity fifo is
   Generic (
-    constant FIFO_DEPTH	: positive := 8
+    constant FIFO_DEPTH	: positive := 64
 	);
   Port ( 
     CLK		: in  STD_LOGIC;

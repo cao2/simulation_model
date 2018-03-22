@@ -42,7 +42,7 @@ package test is
   --constant PWRT_MAXDELAY : natural := 0;  --NOT IMPLEMENTED YET
   
   --********* RW TEST OPTS *******************
-  constant RWT_CNT : natural := 100;
+  constant RWT_CNT : natural := 2;
   constant RWT_SRC : IP_VECT_T := ip_enc(CPU0) or ip_enc(CPU1);
   --constant RWT_DST : IP_VECT_T := ip_enc(GFX); -- NOT IMPLEMENTED YET
   --constant RWT_MAXDELAY : natural := 10;  -- NOT IMPLEMENTED YET
@@ -51,7 +51,7 @@ package test is
                               WRITE_CMD;
 
   --********* UREQ TEST OPTS *****************
-  constant UREQT_CNT : natural := 100;
+  constant UREQT_CNT : natural := 2;
   constant UREQT_SRC : IP_VECT_T := ip_enc(USB) or ip_enc(GFX) or ip_enc(UART) or ip_enc(AUDIO);
   
   --********* PETERSONS TEST OPTS ************
@@ -70,9 +70,10 @@ package test is
 
   --********************************************************************
   --* Warning: don't enable tests that are triggered on the same signals
-  constant RUN_TEST : TEST_T :=TEST(RW) or
+  constant RUN_TEST : TEST_T :=TEST(RW)
+   or
 --                                TEST(PWR) or
-                             TEST(UREQ);
+                            TEST(UREQ);
                                 --TEST(PETERSONS);
                                 --TEST(NONE);
   --********************************************************************

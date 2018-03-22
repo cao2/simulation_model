@@ -5,11 +5,12 @@ package defs is
   constant MSG_WIDTH : positive := 73;
   constant WMSG_WIDTH : positive := 76;
   constant BMSG_WIDTH : positive := 553;
-  
+  constant Monitor_width: positive := 5;
   constant CMD_WIDTH : positive := 8;
   constant ADR_WIDTH : positive := 32;
   constant DAT_WIDTH : positive := 32;
   constant IP_CT: positive := 4;
+  type rank_list is array (0 to 31) of natural range 0 to 31;
  subtype IP_VECT_T is std_logic_vector(19 downto 0);
    type IP_T is (CPU0, CPU1, CACHE0, CACHE1,
                  SA, MEM, GFX, PMU,
@@ -36,8 +37,7 @@ end record MSG_T;
 
 type TST_T is record
    val       : std_logic;                     -- valid bit;
-   sender : IP_T;
-   receiver: IP_T;
+   linkID : std_logic_vector((monitor_width-1) downto 0);
    cmd       : std_logic_vector(7 downto 0);
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id
@@ -52,8 +52,7 @@ type ALL_T is
      
 type TST_TTS is record
     val       : std_logic;                     -- valid bit;
-   sender : IP_T;
-   receiver: IP_T;
+   linkID : std_logic_vector((monitor_width-1) downto 0);
    cmd       : std_logic_vector(7 downto 0);
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id
@@ -63,8 +62,7 @@ type TST_TTS is record
 end record TST_TTS;
 type TST_TO is record
    val       : std_logic;                     -- valid bit;
-   sender : IP_T;
-   receiver: IP_T;
+  linkID : std_logic_vector((monitor_width-1) downto 0);
    cmd       : std_logic_vector(7 downto 0);
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id
@@ -73,8 +71,7 @@ type TST_TO is record
 end record TST_TO;
 type AXI_T is record
    val       : std_logic;                     -- valid bit;
-   sender : IP_T;
-   receiver: IP_T;
+   linkID : std_logic_vector((monitor_width-1) downto 0);
    cmd       : std_logic;
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id

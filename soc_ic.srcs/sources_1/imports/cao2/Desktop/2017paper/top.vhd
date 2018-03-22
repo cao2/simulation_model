@@ -428,10 +428,69 @@ signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t         
      signal mon_array: ALL_T;
     signal mem_rid, mem_rtag: std_logic_vector(7 downto 0);
     signal mem_wid, mem_wtag: std_logic_vector(7 downto 0);
-    signal ZERO_TSTT: TST_TO:=('0',PMU,PMU,(others=>'0'),(others=>'0'),(others=>'0'),(others=>'0'),'0');
-    signal monitor_data: std_logic_vector(37 downto 0);
-begin
+    signal ZERO_TSTT: TST_TO:=('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),(others=>'0'),'0');
+    signal monitor_data: std_logic_vector(32 downto 0);
+    
+    ----Configuration for monitors
+    signal cmd_en_0,cmd_en_1,cmd_en_2,cmd_en_3,cmd_en_4,cmd_en_5,cmd_en_6,cmd_en_7: std_logic_vector(4 downto 0) := "11111";
+    signal cmd_en_8,cmd_en_9,cmd_en_10,cmd_en_11,cmd_en_12,cmd_en_13,cmd_en_14,cmd_en_15: std_logic_vector(4 downto 0):= "11111";
+    signal cmd_en_16,cmd_en_17,cmd_en_18,cmd_en_19,cmd_en_20,cmd_en_21,cmd_en_22,cmd_en_23: std_logic_vector(4 downto 0):= "11111";
+    signal cmd_en_24,cmd_en_25,cmd_en_26,cmd_en_27,cmd_en_28,cmd_en_29,cmd_en_30,cmd_en_31: std_logic_vector(4 downto 0):= "11111";
+    signal tag_en_0,tag_en_1,tag_en_2,tag_en_3,tag_en_4,tag_en_5,tag_en_6,tag_en_7: std_logic_vector(7 downto 0):= "11111111";
+    signal tag_en_8,tag_en_9,tag_en_10,tag_en_11,tag_en_12,tag_en_13,tag_en_14,tag_en_15: std_logic_vector(7 downto 0):= "11111111";
+    signal tag_en_16,tag_en_17,tag_en_18,tag_en_19,tag_en_20,tag_en_21,tag_en_22,tag_en_23: std_logic_vector(7 downto 0):= "11111111";
+    signal tag_en_24,tag_en_25,tag_en_26,tag_en_27,tag_en_28,tag_en_29,tag_en_30,tag_en_31: std_logic_vector(7 downto 0):= "11111111";
+    signal id_en_0,id_en_1,id_en_2,id_en_3,id_en_4,id_en_5,id_en_6,id_en_7: std_logic_vector(7 downto 0):= "11111111";
+    signal id_en_8,id_en_9,id_en_10,id_en_11,id_en_12,id_en_13,id_en_14,id_en_15: std_logic_vector(7 downto 0):= "11111111";
+    signal id_en_16,id_en_17,id_en_18,id_en_19,id_en_20,id_en_21,id_en_22,id_en_23: std_logic_vector(7 downto 0):= "11111111";
+    signal id_en_24,id_en_25,id_en_26,id_en_27,id_en_28,id_en_29,id_en_30,id_en_31: std_logic_vector(7 downto 0):= "11111111";
+    
 
+    
+    
+    signal ranks: rank_list;
+begin
+     rank_set: process(reset)
+     begin
+        if (reset='1') then
+        ranks(0) <=0;
+        ranks(1) <=1;
+        ranks(2) <=2;
+        ranks(3) <=3;
+        ranks(4) <=4;
+        ranks(5) <=5;
+        ranks(6) <=6;
+        ranks(7) <=7;
+        ranks(8) <=8;
+        ranks(9) <=9;
+        ranks(10) <=10;
+        ranks(11) <=11;
+        ranks(12) <=12;
+        ranks(13) <=13;
+        ranks(14) <=14;
+        ranks(15) <=15;
+        ranks(16) <=16;
+        ranks(17) <=17;
+        ranks(18) <=18;
+        ranks(19) <=19;
+        ranks(20) <=20;
+        ranks(21) <=21;
+        ranks(22) <=22;
+        ranks(23) <=23;
+        ranks(24) <=24;
+        ranks(25) <=25;
+        ranks(26) <=26;
+        ranks(27) <=27;
+        ranks(28) <=28;
+        ranks(29) <=29;
+        ranks(30) <=30;
+        ranks(31) <=31;
+
+        end if;
+     end process;
+     
+     
+     
       trace_output_logger: process(tb_clk)
        file trace_file: TEXT open write_mode is "trace_output.tstt";
        variable l: line;
@@ -451,9 +510,11 @@ begin
              port map(
              CLK => Clock,
              RST => reset,
+             ranks => ranks,
+             critical => 4,
              DataIn => mon_array,
-             DataOut => monitor_data,
-             control_full => mon_full
+             DataOut => monitor_data
+             --control_full => mon_full
              );
 --    outputt: process(tb_clk)
 --    begin
@@ -464,7 +525,7 @@ begin
     mon_array_driver: process(tb_clk)
     begin
         if rising_edge(tb_clk) then
-            mon_array(0)<=mon_cpu_req1; ----1
+             mon_array(0)<=mon_cpu_req1; ----1
              mon_array(1)<=mon_cpu_res1; ----2
              mon_array(2)<=mon_cpu_req2; ----3
              mon_array(3)<=mon_cpu_res2; ----4
@@ -580,22 +641,31 @@ begin
 			end if;
 		end if;
 	end process;
+	
     cpu_req1_monitor : entity work.monitor_customized(Behavioral)
         port map(
          clk           => Clock,
          rst           => reset,
-         master_id     => CPU0,
-         slave_id      => CACHE0,
+         cmd_en        => cmd_en_0,
+         id_en         => id_en_0,
+         tag_en        => tag_en_0,
+         link_id           => "00000",
+         ---slave_id   => CACHE0,
          msg_i         => cpu_req1,
          msg_o         => cpu_req11,
          transaction_o => mon_cpu_req1
         );
+        
        cpu_res1_monitor : entity work.monitor_customized(Behavioral)
         port map(
          clk           => Clock,
          rst           => reset,
-         master_id     => CACHE0,
-         slave_id      => CPU0,
+        cmd_en        => cmd_en_1,
+        id_en         => id_en_1,
+        tag_en        => tag_en_1,         
+       
+         link_id           =>"00001",
+         ---slave_id   => CPU0,
          msg_i         => cpu_res1,
          msg_o         => cpu_res11,
          transaction_o => mon_cpu_res1
@@ -604,8 +674,11 @@ begin
         port map(
          clk           => Clock,
          rst           => reset,
-         master_id     => CPU1,
-         slave_id      => CACHE1,
+         cmd_en        => cmd_en_2,
+                  id_en         => id_en_2,
+                  tag_en        => tag_en_2,
+         link_id           => "00010",
+         ---slave_id   => CACHE1,
          msg_i         => cpu_req2,
          msg_o         => cpu_req21,
          transaction_o => mon_cpu_req2
@@ -614,8 +687,11 @@ begin
         port map(
          clk           => Clock,
          rst           => reset,
-         master_id     => CACHE1,
-         slave_id      => CPU1,
+         cmd_en        => cmd_en_3,
+                  id_en         => id_en_3,
+                  tag_en        => tag_en_3,
+         link_id           => "00011",
+         ---slave_id   => CPU1,
          msg_i         => cpu_res2,
          msg_o         => cpu_res21,
          transaction_o => mon_cpu_res2
@@ -624,8 +700,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => GFXM,
-              slave_id      => SA,
+              cmd_en        => cmd_en_4,
+                       id_en         => id_en_4,
+                       tag_en        => tag_en_4,
+              link_id           => "00100",
+              ---slave_id   => SA,
               msg_i         => gfx_upreq,
               msg_o         => gfx_upreq1,
               transaction_o => mon_gfx_upreq
@@ -634,8 +713,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SA,
-              slave_id      => GFXM,
+              cmd_en        => cmd_en_5,
+                       id_en         => id_en_5,
+                       tag_en        => tag_en_5,
+              link_id           => "00101",
+              ---slave_id   => GFXM,
               msg_i         => gfx_upres,
               msg_o         => gfx_upres1,
               transaction_o => mon_gfx_upres
@@ -645,8 +727,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => AUDIOM,
-              slave_id      => SA,
+              cmd_en        => cmd_en_6,
+                       id_en         => id_en_6,
+                       tag_en        => tag_en_6,
+              link_id           => "00110",
+              ---slave_id   => SA,
               msg_i         => audio_upreq,
               msg_o         => audio_upreq1,
               transaction_o => mon_audio_upreq
@@ -655,8 +740,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SA,
-              slave_id      => AUDIOM,
+              cmd_en        => cmd_en_7,
+                       id_en         => id_en_7,
+                       tag_en        => tag_en_7,
+              link_id           => "00111",
+              ---slave_id   => AUDIOM,
               msg_i         => audio_upres,
               msg_o         => audio_upres1,
               transaction_o => mon_audio_upres
@@ -666,8 +754,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => UARTM,
-              slave_id      => SA,
+              cmd_en        => cmd_en_8,
+                       id_en         => id_en_8,
+                       tag_en        => tag_en_8,
+              link_id           => "01000",
+              ---slave_id   => SA,
               msg_i         => uart_upreq,
               msg_o         => uart_upreq1,
               transaction_o => mon_uart_upreq
@@ -676,8 +767,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SA,
-              slave_id      => UARTM,
+              cmd_en        => cmd_en_9,
+                       id_en         => id_en_9,
+                       tag_en        => tag_en_9,
+              link_id           => "01001",
+              ---slave_id   => UARTM,
               msg_i         => uart_upres,
               msg_o         => uart_upres1,
               transaction_o => mon_uart_upres
@@ -687,8 +781,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => USBM,
-              slave_id      => SA,
+              cmd_en        => cmd_en_10,
+                       id_en         => id_en_10,
+                       tag_en        => tag_en_10,
+              link_id           => "01010",
+              ---slave_id   => SA,
               msg_i         => usb_upreq,
               msg_o         => usb_upreq1,
               transaction_o => mon_usb_upreq
@@ -697,8 +794,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SA,
-              slave_id      => USBM,
+              cmd_en        => cmd_en_11,
+                       id_en         => id_en_11,
+                       tag_en        => tag_en_11,
+              link_id           => "01011",
+              ---slave_id   => USBM,
               msg_i         => usb_upres,
               msg_o         => usb_upres1,
               transaction_o => mon_usb_upres
@@ -708,8 +808,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE0,
-              slave_id      => SA,
+              cmd_en        => cmd_en_12,
+                       id_en         => id_en_12,
+                       tag_en        => tag_en_12,
+              link_id           => "01100",
+              ---slave_id   => SA,
               msg_i         => bus_req1,
               msg_o         => bus_req11,
               transaction_o => mon_bus_req1
@@ -718,8 +821,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE1,
-              slave_id      => SA,
+              cmd_en        => cmd_en_13,
+                       id_en         => id_en_13,
+                       tag_en        => tag_en_13,
+              link_id           => "01101",
+              ---slave_id   => SA,
               msg_i         => bus_req2,
               msg_o         => bus_req21,
               transaction_o => mon_bus_req2
@@ -728,8 +834,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SA,
-              slave_id      => CACHE0,
+              cmd_en        => cmd_en_14,
+                       id_en         => id_en_14,
+                       tag_en        => tag_en_14,
+              link_id           => "01110",
+              ---slave_id   => CACHE0,
               msg_i         => bus_res1,
               msg_o         => bus_res11,
               transaction_o => mon_bus_res1
@@ -738,8 +847,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SA,
-              slave_id      => CACHE1,
+              cmd_en        => cmd_en_15,
+                       id_en         => id_en_15,
+                       tag_en        => tag_en_15,
+              link_id           => "01111",
+              ---slave_id   => CACHE1,
               msg_i         => bus_res2,
               msg_o         => bus_res21,
               transaction_o => mon_bus_res2
@@ -748,9 +860,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_16,
+                       id_en         => id_en_16,
+                       tag_en        => tag_en_16,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              link_id           => "10000",
+              ---slave_id   => MEM,
               tag_i => mem_rtag,
               id_i          => mem_rid,
               ---write address channel
@@ -792,8 +907,11 @@ begin
               clk           => Clock,
               rst           => reset,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              cmd_en        => cmd_en_17,
+                       id_en         => id_en_17,
+                       tag_en        => tag_en_17,
+              link_id           => "10001",
+              ---slave_id   => MEM,
               tag_i => mem_wtag,
                           id_i          => mem_wid,
               ---write address channel
@@ -837,9 +955,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_18,
+                       id_en         => id_en_18,
+                       tag_en        => tag_en_18,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => GFX,
+              link_id           => "10010",
+              ---slave_id   => GFX,
               tag_i => mem_rtag,
                           id_i          => mem_rid,
               ---write address channel
@@ -879,9 +1000,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_19,
+                       id_en         => id_en_19,
+                       tag_en        => tag_en_19,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => GFX,
+              link_id           => "10011",
+              ---slave_id   => GFX,
               tag_i => mem_wtag,
                           id_i          => mem_wid,
               ---write address channel
@@ -925,9 +1049,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_20,
+                       id_en         => id_en_20,
+                       tag_en        => tag_en_20,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => AUDIO,
+              link_id           => "10100",
+              ---slave_id   => AUDIO,
               tag_i => mem_rtag,
                           id_i          => mem_rid,
               ---write address channel
@@ -967,9 +1094,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_21,
+                       id_en         => id_en_21,
+                       tag_en        => tag_en_21,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              link_id           => "10101",
+              ---slave_id   => MEM,
               tag_i => mem_wtag,
                           id_i          => mem_wid,
               ---write address channel
@@ -1013,9 +1143,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_22,
+                       id_en         => id_en_22,
+                       tag_en        => tag_en_22,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              link_id           => "10110",
+              ---slave_id   => MEM,
               tag_i => mem_rtag,
                           id_i          => mem_rid,
               ---write address channel
@@ -1055,9 +1188,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_23,
+                       id_en         => id_en_23,
+                       tag_en        => tag_en_23,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              link_id           => "10111",
+              ---slave_id   => MEM,
               tag_i => mem_wtag,
                           id_i          => mem_wid,
               ---write address channel
@@ -1101,9 +1237,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_24,
+                       id_en         => id_en_24,
+                       tag_en        => tag_en_24,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              link_id           => "11000",
+              ---slave_id   => MEM,
               tag_i => mem_rtag,
                           id_i          => mem_rid,
               ---write address channel
@@ -1143,9 +1282,12 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
+              cmd_en        => cmd_en_25,
+                       id_en         => id_en_25,
+                       tag_en        => tag_en_25,
               ----AXI interface
-              master_id     => SA,
-              slave_id      => MEM,
+              link_id           => "11001",
+              ---slave_id   => MEM,
               tag_i => mem_wtag,
                           id_i          => mem_wid,
               ---write address channel
@@ -1189,8 +1331,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => SAM,
-              slave_id      => CACHE0,
+              cmd_en        => cmd_en_26,
+                       id_en         => id_en_26,
+                       tag_en        => tag_en_26,
+              link_id           => "11010",
+              ---slave_id   => CACHE0,
               msg_i         => up_snp_req,
               msg_o         => up_snp_req11,
               transaction_o => up_snp_req_mon
@@ -1199,8 +1344,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE0,
-              slave_id      => SAM,
+              cmd_en        => cmd_en_27,
+                       id_en         => id_en_27,
+                       tag_en        => tag_en_27,
+              link_id           => "11011",
+              ---slave_id   => SAM,
               msg_i         => up_snp_res,
               msg_o         => up_snp_res11,
               transaction_o => up_snp_res_mon
@@ -1209,8 +1357,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE1M,
-              slave_id      => CACHE0,
+              cmd_en        => cmd_en_28,
+                       id_en         => id_en_28,
+                       tag_en        => tag_en_28,
+              link_id           => "11100",
+              ---slave_id   => CACHE0,
               msg_i         => snp_req1,
               msg_o         => snp_req11,
               transaction_o => snp_req_1_mon
@@ -1219,8 +1370,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE0M,
-              slave_id      => CACHE1,
+              cmd_en        => cmd_en_29,
+                       id_en         => id_en_29,
+                       tag_en        => tag_en_29,
+              link_id           => "11101",
+              ---slave_id   => CACHE1,
               msg_i         => snp_req2,
               msg_o         => snp_req21,
               transaction_o => snp_req_2_mon
@@ -1229,8 +1383,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE0,
-              slave_id      => CACHE1M,
+              cmd_en        => cmd_en_30,
+                       id_en         => id_en_30,
+                       tag_en        => tag_en_30,
+              link_id           => "11110",
+              ---slave_id   => CACHE1M,
               msg_i         => snp_res1,
               msg_o         => snp_res11,
               transaction_o => mon_snp_res_1
@@ -1239,8 +1396,11 @@ begin
           port map(
               clk           => Clock,
               rst           => reset,
-              master_id     => CACHE1,
-              slave_id      => CACHE0M,
+              cmd_en        => cmd_en_31,
+                       id_en         => id_en_31,
+                       tag_en        => tag_en_31,
+              link_id           => "11111",
+              ---slave_id   => CACHE0M,
               msg_i         => snp_res2,
               msg_o         => snp_res21,
               transaction_o => mon_snp_res_2
@@ -1704,6 +1864,7 @@ begin
   
       -- -- Clock generation, starts at 0
       tb_clk <= not tb_clk after tb_period/2 when tb_sim_ended /= '1' else '0';
+      --tb_clk <= not tb_clk after tb_period/2;
       Clock  <= tb_clk;
   
       logger_p : process(tb_clk)

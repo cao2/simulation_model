@@ -7,9 +7,14 @@ entity monitor_axi_write is
 	Port(
 		clk           : in  STD_LOGIC;
 		rst           : in  STD_LOGIC;
+		
+		----Configurations
+        cmd_en : in  std_logic_vector (4 downto 0);
+        tag_en : in  std_logic_vector (7 downto 0);
+        id_en : in  std_logic_vector (7 downto 0);
+
 		----AXI interface
-		master_id     : in  IP_T;
-		slave_id      : in  IP_T;
+		link_id   : in std_logic_vector( (monitor_width-1) downto 0);
 		tag_i         : in  std_logic_vector(7 downto 0);
 		id_i          : in  std_logic_vector(7 downto 0);
 		---write address channel
@@ -105,20 +110,23 @@ begin
 				---Note: the data is available here
 				---, do we need to check that?
 				tmp_transaction.val      := '1';
-				tmp_transaction.sender   := master_id;
-				tmp_transaction.receiver := slave_id;
+				--tmp_transaction.sender   := master_id;
+				tmp_transaction.linkID := link_id;
 				tmp_transaction.cmd      := '0';
 				tmp_transaction.tag      := tag_i;
 				tmp_transaction.id       := id_i;
 				if wdvalid_i = '1' and wlast_i = '1' then
 					st            := five;
-					transaction_o <= tmp_transaction;
-					tst_t_o <= (tmp_transaction.val, 
-                                        tmp_transaction.sender, 
-                                        tmp_transaction.receiver, 
-                                        WRITE_CMD,
+				if (((tag_i and tag_en)=tag_i) 
+                                    and ((id_i and id_en)=id_i) and  cmd_en(0)='1') then
+					   transaction_o <= tmp_transaction;
+					   tst_t_o <= (tmp_transaction.val, 
+                                       -- tmp_transaction.sender, 
+                                        tmp_transaction.linkID, 
+                                        "00000001",
                                          tmp_traNsaction.tag,
                                          tmp_transaction.id, tmp_transaction.adr);
+                    end if;
 				end if;
 
 			elsif st = five then
@@ -126,16 +134,19 @@ begin
 				tst_t_o.val <='0';
 				if wrvalid_i = '1' then
 					if wrsp_i = "00" then
-						tmp_transaction.sender   := slave_id;
-						tmp_transaction.receiver := master_id;
+						tmp_transaction.linkID   := link_id;
+						--tmp_transaction.receiver := master_id;
 						tmp_transaction.cmd      := '1';
-						transaction_o            <= tmp_transaction;
-						tst_t_o <= (tmp_transaction.val, 
-                                            tmp_transaction.sender, 
-                                            tmp_transaction.receiver, 
-                                            WRITE_CMD,
+						if (((tag_i and tag_en)=tag_i) 
+                            and ((id_i and id_en)=id_i) and cmd_en(0)='1') then
+						  transaction_o            <= tmp_transaction;
+						  tst_t_o <= (tmp_transaction.val, 
+                                            tmp_transaction.linkID, 
+                                            --tmp_transaction.receiver, 
+                                            "00000010",
                                              tmp_traNsaction.tag,
                                              tmp_transaction.id, tmp_transaction.adr);
+                        end if;
 						st                       := one;
 					end if;
 				end if;

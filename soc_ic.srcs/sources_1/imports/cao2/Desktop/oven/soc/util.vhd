@@ -305,7 +305,7 @@ package body util is
   end;
    function slv(m : TST_T) return std_logic_vector is
   begin
-    return m.val & stt(m.sender)&stt(m.receiver) & m.cmd & m.tag & m.id & m.adr ;
+    return m.val & m.linkID & m.cmd & m.tag & m.id & m.adr ;
   end;
 
   function slv(m : BMSG_T) return std_logic_vector is
@@ -315,11 +315,11 @@ end;
  
   function slv(m : AXI_T) return std_logic_vector is
   begin
-    return m.val & stt(m.sender)&stt(m.receiver) & m.cmd & m.tag & m.id & m.adr ;
+    return m.val & m.linkID & m.cmd & m.tag & m.id & m.adr ;
   end;
    function slv(m : TST_TO) return std_logic_vector is
    begin
-     return m.val & stt(m.sender)&stt(m.receiver) & m.cmd & m.tag & m.id & m.adr&m.tim ;
+     return m.val & m.linkID & m.cmd & m.tag & m.id & m.adr&m.tim ;
    end;
   
 end util;
