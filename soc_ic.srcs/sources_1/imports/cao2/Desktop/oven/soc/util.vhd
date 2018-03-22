@@ -72,6 +72,7 @@ package util is
   function slv(m: AXI_T) return std_logic_vector;
   function stt(m: IP_T) return std_logic_vector;
   function slv(m: TST_TO) return std_logic_vector;
+  	function count_ones(s : std_logic_vector) return natural range 0 to 1;
   --procedure clr(signal vector : out std_logic_vector);
 end util;
 
@@ -312,7 +313,16 @@ package body util is
   begin
     return m.val & m.cmd & m.tag & m.id & m.adr & m.dat;
 end;
- 
+ function count_ones(s : std_logic_vector) return natural range 0 to 1 is
+  variable temp : natural := 0;
+begin
+  for i in s'range loop
+    if s(i) = '1' then temp := temp + 1; 
+    end if;
+  end loop;
+  
+  return temp;
+end function count_ones;
   function slv(m : AXI_T) return std_logic_vector is
   begin
     return m.val & m.linkID & m.cmd & m.tag & m.id & m.adr ;

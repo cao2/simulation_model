@@ -41,23 +41,23 @@ entity arbiter32 is
 		RST          : in  STD_LOGIC;
 		DataIn       : in  ALL_T;
 		DataOut      : out std_logic_vector(32 downto 0);
-		ranks        : in rank_list;
-		ranks_fifo    : in rank_list;
-		critical: in positive;
+		ranks        : in  rank_list;
+		ranks_fifo   : in  rank_list;
+		critical     : in  positive;
 		--A_full  : out STD_LOGIC := '0';
 		--control_full : out std_logic;
-		data_dropped: out std_logic :='0'
+		data_dropped : out std_logic_vector(4 downto 0) := (others =>'0')
 	);
 end arbiter32;
 
 architecture rtl of arbiter32 is
-	constant dpth                                         : positive                      := 8;
+	constant dpth                                                                                                                                                                                                               : positive                      := 8;
 	--signal td1: std_logic_vector(31 downto 0);
 	--signal td2: std_logic_vector(31 downto 0);
 	signal in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, in16, in17, in18, in19, in20, in21, in22, in23, in24, in25, in26, in27, in28, in29, in30, in31                                 : std_logic_vector(31 downto 0);
 	signal tts0, tts1, tts2, tts3, tts4, tts5, tts6, tts7, tts8, tts9, tts10, tts11, tts12, tts13, tts14, tts15, tts16, tts17, tts18, tts19, tts20, tts21, tts22, tts23, tts24, tts25, tts26, tts27, tts28, tts29, tts30, tts31 : std_logic_vector(31 downto 0);
 	type tts_a is array (0 to 31) of std_logic_vector(31 downto 0);
-	signal empty_data: std_logic_vector ( 31 downto 0) :=(others=>'0');
+	signal empty_data                                                                                                                                                                                                           : std_logic_vector(31 downto 0) := (others => '0');
 	signal tts_array                                                                                                                                                                                                            : tts_a;
 	signal re, full, emp, we                                                                                                                                                                                                    : std_logic_vector(31 downto 0) := (others => '0');
 	signal count                                                                                                                                                                                                                : integer                       := 0;
@@ -65,19 +65,18 @@ architecture rtl of arbiter32 is
 	--	signal layer2_1, layer2_2, layer2_3, layer2_4, layer2_5, layer2_6, layer2_7, layer2_8: TST_TTS;
 	--	signal layer3_1, layer3_2, layer3_3, layer3_4 : TST_TTS;
 	--	signal layer4_1, layer4_2 : TST_TTS;
-	constant DEPTH                                                         : positive                      := 18;
-	signal control_in, control_out                                                                                                                                                                                              : std_logic_vector(32 downto 0);
-	signal control_re, control_we, control_empty, control_full                                                                                                                                                                                : std_logic;
-	signal critical_mode: std_logic :='0';
+	constant DEPTH                                                                                                                                                                                                              : positive                      := 18;
+	signal control_in, control_out                                                                                                                                                                                              : std_logic_vector(36 downto 0);
+	signal control_re, control_we, control_empty, control_full                                                                                                                                                                  : std_logic;
+	signal critical_mode                                                                                                                                                                                                        : std_logic                     := '0';
 	--signal ranks: rank_list;
 	signal ack                                                                                                                                                                                                                  : std_logic_vector(31 downto 0);
 begin
 
-
 	tts_map : process(clk)
 	begin
 		if rising_edge(clk) then
-		    tts_array(0) <=  tts0;
+			tts_array(0)  <= tts0;
 			tts_array(1)  <= tts1;
 			tts_array(2)  <= tts2;
 			tts_array(3)  <= tts3;
@@ -112,22 +111,20 @@ begin
 
 		end if;
 	end process;
-	
-	mode_set: process(clk)
-	variable tmp_emp: std_logic_vector( 3 downto 0);
+
+	mode_set : process(clk)
+		variable tmp_emp : std_logic_vector(3 downto 0);
 	begin
-	   if rising_edge(clk) then
-	       tmp_emp:= emp(ranks(0))&emp(ranks(1))&emp(ranks(2))&emp(ranks(3));
-	       if (tmp_emp="1111") then
-	           critical_mode <='0';
-	       else
-	           critical_mode <='1';
-	       end if;
-	   end if;
+		if rising_edge(clk) then
+			tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+			if (tmp_emp = "1111") then
+				critical_mode <= '0';
+			else
+				critical_mode <= '1';
+			end if;
+		end if;
 	end process;
-	
-	
-	
+
 	fifo_proc : process(clk, rst)
 		-- type ram_t is array (0 to FIFO_DEPTH - 1) of ALL_T;
 		-- variable Memory   : ram_t;
@@ -137,15 +134,15 @@ begin
 		variable Head     : natural range 0 to FIFO_DEPTH - 1;
 		variable Tail     : natural range 0 to FIFO_DEPTH - 1;
 
-		variable Looped   : boolean;
-		variable len      : integer               := 0;
-		variable st       : natural range 0 to 31 := 0;
-		variable valid    : boolean               := false;
-		variable i        : natural range 0 to 32 := 0;
-		variable state    : STATE                 := one;
-		variable contro_v : std_logic_vector(32 downto 0);
-		variable tmp_critical: positive;
-		
+		variable Looped       : boolean;
+		variable len          : integer               := 0;
+		variable st           : natural range 0 to 31 := 0;
+		variable valid        : boolean               := false;
+		variable i            : natural range 0 to 32 := 0;
+		variable state        : STATE                 := one;
+		variable contro_v     : std_logic_vector(36 downto 0);
+		variable tmp_critical : positive;
+
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
@@ -156,13 +153,13 @@ begin
 					i          := 0;
 					control_re <= '1';
 					state      := seven;
-					re <=(others=>'0');
-					DataOut <= empty_data&'1';
-				elsif state =seven then
-				    control_re<='0';
-				    state := two;
+					re         <= (others => '0');
+					DataOut    <= empty_data & '1';
+				elsif state = seven then
+					control_re <= '0';
+					state      := two;
 				elsif state = two then
-					if (control_out  /= "000000000000000000000000000000000") then
+					if (control_out /= "000000000000000000000000000000000") then
 						if (contro_v(0) = '1'  ) then
 							valid             := true;
 							val_chan(num_val) := ranks(0);
@@ -324,15 +321,15 @@ begin
 							num_val           := num_val + 1;
 						end if;
 						state := three;
-						end if;
+					end if;
 				elsif state = three then
 					re(val_chan(i)) <= '1';
 					state           := four;
 				elsif (state = four) then
 					re(val_chan(i)) <= '0';
 					if tts_array(val_chan(i))(31 downto 31) = "1" then
-						DataOut <= tts_array(val_chan(i)) & '1';
-						data_dropped <= contro_v(32);
+						DataOut      <= tts_array(val_chan(i)) & '1';
+						data_dropped <= contro_v(36 downto 32);
 						---now the first data is out, check if it reaches the size
 						if i + 1 < num_val then
 							i     := i + 1;
@@ -343,8 +340,8 @@ begin
 					end if;
 
 				elsif (state = five) then
-				    DataOut <= (others=>'0');
-				    data_dropped <= '0';
+					DataOut         <= (others => '0');
+					data_dropped    <= (others => '0');
 					re(val_chan(i)) <= '1';
 					state           := six;
 				elsif (state = six ) then
@@ -366,7 +363,7 @@ begin
 		end if;
 	end process;
 	fifo_control : entity work.fifo_uart(arch)
-		generic map(B => 32+1, W => dpth+2)
+		generic map(B => 31+5, W => dpth + 2)
 		port map(clk    => clk, reset => rst, rd => control_re,
 		         wr     => control_we, w_data => control_in,
 		         empty  => control_empty, full => control_full, r_data => control_out);
@@ -393,21 +390,32 @@ begin
 
 	fifo_control_p : process(CLK)
 		variable tmp_in : std_logic_vector(31 downto 0);
+		variable num_drop: natural range 0 to 31:=0;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				control_we <= '0';
 			else
 				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val & DataIn(ranks(28)).val & DataIn(ranks(27)).val & DataIn(ranks(26)).val & DataIn(ranks(25)).val & DataIn(ranks(24)).val & DataIn(ranks(23)).val & DataIn(ranks(22)).val & DataIn(ranks(21)).val & DataIn(ranks(20)).val & DataIn(ranks(19)).val & DataIn(ranks(18)).val & DataIn(ranks(17)).val & DataIn(ranks(16)).val & DataIn(ranks(15)).val & DataIn(ranks(14)).val & DataIn(ranks(13)).val & DataIn(ranks(12)).val & DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_in /= "00000000000000000000000000000000" and control_full /='1') then
-				--if (control_full /='1') then
-				  if (full/="00000000000000000000000000000000") then
-					control_in <= '1'&tmp_in;
-			      else
-			         control_in <='0'&tmp_in;
-			      end if;
-				    control_we <= '1';
-				--end if;
+				if (tmp_in /= "00000000000000000000000000000000" and control_full /= '1') then
+					--if (control_full /='1') then
+					----check numbers of drops
+					if (critical_mode='0') then
+						---simply count the total numbers of full
+						if (full /= "00000000000000000000000000000000") then
+							num_drop := count_ones(full);
+						else
+							num_drop := 0;
+						end if;
+					else
+						num_drop := count_ones(tmp_in((31-critial) downto 0))+ count_ones(full(31 downto (31-critical)));
+					end if;
+					
+					
+					control_in <= std_logic_vector(to_unsigned(num_drop,5)) & tmp_in;
+					
+					control_we <= '1';
+					--end if;
 				else
 					control_we <= '0';
 				end if;
@@ -415,7 +423,7 @@ begin
 		end if;
 	end process;
 	FIFO0 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(0),
 		         wr     => we(0),
@@ -429,7 +437,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(0) <= '0';
-			elsif (DataIn(0).val = '1' and full(0) ='0' ) then
+			elsif ( DataIn(0).val = '1' and full(0) = '0' and (critical_mode = '0' or ranks_fifo(0) < critical)) then
 				in0   <= slv(DataIn(0));
 				we(0) <= '1';
 			else
@@ -438,7 +446,7 @@ begin
 		end if;
 	end process;
 	FIFO1 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(1),
 		         wr     => we(1),
@@ -452,7 +460,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(1) <= '0';
-			elsif DataIn(1).val = '1'and full(1) ='0' then
+			elsif ( DataIn(1).val = '1' and full(1) = '0' and (critical_mode = '0' or ranks_fifo(1) < critical)) then
 				in1   <= slv(DataIn(1));
 				we(1) <= '1';
 			else
@@ -461,7 +469,7 @@ begin
 		end if;
 	end process;
 	FIFO2 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(2),
 		         wr     => we(2),
@@ -475,7 +483,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(2) <= '0';
-			elsif DataIn(2).val = '1' and full(2) ='0' then
+			elsif ( DataIn(2).val = '1' and full(2) = '0' and (critical_mode = '0' or ranks_fifo(2) < critical)) then
 				in2   <= slv(DataIn(2));
 				we(2) <= '1';
 			else
@@ -484,7 +492,7 @@ begin
 		end if;
 	end process;
 	FIFO3 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(3),
 		         wr     => we(3),
@@ -498,7 +506,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(3) <= '0';
-			elsif DataIn(3).val = '1' and full(3) ='0' then
+			elsif ( DataIn(3).val = '1' and full(3) = '0' and (critical_mode = '0' or ranks_fifo(3) < critical)) then
 				in3   <= slv(DataIn(3));
 				we(3) <= '1';
 			else
@@ -507,7 +515,7 @@ begin
 		end if;
 	end process;
 	FIFO4 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(4),
 		         wr     => we(4),
@@ -521,7 +529,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(4) <= '0';
-			elsif DataIn(4).val = '1' and full(4) ='0' then
+			elsif ( DataIn(4).val = '1' and full(4) = '0' and (critical_mode = '0' or ranks_fifo(4) < critical)) then
 				in4   <= slv(DataIn(4));
 				we(4) <= '1';
 			else
@@ -530,7 +538,7 @@ begin
 		end if;
 	end process;
 	FIFO5 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(5),
 		         wr     => we(5),
@@ -544,7 +552,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(5) <= '0';
-			elsif DataIn(5).val = '1' and full(5) ='0' then
+			elsif ( DataIn(5).val = '1' and full(5) = '0' and (critical_mode = '0' or ranks_fifo(5) < critical)) then
 				in5   <= slv(DataIn(5));
 				we(5) <= '1';
 			else
@@ -553,7 +561,7 @@ begin
 		end if;
 	end process;
 	FIFO6 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(6),
 		         wr     => we(6),
@@ -567,7 +575,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(6) <= '0';
-			elsif DataIn(6).val = '1' and full(6) ='0' then
+			elsif ( DataIn(6).val = '1' and full(6) = '0' and (critical_mode = '0' or ranks_fifo(6) < critical)) then
 				in6   <= slv(DataIn(6));
 				we(6) <= '1';
 			else
@@ -576,7 +584,7 @@ begin
 		end if;
 	end process;
 	FIFO7 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(7),
 		         wr     => we(7),
@@ -590,7 +598,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(7) <= '0';
-			elsif DataIn(7).val = '1'  and full(7) ='0' then
+			elsif ( DataIn(7).val = '1' and full(7) = '0' and (critical_mode = '0' or ranks_fifo(7) < critical)) then
 				in7   <= slv(DataIn(7));
 				we(7) <= '1';
 			else
@@ -599,7 +607,7 @@ begin
 		end if;
 	end process;
 	FIFO8 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(8),
 		         wr     => we(8),
@@ -613,7 +621,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(8) <= '0';
-			elsif DataIn(8).val = '1'  and full(8) ='0' then
+			elsif ( DataIn(8).val = '1' and full(8) = '0' and (critical_mode = '0' or ranks_fifo(8) < critical)) then
 				in8   <= slv(DataIn(8));
 				we(8) <= '1';
 			else
@@ -622,7 +630,7 @@ begin
 		end if;
 	end process;
 	FIFO9 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(9),
 		         wr     => we(9),
@@ -636,7 +644,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(9) <= '0';
-			elsif DataIn(9).val = '1'  and full(9) ='0' then
+			elsif ( DataIn(9).val = '1' and full(9) = '0' and (critical_mode = '0' or ranks_fifo(9) < critical)) then
 				in9   <= slv(DataIn(9));
 				we(9) <= '1';
 			else
@@ -645,7 +653,7 @@ begin
 		end if;
 	end process;
 	FIFO10 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(10),
 		         wr     => we(10),
@@ -659,7 +667,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(10) <= '0';
-			elsif DataIn(10).val = '1'  and full(10) ='0' then
+			elsif ( DataIn(10).val = '1' and full(10) = '0' and (critical_mode = '0' or ranks_fifo(10) < critical)) then
 				in10   <= slv(DataIn(10));
 				we(10) <= '1';
 			else
@@ -668,7 +676,7 @@ begin
 		end if;
 	end process;
 	FIFO11 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(11),
 		         wr     => we(11),
@@ -682,7 +690,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(11) <= '0';
-			elsif DataIn(11).val = '1'  and full(11) ='0' then
+			elsif ( DataIn(11).val = '1' and full(11) = '0' and (critical_mode = '0' or ranks_fifo(11) < critical)) then
 				in11   <= slv(DataIn(11));
 				we(11) <= '1';
 			else
@@ -691,7 +699,7 @@ begin
 		end if;
 	end process;
 	FIFO12 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(12),
 		         wr     => we(12),
@@ -705,7 +713,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(12) <= '0';
-			elsif DataIn(12).val = '1'  and full(12) ='0' then
+			elsif ( DataIn(12).val = '1' and full(12) = '0' and (critical_mode = '0' or ranks_fifo(12) < critical)) then
 				in12   <= slv(DataIn(12));
 				we(12) <= '1';
 			else
@@ -714,7 +722,7 @@ begin
 		end if;
 	end process;
 	FIFO13 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(13),
 		         wr     => we(13),
@@ -728,7 +736,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(13) <= '0';
-			elsif DataIn(13).val = '1'  and full(13) ='0'  then
+			elsif ( DataIn(13).val = '1' and full(13) = '0' and (critical_mode = '0' or ranks_fifo(13) < critical)) then
 				in13   <= slv(DataIn(13));
 				we(13) <= '1';
 			else
@@ -737,7 +745,7 @@ begin
 		end if;
 	end process;
 	FIFO14 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(14),
 		         wr     => we(14),
@@ -751,7 +759,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(14) <= '0';
-			elsif DataIn(14).val = '1'  and full(14) ='0'  then
+			elsif ( DataIn(14).val = '1' and full(14) = '0' and (critical_mode = '0' or ranks_fifo(14) < critical)) then
 				in14   <= slv(DataIn(14));
 				we(14) <= '1';
 			else
@@ -760,7 +768,7 @@ begin
 		end if;
 	end process;
 	FIFO15 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(15),
 		         wr     => we(15),
@@ -774,7 +782,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(15) <= '0';
-			elsif DataIn(15).val = '1'  and full(15) ='0' then
+			elsif ( DataIn(15).val = '1' and full(15) = '0' and (critical_mode = '0' or ranks_fifo(15) < critical)) then
 				in15   <= slv(DataIn(15));
 				we(15) <= '1';
 			else
@@ -783,7 +791,7 @@ begin
 		end if;
 	end process;
 	FIFO16 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(16),
 		         wr     => we(16),
@@ -797,7 +805,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(16) <= '0';
-			elsif DataIn(16).val = '1'  and full(16) ='0' then
+			elsif ( DataIn(16).val = '1' and full(16) = '0' and (critical_mode = '0' or ranks_fifo(16) < critical)) then
 				in16   <= slv(DataIn(16));
 				we(16) <= '1';
 			else
@@ -806,7 +814,7 @@ begin
 		end if;
 	end process;
 	FIFO17 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(17),
 		         wr     => we(17),
@@ -820,7 +828,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(17) <= '0';
-			elsif DataIn(17).val = '1'  and full(17) ='0' then
+			elsif ( DataIn(17).val = '1' and full(17) = '0' and (critical_mode = '0' or ranks_fifo(17) < critical)) then
 				in17   <= slv(DataIn(17));
 				we(17) <= '1';
 			else
@@ -829,7 +837,7 @@ begin
 		end if;
 	end process;
 	FIFO18 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(18),
 		         wr     => we(18),
@@ -843,7 +851,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(18) <= '0';
-			elsif DataIn(18).val = '1'  and full(18) ='0' then
+			elsif ( DataIn(18).val = '1' and full(18) = '0' and (critical_mode = '0' or ranks_fifo(18) < critical)) then
 				in18   <= slv(DataIn(18));
 				we(18) <= '1';
 			else
@@ -852,7 +860,7 @@ begin
 		end if;
 	end process;
 	FIFO19 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(19),
 		         wr     => we(19),
@@ -866,7 +874,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(19) <= '0';
-			elsif DataIn(19).val = '1'  and full(19) ='0' then
+			elsif ( DataIn(19).val = '1' and full(19) = '0' and (critical_mode = '0' or ranks_fifo(19) < critical)) then
 				in19   <= slv(DataIn(19));
 				we(19) <= '1';
 			else
@@ -875,7 +883,7 @@ begin
 		end if;
 	end process;
 	FIFO20 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(20),
 		         wr     => we(20),
@@ -889,7 +897,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(20) <= '0';
-			elsif DataIn(20).val = '1'  and full(20) ='0' then
+			elsif ( DataIn(20).val = '1' and full(20) = '0' and (critical_mode = '0' or ranks_fifo(20) < critical)) then
 				in20   <= slv(DataIn(20));
 				we(20) <= '1';
 			else
@@ -898,7 +906,7 @@ begin
 		end if;
 	end process;
 	FIFO21 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(21),
 		         wr     => we(21),
@@ -912,7 +920,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(21) <= '0';
-			elsif DataIn(21).val = '1' and full(21) ='0'  then
+			elsif ( DataIn(21).val = '1' and full(21) = '0' and (critical_mode = '0' or ranks_fifo(21) < critical)) then
 				in21   <= slv(DataIn(21));
 				we(21) <= '1';
 			else
@@ -921,7 +929,7 @@ begin
 		end if;
 	end process;
 	FIFO22 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(22),
 		         wr     => we(22),
@@ -935,7 +943,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(22) <= '0';
-			elsif DataIn(22).val = '1'  and full(22) ='0' then
+			elsif ( DataIn(22).val = '1' and full(22) = '0' and (critical_mode = '0' or ranks_fifo(22) < critical)) then
 				in22   <= slv(DataIn(22));
 				we(22) <= '1';
 			else
@@ -944,7 +952,7 @@ begin
 		end if;
 	end process;
 	FIFO23 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(23),
 		         wr     => we(23),
@@ -958,7 +966,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(23) <= '0';
-			elsif DataIn(23).val = '1'  and full(23) ='0' then
+			elsif ( DataIn(23).val = '1' and full(23) = '0' and (critical_mode = '0' or ranks_fifo(23) < critical)) then
 				in23   <= slv(DataIn(23));
 				we(23) <= '1';
 			else
@@ -967,7 +975,7 @@ begin
 		end if;
 	end process;
 	FIFO24 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(24),
 		         wr     => we(24),
@@ -981,7 +989,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(24) <= '0';
-			elsif DataIn(24).val = '1'  and full(24) ='0' then
+			elsif ( DataIn(24).val = '1' and full(24) = '0' and (critical_mode = '0' or ranks_fifo(24) < critical)) then
 				in24   <= slv(DataIn(24));
 				we(24) <= '1';
 			else
@@ -990,7 +998,7 @@ begin
 		end if;
 	end process;
 	FIFO25 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(25),
 		         wr     => we(25),
@@ -1004,7 +1012,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(25) <= '0';
-			elsif DataIn(25).val = '1'  and full(25) ='0' then
+			elsif ( DataIn(25).val = '1' and full(25) = '0' and (critical_mode = '0' or ranks_fifo(25) < critical)) then
 				in25   <= slv(DataIn(25));
 				we(25) <= '1';
 			else
@@ -1013,7 +1021,7 @@ begin
 		end if;
 	end process;
 	FIFO26 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(26),
 		         wr     => we(26),
@@ -1027,7 +1035,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(26) <= '0';
-			elsif DataIn(26).val = '1'  and full(26) ='0' then
+			elsif ( DataIn(26).val = '1' and full(26) = '0' and (critical_mode = '0' or ranks_fifo(26) < critical)) then
 				in26   <= slv(DataIn(26));
 				we(26) <= '1';
 			else
@@ -1036,7 +1044,7 @@ begin
 		end if;
 	end process;
 	FIFO27 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(27),
 		         wr     => we(27),
@@ -1050,7 +1058,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(27) <= '0';
-			elsif DataIn(27).val = '1'  and full(27) ='0' then
+			elsif ( DataIn(27).val = '1' and full(27) = '0' and (critical_mode = '0' or ranks_fifo(27) < critical)) then
 				in27   <= slv(DataIn(27));
 				we(27) <= '1';
 			else
@@ -1059,7 +1067,7 @@ begin
 		end if;
 	end process;
 	FIFO28 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(28),
 		         wr     => we(28),
@@ -1073,7 +1081,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(28) <= '0';
-			elsif DataIn(28).val = '1'  and full(28) ='0' then
+			elsif ( DataIn(28).val = '1' and full(28) = '0' and (critical_mode = '0' or ranks_fifo(28) < critical)) then
 				in28   <= slv(DataIn(28));
 				we(28) <= '1';
 			else
@@ -1082,7 +1090,7 @@ begin
 		end if;
 	end process;
 	FIFO29 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(29),
 		         wr     => we(29),
@@ -1096,7 +1104,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(29) <= '0';
-			elsif DataIn(29).val = '1'  and full(29) ='0' then
+			elsif ( DataIn(29).val = '1' and full(29) = '0' and (critical_mode = '0' or ranks_fifo(29) < critical)) then
 				in29   <= slv(DataIn(29));
 				we(29) <= '1';
 			else
@@ -1105,7 +1113,7 @@ begin
 		end if;
 	end process;
 	FIFO30 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(30),
 		         wr     => we(30),
@@ -1119,7 +1127,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(30) <= '0';
-			elsif DataIn(30).val = '1'  and full(30) ='0' then
+			elsif ( DataIn(30).val = '1' and full(30) = '0' and (critical_mode = '0' or ranks_fifo(30) < critical)) then
 				in30   <= slv(DataIn(30));
 				we(30) <= '1';
 			else
@@ -1128,7 +1136,7 @@ begin
 		end if;
 	end process;
 	FIFO31 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => dpth)
+		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(31),
 		         wr     => we(31),
@@ -1142,7 +1150,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(31) <= '0';
-			elsif DataIn(31).val = '1'  and full(31) ='0' then
+			elsif ( DataIn(31).val = '1' and full(31) = '0' and (critical_mode = '0' or ranks_fifo(31) < critical)) then
 				in31   <= slv(DataIn(31));
 				we(31) <= '1';
 			else
