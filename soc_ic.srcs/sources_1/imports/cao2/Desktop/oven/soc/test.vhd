@@ -70,10 +70,10 @@ package test is
 
   --********************************************************************
   --* Warning: don't enable tests that are triggered on the same signals
-  constant RUN_TEST : TEST_T :=TEST(RW)
-   or
+  constant RUN_TEST : TEST_T :=TEST(RW);
+  -- or
 --                                TEST(PWR) or
-                            TEST(UREQ);
+                           -- TEST(UREQ);
                                 --TEST(PETERSONS);
                                 --TEST(NONE);
   --********************************************************************

@@ -51,7 +51,7 @@ entity arbiter32 is
 end arbiter32;
 
 architecture rtl of arbiter32 is
-	constant dpth                                         : positive                      := 22;
+	constant dpth                                         : positive                      := 8;
 	--signal td1: std_logic_vector(31 downto 0);
 	--signal td2: std_logic_vector(31 downto 0);
 	signal in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, in16, in17, in18, in19, in20, in21, in22, in23, in24, in25, in26, in27, in28, in29, in30, in31                                 : std_logic_vector(31 downto 0);
@@ -68,10 +68,12 @@ architecture rtl of arbiter32 is
 	constant DEPTH                                                         : positive                      := 18;
 	signal control_in, control_out                                                                                                                                                                                              : std_logic_vector(32 downto 0);
 	signal control_re, control_we, control_empty, control_full                                                                                                                                                                                : std_logic;
-	signal critical_mode: std_logic :='1';
+	signal critical_mode: std_logic :='0';
 	--signal ranks: rank_list;
 	signal ack                                                                                                                                                                                                                  : std_logic_vector(31 downto 0);
 begin
+
+
 	tts_map : process(clk)
 	begin
 		if rising_edge(clk) then
@@ -123,6 +125,9 @@ begin
 	       end if;
 	   end if;
 	end process;
+	
+	
+	
 	fifo_proc : process(clk, rst)
 		-- type ram_t is array (0 to FIFO_DEPTH - 1) of ALL_T;
 		-- variable Memory   : ram_t;
@@ -424,7 +429,7 @@ begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(0) <= '0';
-			elsif (DataIn(0).val = '1' and full(0) ='0' and  (critical_mode='0' or ranks_fifo(0)<critical) then
+			elsif (DataIn(0).val = '1' and full(0) ='0' ) then
 				in0   <= slv(DataIn(0));
 				we(0) <= '1';
 			else

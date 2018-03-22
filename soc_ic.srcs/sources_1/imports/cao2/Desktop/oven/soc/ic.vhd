@@ -557,7 +557,7 @@ begin
   
 	snp_res_fifo : entity work.fifo_snp(rtl)
 	generic map(
-                FIFO_DEPTH => 50
+                FIFO_DEPTH => 32
             )
 		port map(
 			CLK     => Clock,

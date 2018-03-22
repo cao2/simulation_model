@@ -511,6 +511,7 @@ begin
              CLK => Clock,
              RST => reset,
              ranks => ranks,
+             ranks_fifo => ranks,
              critical => 4,
              DataIn => mon_array,
              DataOut => monitor_data

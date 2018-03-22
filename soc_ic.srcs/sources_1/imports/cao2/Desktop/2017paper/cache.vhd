@@ -143,7 +143,7 @@ begin
 	
 	ureq_fifo : entity work.fifo(rtl)   -- req from device
 		generic map(
-			FIFO_DEPTH => 300
+			FIFO_DEPTH => 32
 		)
 		port map(
 			CLK     => Clock,
