@@ -46,7 +46,7 @@ entity arbiter32 is
 		critical     : in  positive;
 		--A_full  : out STD_LOGIC := '0';
 		--control_full : out std_logic;
-		data_dropped : out std_logic_vector(4 downto 0) := (others =>'0')
+		data_dropped : out std_logic_vector(4 downto 0) := (others => '0')
 	);
 end arbiter32;
 
@@ -114,12 +114,12 @@ begin
 
 	mode_set : process(clk)
 		variable tmp_emp : std_logic_vector(3 downto 0);
-		variable tmp_val: std_logic_vector( 3 downto 0);
+		variable tmp_val : std_logic_vector(3 downto 0);
 	begin
 		if rising_edge(clk) then
 			tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
-			tmp_val :=  DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-			if (tmp_emp = "1111" or tmp_val="0000" ) then
+			tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+			if (tmp_emp = "1111" or tmp_val = "0000" ) then
 				critical_mode <= '0';
 			else
 				critical_mode <= '1';
@@ -144,7 +144,7 @@ begin
 		variable state        : STATE                 := one;
 		variable contro_v     : std_logic_vector(36 downto 0);
 		variable tmp_critical : positive;
-        variable emp_cont: std_logic_vector(36 downto 0);
+		variable emp_cont     : std_logic_vector(36 downto 0);
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
@@ -160,10 +160,10 @@ begin
 				elsif state = seven then
 					control_re <= '0';
 					state      := two;
-					emp_cont := (others =>'0');
+					emp_cont   := (others => '0');
 				elsif state = two then
 					if (control_out /= emp_cont) then
-					    contro_v := control_out;
+						contro_v := control_out;
 						if (contro_v(0) = '1'  ) then
 							valid             := true;
 							val_chan(num_val) := ranks(0);
@@ -324,7 +324,7 @@ begin
 							val_chan(num_val) := ranks(31);
 							num_val           := num_val + 1;
 						end if;
-						state := three;
+						state    := three;
 					end if;
 				elsif state = three then
 					re(val_chan(i)) <= '1';
@@ -367,7 +367,7 @@ begin
 		end if;
 	end process;
 	fifo_control : entity work.fifo_uart(arch)
-		generic map(B => 32+5, W => dpth + 2)
+		generic map(B => 32 + 5, W => dpth + 2)
 		port map(clk    => clk, reset => rst, rd => control_re,
 		         wr     => control_we, w_data => control_in,
 		         empty  => control_empty, full => control_full, r_data => control_out);
@@ -393,44 +393,31 @@ begin
 	--            );
 
 	fifo_control_p : process(CLK)
-		variable tmp_in : std_logic_vector(31 downto 0);
-		variable num_drop: natural range 0 to 31:=0;
-		variable tmp_emp, tmp_val: std_logic_vector(3 downto 0);
+		variable tmp_in           : std_logic_vector(31 downto 0);
+		variable num_drop         : natural range 0 to 31 := 0;
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				control_we <= '0';
 			else
-				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val 
-				& DataIn(ranks(28)).val & DataIn(ranks(27)).val 
-				& DataIn(ranks(26)).val & DataIn(ranks(25)).val 
-				& DataIn(ranks(24)).val & DataIn(ranks(23)).val 
-				& DataIn(ranks(22)).val & DataIn(ranks(21)).val 
-				& DataIn(ranks(20)).val & DataIn(ranks(19)).val 
-				& DataIn(ranks(18)).val & DataIn(ranks(17)).val 
-				& DataIn(ranks(16)).val & DataIn(ranks(15)).val 
-				& DataIn(ranks(14)).val & DataIn(ranks(13)).val 
-				& DataIn(ranks(12)).val & DataIn(ranks(11)).val 
-				& DataIn(ranks(10)).val & DataIn(ranks(9)).val 
-				& DataIn(ranks(8)).val & DataIn(ranks(7)).val 
-				& DataIn(ranks(6)).val & DataIn(ranks(5)).val 
-				& DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val & DataIn(ranks(28)).val & DataIn(ranks(27)).val & DataIn(ranks(26)).val & DataIn(ranks(25)).val & DataIn(ranks(24)).val & DataIn(ranks(23)).val & DataIn(ranks(22)).val & DataIn(ranks(21)).val & DataIn(ranks(20)).val & DataIn(ranks(19)).val & DataIn(ranks(18)).val & DataIn(ranks(17)).val & DataIn(ranks(16)).val & DataIn(ranks(15)).val & DataIn(ranks(14)).val & DataIn(ranks(13)).val & DataIn(ranks(12)).val & DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
 				if (tmp_in /= "00000000000000000000000000000000" and control_full /= '1') then
 					--if (control_full /='1') then
 					----check numbers of drops
 					tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
-                    tmp_val :=  DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-					if (tmp_emp = "1111" or tmp_val="0000" ) then
+					tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+					if (tmp_emp = "1111" or tmp_val = "0000" ) then
 						---simply count the total numbers of full
 						num_drop := count_ones(full);
-						tmp_in := tmp_in and (not full);
+						tmp_in   := tmp_in and (not full);
 					else
-						num_drop := count_ones(tmp_in((31-critical) downto 0)) + count_ones(full(31 downto (31-critical)));
-						tmp_in := "0000000000000000000000000000"&tmp_in(3 downto 0);
+						num_drop := count_ones(tmp_in((31 - critical) downto 0)) + count_ones(full(31 downto (31 - critical)));
+						tmp_in   := "0000000000000000000000000000" & tmp_in(3 downto 0);
 					end if;
 
-					control_in <= std_logic_vector(to_unsigned(num_drop,5)) & tmp_in;
-					
+					control_in <= std_logic_vector(to_unsigned(num_drop, 5)) & tmp_in;
+
 					control_we <= '1';
 					--end if;
 				else
@@ -439,6 +426,7 @@ begin
 			end if;
 		end if;
 	end process;
+
 	FIFO0 : entity work.fifo_uart(arch)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
@@ -450,15 +438,26 @@ begin
 		         r_data => tts0
 		        );
 	fifo0_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(0) <= '0';
-			elsif ( DataIn(0).val = '1' and full(0) = '0' and (critical_mode = '0' or ranks_fifo(0) < critical)) then
-				in0   <= slv(DataIn(0));
-				we(0) <= '1';
-			else
-				we(0) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(0).val = '1' and full(0) = '0' and (critical_mode = '0' or ranks_fifo(0) < critical)) then
+					in0   <= slv(DataIn(0));
+					we(0) <= '1';
+				else
+					we(0) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -473,15 +472,26 @@ begin
 		         r_data => tts1
 		        );
 	fifo1_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(1) <= '0';
-			elsif ( DataIn(1).val = '1' and full(1) = '0' and (critical_mode = '0' or ranks_fifo(1) < critical)) then
-				in1   <= slv(DataIn(1));
-				we(1) <= '1';
-			else
-				we(1) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(1).val = '1' and full(1) = '0' and (critical_mode = '0' or ranks_fifo(1) < critical)) then
+					in1   <= slv(DataIn(1));
+					we(1) <= '1';
+				else
+					we(1) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -496,15 +506,26 @@ begin
 		         r_data => tts2
 		        );
 	fifo2_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(2) <= '0';
-			elsif ( DataIn(2).val = '1' and full(2) = '0' and (critical_mode = '0' or ranks_fifo(2) < critical)) then
-				in2   <= slv(DataIn(2));
-				we(2) <= '1';
-			else
-				we(2) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(2).val = '1' and full(2) = '0' and (critical_mode = '0' or ranks_fifo(2) < critical)) then
+					in2   <= slv(DataIn(2));
+					we(2) <= '1';
+				else
+					we(2) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -519,15 +540,26 @@ begin
 		         r_data => tts3
 		        );
 	fifo3_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(3) <= '0';
-			elsif ( DataIn(3).val = '1' and full(3) = '0' and (critical_mode = '0' or ranks_fifo(3) < critical)) then
-				in3   <= slv(DataIn(3));
-				we(3) <= '1';
-			else
-				we(3) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(3).val = '1' and full(3) = '0' and (critical_mode = '0' or ranks_fifo(3) < critical)) then
+					in3   <= slv(DataIn(3));
+					we(3) <= '1';
+				else
+					we(3) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -542,15 +574,26 @@ begin
 		         r_data => tts4
 		        );
 	fifo4_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(4) <= '0';
-			elsif ( DataIn(4).val = '1' and full(4) = '0' and (critical_mode = '0' or ranks_fifo(4) < critical)) then
-				in4   <= slv(DataIn(4));
-				we(4) <= '1';
-			else
-				we(4) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(4).val = '1' and full(4) = '0' and (critical_mode = '0' or ranks_fifo(4) < critical)) then
+					in4   <= slv(DataIn(4));
+					we(4) <= '1';
+				else
+					we(4) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -565,15 +608,26 @@ begin
 		         r_data => tts5
 		        );
 	fifo5_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(5) <= '0';
-			elsif ( DataIn(5).val = '1' and full(5) = '0' and (critical_mode = '0' or ranks_fifo(5) < critical)) then
-				in5   <= slv(DataIn(5));
-				we(5) <= '1';
-			else
-				we(5) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(5).val = '1' and full(5) = '0' and (critical_mode = '0' or ranks_fifo(5) < critical)) then
+					in5   <= slv(DataIn(5));
+					we(5) <= '1';
+				else
+					we(5) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -588,15 +642,26 @@ begin
 		         r_data => tts6
 		        );
 	fifo6_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(6) <= '0';
-			elsif ( DataIn(6).val = '1' and full(6) = '0' and (critical_mode = '0' or ranks_fifo(6) < critical)) then
-				in6   <= slv(DataIn(6));
-				we(6) <= '1';
-			else
-				we(6) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(6).val = '1' and full(6) = '0' and (critical_mode = '0' or ranks_fifo(6) < critical)) then
+					in6   <= slv(DataIn(6));
+					we(6) <= '1';
+				else
+					we(6) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -611,15 +676,26 @@ begin
 		         r_data => tts7
 		        );
 	fifo7_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(7) <= '0';
-			elsif ( DataIn(7).val = '1' and full(7) = '0' and (critical_mode = '0' or ranks_fifo(7) < critical)) then
-				in7   <= slv(DataIn(7));
-				we(7) <= '1';
-			else
-				we(7) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(7).val = '1' and full(7) = '0' and (critical_mode = '0' or ranks_fifo(7) < critical)) then
+					in7   <= slv(DataIn(7));
+					we(7) <= '1';
+				else
+					we(7) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -634,15 +710,26 @@ begin
 		         r_data => tts8
 		        );
 	fifo8_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(8) <= '0';
-			elsif ( DataIn(8).val = '1' and full(8) = '0' and (critical_mode = '0' or ranks_fifo(8) < critical)) then
-				in8   <= slv(DataIn(8));
-				we(8) <= '1';
-			else
-				we(8) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(8).val = '1' and full(8) = '0' and (critical_mode = '0' or ranks_fifo(8) < critical)) then
+					in8   <= slv(DataIn(8));
+					we(8) <= '1';
+				else
+					we(8) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -657,15 +744,26 @@ begin
 		         r_data => tts9
 		        );
 	fifo9_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(9) <= '0';
-			elsif ( DataIn(9).val = '1' and full(9) = '0' and (critical_mode = '0' or ranks_fifo(9) < critical)) then
-				in9   <= slv(DataIn(9));
-				we(9) <= '1';
-			else
-				we(9) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(9).val = '1' and full(9) = '0' and (critical_mode = '0' or ranks_fifo(9) < critical)) then
+					in9   <= slv(DataIn(9));
+					we(9) <= '1';
+				else
+					we(9) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -680,15 +778,26 @@ begin
 		         r_data => tts10
 		        );
 	fifo10_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(10) <= '0';
-			elsif ( DataIn(10).val = '1' and full(10) = '0' and (critical_mode = '0' or ranks_fifo(10) < critical)) then
-				in10   <= slv(DataIn(10));
-				we(10) <= '1';
-			else
-				we(10) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(10).val = '1' and full(10) = '0' and (critical_mode = '0' or ranks_fifo(10) < critical)) then
+					in10   <= slv(DataIn(10));
+					we(10) <= '1';
+				else
+					we(10) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -703,15 +812,26 @@ begin
 		         r_data => tts11
 		        );
 	fifo11_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(11) <= '0';
-			elsif ( DataIn(11).val = '1' and full(11) = '0' and (critical_mode = '0' or ranks_fifo(11) < critical)) then
-				in11   <= slv(DataIn(11));
-				we(11) <= '1';
-			else
-				we(11) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(11).val = '1' and full(11) = '0' and (critical_mode = '0' or ranks_fifo(11) < critical)) then
+					in11   <= slv(DataIn(11));
+					we(11) <= '1';
+				else
+					we(11) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -726,15 +846,26 @@ begin
 		         r_data => tts12
 		        );
 	fifo12_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(12) <= '0';
-			elsif ( DataIn(12).val = '1' and full(12) = '0' and (critical_mode = '0' or ranks_fifo(12) < critical)) then
-				in12   <= slv(DataIn(12));
-				we(12) <= '1';
-			else
-				we(12) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(12).val = '1' and full(12) = '0' and (critical_mode = '0' or ranks_fifo(12) < critical)) then
+					in12   <= slv(DataIn(12));
+					we(12) <= '1';
+				else
+					we(12) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -749,15 +880,26 @@ begin
 		         r_data => tts13
 		        );
 	fifo13_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(13) <= '0';
-			elsif ( DataIn(13).val = '1' and full(13) = '0' and (critical_mode = '0' or ranks_fifo(13) < critical)) then
-				in13   <= slv(DataIn(13));
-				we(13) <= '1';
-			else
-				we(13) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(13).val = '1' and full(13) = '0' and (critical_mode = '0' or ranks_fifo(13) < critical)) then
+					in13   <= slv(DataIn(13));
+					we(13) <= '1';
+				else
+					we(13) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -772,15 +914,26 @@ begin
 		         r_data => tts14
 		        );
 	fifo14_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(14) <= '0';
-			elsif ( DataIn(14).val = '1' and full(14) = '0' and (critical_mode = '0' or ranks_fifo(14) < critical)) then
-				in14   <= slv(DataIn(14));
-				we(14) <= '1';
-			else
-				we(14) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(14).val = '1' and full(14) = '0' and (critical_mode = '0' or ranks_fifo(14) < critical)) then
+					in14   <= slv(DataIn(14));
+					we(14) <= '1';
+				else
+					we(14) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -795,15 +948,26 @@ begin
 		         r_data => tts15
 		        );
 	fifo15_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(15) <= '0';
-			elsif ( DataIn(15).val = '1' and full(15) = '0' and (critical_mode = '0' or ranks_fifo(15) < critical)) then
-				in15   <= slv(DataIn(15));
-				we(15) <= '1';
-			else
-				we(15) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(15).val = '1' and full(15) = '0' and (critical_mode = '0' or ranks_fifo(15) < critical)) then
+					in15   <= slv(DataIn(15));
+					we(15) <= '1';
+				else
+					we(15) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -818,15 +982,26 @@ begin
 		         r_data => tts16
 		        );
 	fifo16_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(16) <= '0';
-			elsif ( DataIn(16).val = '1' and full(16) = '0' and (critical_mode = '0' or ranks_fifo(16) < critical)) then
-				in16   <= slv(DataIn(16));
-				we(16) <= '1';
-			else
-				we(16) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(16).val = '1' and full(16) = '0' and (critical_mode = '0' or ranks_fifo(16) < critical)) then
+					in16   <= slv(DataIn(16));
+					we(16) <= '1';
+				else
+					we(16) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -841,15 +1016,26 @@ begin
 		         r_data => tts17
 		        );
 	fifo17_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(17) <= '0';
-			elsif ( DataIn(17).val = '1' and full(17) = '0' and (critical_mode = '0' or ranks_fifo(17) < critical)) then
-				in17   <= slv(DataIn(17));
-				we(17) <= '1';
-			else
-				we(17) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(17).val = '1' and full(17) = '0' and (critical_mode = '0' or ranks_fifo(17) < critical)) then
+					in17   <= slv(DataIn(17));
+					we(17) <= '1';
+				else
+					we(17) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -864,15 +1050,26 @@ begin
 		         r_data => tts18
 		        );
 	fifo18_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(18) <= '0';
-			elsif ( DataIn(18).val = '1' and full(18) = '0' and (critical_mode = '0' or ranks_fifo(18) < critical)) then
-				in18   <= slv(DataIn(18));
-				we(18) <= '1';
-			else
-				we(18) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(18).val = '1' and full(18) = '0' and (critical_mode = '0' or ranks_fifo(18) < critical)) then
+					in18   <= slv(DataIn(18));
+					we(18) <= '1';
+				else
+					we(18) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -887,15 +1084,26 @@ begin
 		         r_data => tts19
 		        );
 	fifo19_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(19) <= '0';
-			elsif ( DataIn(19).val = '1' and full(19) = '0' and (critical_mode = '0' or ranks_fifo(19) < critical)) then
-				in19   <= slv(DataIn(19));
-				we(19) <= '1';
-			else
-				we(19) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(19).val = '1' and full(19) = '0' and (critical_mode = '0' or ranks_fifo(19) < critical)) then
+					in19   <= slv(DataIn(19));
+					we(19) <= '1';
+				else
+					we(19) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -910,15 +1118,26 @@ begin
 		         r_data => tts20
 		        );
 	fifo20_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(20) <= '0';
-			elsif ( DataIn(20).val = '1' and full(20) = '0' and (critical_mode = '0' or ranks_fifo(20) < critical)) then
-				in20   <= slv(DataIn(20));
-				we(20) <= '1';
-			else
-				we(20) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(20).val = '1' and full(20) = '0' and (critical_mode = '0' or ranks_fifo(20) < critical)) then
+					in20   <= slv(DataIn(20));
+					we(20) <= '1';
+				else
+					we(20) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -933,15 +1152,26 @@ begin
 		         r_data => tts21
 		        );
 	fifo21_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(21) <= '0';
-			elsif ( DataIn(21).val = '1' and full(21) = '0' and (critical_mode = '0' or ranks_fifo(21) < critical)) then
-				in21   <= slv(DataIn(21));
-				we(21) <= '1';
-			else
-				we(21) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(21).val = '1' and full(21) = '0' and (critical_mode = '0' or ranks_fifo(21) < critical)) then
+					in21   <= slv(DataIn(21));
+					we(21) <= '1';
+				else
+					we(21) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -956,15 +1186,26 @@ begin
 		         r_data => tts22
 		        );
 	fifo22_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(22) <= '0';
-			elsif ( DataIn(22).val = '1' and full(22) = '0' and (critical_mode = '0' or ranks_fifo(22) < critical)) then
-				in22   <= slv(DataIn(22));
-				we(22) <= '1';
-			else
-				we(22) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(22).val = '1' and full(22) = '0' and (critical_mode = '0' or ranks_fifo(22) < critical)) then
+					in22   <= slv(DataIn(22));
+					we(22) <= '1';
+				else
+					we(22) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -979,15 +1220,26 @@ begin
 		         r_data => tts23
 		        );
 	fifo23_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(23) <= '0';
-			elsif ( DataIn(23).val = '1' and full(23) = '0' and (critical_mode = '0' or ranks_fifo(23) < critical)) then
-				in23   <= slv(DataIn(23));
-				we(23) <= '1';
-			else
-				we(23) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(23).val = '1' and full(23) = '0' and (critical_mode = '0' or ranks_fifo(23) < critical)) then
+					in23   <= slv(DataIn(23));
+					we(23) <= '1';
+				else
+					we(23) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1002,15 +1254,26 @@ begin
 		         r_data => tts24
 		        );
 	fifo24_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(24) <= '0';
-			elsif ( DataIn(24).val = '1' and full(24) = '0' and (critical_mode = '0' or ranks_fifo(24) < critical)) then
-				in24   <= slv(DataIn(24));
-				we(24) <= '1';
-			else
-				we(24) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(24).val = '1' and full(24) = '0' and (critical_mode = '0' or ranks_fifo(24) < critical)) then
+					in24   <= slv(DataIn(24));
+					we(24) <= '1';
+				else
+					we(24) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1025,15 +1288,26 @@ begin
 		         r_data => tts25
 		        );
 	fifo25_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(25) <= '0';
-			elsif ( DataIn(25).val = '1' and full(25) = '0' and (critical_mode = '0' or ranks_fifo(25) < critical)) then
-				in25   <= slv(DataIn(25));
-				we(25) <= '1';
-			else
-				we(25) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(25).val = '1' and full(25) = '0' and (critical_mode = '0' or ranks_fifo(25) < critical)) then
+					in25   <= slv(DataIn(25));
+					we(25) <= '1';
+				else
+					we(25) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1048,15 +1322,26 @@ begin
 		         r_data => tts26
 		        );
 	fifo26_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(26) <= '0';
-			elsif ( DataIn(26).val = '1' and full(26) = '0' and (critical_mode = '0' or ranks_fifo(26) < critical)) then
-				in26   <= slv(DataIn(26));
-				we(26) <= '1';
-			else
-				we(26) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(26).val = '1' and full(26) = '0' and (critical_mode = '0' or ranks_fifo(26) < critical)) then
+					in26   <= slv(DataIn(26));
+					we(26) <= '1';
+				else
+					we(26) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1071,15 +1356,26 @@ begin
 		         r_data => tts27
 		        );
 	fifo27_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(27) <= '0';
-			elsif ( DataIn(27).val = '1' and full(27) = '0' and (critical_mode = '0' or ranks_fifo(27) < critical)) then
-				in27   <= slv(DataIn(27));
-				we(27) <= '1';
-			else
-				we(27) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(27).val = '1' and full(27) = '0' and (critical_mode = '0' or ranks_fifo(27) < critical)) then
+					in27   <= slv(DataIn(27));
+					we(27) <= '1';
+				else
+					we(27) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1094,15 +1390,26 @@ begin
 		         r_data => tts28
 		        );
 	fifo28_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(28) <= '0';
-			elsif ( DataIn(28).val = '1' and full(28) = '0' and (critical_mode = '0' or ranks_fifo(28) < critical)) then
-				in28   <= slv(DataIn(28));
-				we(28) <= '1';
-			else
-				we(28) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(28).val = '1' and full(28) = '0' and (critical_mode = '0' or ranks_fifo(28) < critical)) then
+					in28   <= slv(DataIn(28));
+					we(28) <= '1';
+				else
+					we(28) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1117,15 +1424,26 @@ begin
 		         r_data => tts29
 		        );
 	fifo29_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(29) <= '0';
-			elsif ( DataIn(29).val = '1' and full(29) = '0' and (critical_mode = '0' or ranks_fifo(29) < critical)) then
-				in29   <= slv(DataIn(29));
-				we(29) <= '1';
-			else
-				we(29) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(29).val = '1' and full(29) = '0' and (critical_mode = '0' or ranks_fifo(29) < critical)) then
+					in29   <= slv(DataIn(29));
+					we(29) <= '1';
+				else
+					we(29) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1140,15 +1458,26 @@ begin
 		         r_data => tts30
 		        );
 	fifo30_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(30) <= '0';
-			elsif ( DataIn(30).val = '1' and full(30) = '0' and (critical_mode = '0' or ranks_fifo(30) < critical)) then
-				in30   <= slv(DataIn(30));
-				we(30) <= '1';
-			else
-				we(30) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(30).val = '1' and full(30) = '0' and (critical_mode = '0' or ranks_fifo(30) < critical)) then
+					in30   <= slv(DataIn(30));
+					we(30) <= '1';
+				else
+					we(30) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
@@ -1163,15 +1492,26 @@ begin
 		         r_data => tts31
 		        );
 	fifo31_p : process(CLK)
+		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(31) <= '0';
-			elsif ( DataIn(31).val = '1' and full(31) = '0' and (critical_mode = '0' or ranks_fifo(31) < critical)) then
-				in31   <= slv(DataIn(31));
-				we(31) <= '1';
-			else
-				we(31) <= '0';
+			elsif rising_edge(CLK) then
+				tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+				tmp_val := DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = "1111" or tmp_val = "0000") then
+					critical_mode := '0';
+				else
+					critical_mode := '1';
+				end if;
+				if ( DataIn(31).val = '1' and full(31) = '0' and (critical_mode = '0' or ranks_fifo(31) < critical)) then
+					in31   <= slv(DataIn(31));
+					we(31) <= '1';
+				else
+					we(31) <= '0';
+				end if;
 			end if;
 		end if;
 	end process;
