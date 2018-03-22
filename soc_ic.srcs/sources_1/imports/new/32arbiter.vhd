@@ -114,10 +114,12 @@ begin
 
 	mode_set : process(clk)
 		variable tmp_emp : std_logic_vector(3 downto 0);
+		variable tmp_val: std_logic_vector( 3 downto 0);
 	begin
 		if rising_edge(clk) then
 			tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
-			if (tmp_emp = "1111") then
+			tmp_val :=  DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+			if (tmp_emp = "1111" or tmp_val="0000" ) then
 				critical_mode <= '0';
 			else
 				critical_mode <= '1';
@@ -142,7 +144,7 @@ begin
 		variable state        : STATE                 := one;
 		variable contro_v     : std_logic_vector(36 downto 0);
 		variable tmp_critical : positive;
-
+        variable emp_cont: std_logic_vector(36 downto 0);
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
@@ -158,8 +160,10 @@ begin
 				elsif state = seven then
 					control_re <= '0';
 					state      := two;
+					emp_cont := (others =>'0');
 				elsif state = two then
-					if (control_out /= "000000000000000000000000000000000") then
+					if (control_out /= emp_cont) then
+					    contro_v := control_out;
 						if (contro_v(0) = '1'  ) then
 							valid             := true;
 							val_chan(num_val) := ranks(0);
@@ -363,7 +367,7 @@ begin
 		end if;
 	end process;
 	fifo_control : entity work.fifo_uart(arch)
-		generic map(B => 31+5, W => dpth + 2)
+		generic map(B => 32+5, W => dpth + 2)
 		port map(clk    => clk, reset => rst, rd => control_re,
 		         wr     => control_we, w_data => control_in,
 		         empty  => control_empty, full => control_full, r_data => control_out);
@@ -391,27 +395,40 @@ begin
 	fifo_control_p : process(CLK)
 		variable tmp_in : std_logic_vector(31 downto 0);
 		variable num_drop: natural range 0 to 31:=0;
+		variable tmp_emp, tmp_val: std_logic_vector(3 downto 0);
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				control_we <= '0';
 			else
-				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val & DataIn(ranks(28)).val & DataIn(ranks(27)).val & DataIn(ranks(26)).val & DataIn(ranks(25)).val & DataIn(ranks(24)).val & DataIn(ranks(23)).val & DataIn(ranks(22)).val & DataIn(ranks(21)).val & DataIn(ranks(20)).val & DataIn(ranks(19)).val & DataIn(ranks(18)).val & DataIn(ranks(17)).val & DataIn(ranks(16)).val & DataIn(ranks(15)).val & DataIn(ranks(14)).val & DataIn(ranks(13)).val & DataIn(ranks(12)).val & DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val 
+				& DataIn(ranks(28)).val & DataIn(ranks(27)).val 
+				& DataIn(ranks(26)).val & DataIn(ranks(25)).val 
+				& DataIn(ranks(24)).val & DataIn(ranks(23)).val 
+				& DataIn(ranks(22)).val & DataIn(ranks(21)).val 
+				& DataIn(ranks(20)).val & DataIn(ranks(19)).val 
+				& DataIn(ranks(18)).val & DataIn(ranks(17)).val 
+				& DataIn(ranks(16)).val & DataIn(ranks(15)).val 
+				& DataIn(ranks(14)).val & DataIn(ranks(13)).val 
+				& DataIn(ranks(12)).val & DataIn(ranks(11)).val 
+				& DataIn(ranks(10)).val & DataIn(ranks(9)).val 
+				& DataIn(ranks(8)).val & DataIn(ranks(7)).val 
+				& DataIn(ranks(6)).val & DataIn(ranks(5)).val 
+				& DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
 				if (tmp_in /= "00000000000000000000000000000000" and control_full /= '1') then
 					--if (control_full /='1') then
 					----check numbers of drops
-					if (critical_mode='0') then
+					tmp_emp := emp(ranks(0)) & emp(ranks(1)) & emp(ranks(2)) & emp(ranks(3));
+                    tmp_val :=  DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+					if (tmp_emp = "1111" or tmp_val="0000" ) then
 						---simply count the total numbers of full
-						if (full /= "00000000000000000000000000000000") then
-							num_drop := count_ones(full);
-						else
-							num_drop := 0;
-						end if;
+						num_drop := count_ones(full);
+						tmp_in := tmp_in and (not full);
 					else
-						num_drop := count_ones(tmp_in((31-critial) downto 0))+ count_ones(full(31 downto (31-critical)));
+						num_drop := count_ones(tmp_in((31-critical) downto 0)) + count_ones(full(31 downto (31-critical)));
+						tmp_in := "0000000000000000000000000000"&tmp_in(3 downto 0);
 					end if;
-					
-					
+
 					control_in <= std_logic_vector(to_unsigned(num_drop,5)) & tmp_in;
 					
 					control_we <= '1';

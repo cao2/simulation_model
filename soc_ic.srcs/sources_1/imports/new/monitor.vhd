@@ -88,8 +88,7 @@ begin
 						tmp_transaction.adr := "10";
 					end if;
 					st                  := three;
-					if (((tag_i and tag_en)=tag_i) 
-                                                        and ((id_i and id_en)=id_i) and cmd_en(1)='1') then
+					if (((tag_i and tag_en)=tag_i) and ((id_i and id_en)=id_i) and cmd_en(1)='1') then
 					   transaction_o<= tmp_transaction;
 					   tst_t_o <= (tmp_transaction.val, 
 					   tmp_transaction.linkID, 

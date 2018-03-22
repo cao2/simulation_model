@@ -446,7 +446,7 @@ signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t         
     signal id_en_24,id_en_25,id_en_26,id_en_27,id_en_28,id_en_29,id_en_30,id_en_31: std_logic_vector(7 downto 0):= "11111111";
     
 
-    
+    signal data_dropped: std_logic_vector (4 downto 0);
     
     signal ranks: rank_list;
 begin
@@ -485,7 +485,6 @@ begin
         ranks(29) <=29;
         ranks(30) <=30;
         ranks(31) <=31;
-
         end if;
      end process;
      
@@ -514,7 +513,8 @@ begin
              ranks_fifo => ranks,
              critical => 4,
              DataIn => mon_array,
-             DataOut => monitor_data
+             DataOut => monitor_data,
+             data_dropped => data_dropped
              --control_full => mon_full
              );
 --    outputt: process(tb_clk)
