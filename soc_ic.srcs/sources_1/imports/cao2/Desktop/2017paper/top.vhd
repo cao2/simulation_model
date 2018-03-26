@@ -497,7 +497,8 @@ begin
                if GEN_TRACE1 then
                    if rising_edge(tb_clk) then
                        ---- cpu
-                       write(l, monitor_data);     --35
+                       write(l, monitor_data&data_dropped);     --35
+                       
                        writeline(trace_file, l);
                    end if;
                end if;
@@ -511,7 +512,7 @@ begin
              RST => reset,
              ranks => ranks,
              ranks_fifo => ranks,
-             critical => 4,
+             critical => 12,
              DataIn => mon_array,
              DataOut => monitor_data,
              data_dropped => data_dropped
@@ -530,34 +531,36 @@ begin
              mon_array(1)<=mon_cpu_res1; ----2
              mon_array(2)<=mon_cpu_req2; ----3
              mon_array(3)<=mon_cpu_res2; ----4
-             mon_array(4)<=snp_req_1_mon; ----5
-             mon_array(5)<=snp_req_2_mon; ----6
-             mon_array(6)<=mon_snp_res_1; ----7
-             mon_array(7)<=mon_snp_res_2; ----8
-             mon_array(8)<=mon_bus_req1; ----9
-             mon_array(9)<=mon_bus_req2; ----10
-             mon_array(10)<=mon_bus_res1; ----11
-             mon_array(11)<=mon_bus_res2; ----12
-             mon_array(12)<=up_snp_req_mon; ----13
-             mon_array(13)<=up_snp_res_mon; ----14
-             mon_array(14)<=mon_mem_read_t; ----15
-             mon_array(15)<=mon_mem_write_t; ----16
-             mon_array(16)<=mon_gfx_read_t; ----17
-             mon_array(17)<=mon_gfx_write_t; ----18
-             mon_array(18)<=mon_audio_read_t; ----19
-             mon_array(19)<=mon_audio_write_t; ----20
-             mon_array(20)<=mon_usb_read_t; ----21
-             mon_array(21)<=mon_usb_write_t; ----22
-             mon_array(22)<=mon_uart_read_t; ----23
-             mon_array(23)<=mon_uart_write_t; ----24
-             mon_array(24)<=mon_gfx_upreq; ----25
-             mon_array(25)<=mon_gfx_upres; ----26
-             mon_array(26)<=mon_audio_upreq; ----27
-             mon_array(27)<=mon_audio_upres; ----28
-             mon_array(28)<=mon_usb_upreq; ----29
-             mon_array(29)<=mon_usb_upres; ----30
-             mon_array(30)<=mon_uart_upreq; ----31
-             mon_array(31)<=mon_uart_upres; ----32
+             
+             mon_array(4)<=mon_gfx_upreq; ----5
+             mon_array(5)<=mon_gfx_upres; ----6
+                          mon_array(6)<=mon_audio_upreq; ----7
+                          mon_array(7)<=mon_audio_upres; ----8
+              mon_array(8)<=mon_uart_upreq; ----9
+              mon_array(9)<=mon_uart_upres; ----10  
+              mon_array(10)<=mon_usb_upreq; ----9
+              mon_array(11)<=mon_usb_upres; ----10    
+                                        
+             mon_array(12)<=mon_bus_req1; ----11
+                                                    mon_array(13)<=mon_bus_req2; ----12
+                                                    mon_array(14)<=mon_bus_res1; ----13
+                                                    mon_array(15)<=mon_bus_res2; ----14                   
+             mon_array(16)<=mon_mem_read_t; ----15
+                                                                 mon_array(17)<=mon_mem_write_t; ----16
+                                                                 mon_array(18)<=mon_gfx_read_t; ----17
+                                                                 mon_array(19)<=mon_gfx_write_t; ----18
+                                                                 mon_array(20)<=mon_audio_read_t; ----19
+                                                                 mon_array(21)<=mon_audio_write_t; ----20
+                                                                 mon_array(22)<=mon_usb_read_t; ----21
+                                                                 mon_array(23)<=mon_usb_write_t; ----22
+                                                                 mon_array(24)<=mon_uart_read_t; ----23
+                                                                 mon_array(25)<=mon_uart_write_t; ----24  
+                                                                            mon_array(26)<=up_snp_req_mon; ----13
+                                                                            mon_array(27)<=up_snp_res_mon; ----14           
+             mon_array(28)<=snp_req_1_mon; ----5
+             mon_array(29)<=snp_req_2_mon; ----6
+             mon_array(30)<=mon_snp_res_1; ----7
+             mon_array(31)<=mon_snp_res_2; ----8  
         end if;
     end process;
 	transaction_logger_p : process(tb_clk)

@@ -42,16 +42,16 @@ package test is
   --constant PWRT_MAXDELAY : natural := 0;  --NOT IMPLEMENTED YET
   
   --********* RW TEST OPTS *******************
-  constant RWT_CNT : natural := 2;
+  constant RWT_CNT : natural := 20;
   constant RWT_SRC : IP_VECT_T := ip_enc(CPU0) or ip_enc(CPU1);
   --constant RWT_DST : IP_VECT_T := ip_enc(GFX); -- NOT IMPLEMENTED YET
   --constant RWT_MAXDELAY : natural := 10;  -- NOT IMPLEMENTED YET
-  constant RWT_WAITRES : boolean := false;
+  constant RWT_WAITRES : boolean := true;
   constant RWT_CMD : CMD_T := READ_CMD or
                               WRITE_CMD;
 
   --********* UREQ TEST OPTS *****************
-  constant UREQT_CNT : natural := 2;
+  constant UREQT_CNT : natural :=20;
   constant UREQT_SRC : IP_VECT_T := ip_enc(USB) or ip_enc(GFX) or ip_enc(UART) or ip_enc(AUDIO);
   
   --********* PETERSONS TEST OPTS ************
