@@ -46,7 +46,7 @@ begin
    -- read port
    r_data <= array_reg(to_integer(unsigned(r_ptr_reg)));
    -- write enabled only when FIFO is not full
-   wr_en <= wr ;
+   wr_en <= wr and (not full_reg);
 
    --=================================================
    -- fifo control logic
