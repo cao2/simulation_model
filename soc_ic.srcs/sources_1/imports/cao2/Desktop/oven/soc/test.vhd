@@ -52,7 +52,7 @@ package test is
 
   --********* UREQ TEST OPTS *****************
   constant UREQT_CNT : natural :=100;
-  constant UREQT_SRC : IP_VECT_T := ip_enc(USB) or ip_enc(GFX)  or ip_enc(AUDIO);
+  constant UREQT_SRC : IP_VECT_T := ip_enc(USB) or ip_enc(GFX) or ip_enc(UART) or ip_enc(AUDIO);
   
   --********* PETERSONS TEST OPTS ************
   constant PT_DELAY_FLAG : boolean := true;
@@ -144,7 +144,7 @@ package body test is
   begin
   --cnt := 1;
     if rndmz_dlay and st /= next_st then -- start
-      cnt :=seed;
+      cnt :=1;
       seed := seed + 1;
       rndmz_dlay := false;
       delay(cnt, st, next_st);
