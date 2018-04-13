@@ -494,7 +494,9 @@ begin
 			Empty   => emp14
 		);
 	cache0_req_fifo: entity work.fifo(rtl)
-	  
+	   generic map(
+                    FIFO_DEPTH => 128
+                )
 		port map(
 			CLK     => Clock,
 			RST     => reset,
@@ -506,6 +508,9 @@ begin
 			Empty   => emp16
 		);
 	cache1_req_fifo: entity work.fifo(rtl)
+	generic map(
+                    FIFO_DEPTH => 128
+                )
 		port map(
 			CLK     => Clock,
 			RST     => reset,
@@ -557,7 +562,7 @@ begin
   
 	snp_res_fifo : entity work.fifo_snp(rtl)
 	generic map(
-                FIFO_DEPTH => 32
+                FIFO_DEPTH => 128
             )
 		port map(
 			CLK     => Clock,
@@ -1390,7 +1395,7 @@ begin
 	begin
 		if rising_edge(Clock) then
 			if state = 0 then
-			    report "snp_res state 0";
+			    ---report "snp_res state 0";
 				if re2 = '0' and emp2 = '0' then
 					re2   <= '1';
 					state := 1;
@@ -1399,34 +1404,34 @@ begin
 				re2 <= '0';
 				if out2.msg.val = '1' and out2.hit = '0' then
 					--report "valie";
-					report "3 ic using";
+					---report "3 ic using";
 					-- -now we look at which components it want to go
 					if out2.msg.adr(31 downto 31) = "1" then
 						-- -this belongs to the memory	
 						tmp_msg := out2.msg;
 						tomem3  <= out2.msg;
-						report "snoop )::::::::::::::::::::::::::::::tomem3 i's tag info: " & integer'image(to_integer(unsigned(out2.msg.tag)));
+						---report "snoop )::::::::::::::::::::::::::::::tomem3 i's tag info: " & integer'image(to_integer(unsigned(out2.msg.tag)));
 						state   := 5;
 					elsif out2.msg.adr(30 downto 29) = "00" then
 						togfx3 <= out2.msg;
-						report "togfx3, snop response";	
+						---report "togfx3, snop response";	
 						state  := 6;
 					elsif out2.msg.adr(30 downto 29) = "01" then
-						report "touart3, snop response";	
+						---report "touart3, snop response";	
 						touart3 <= out2.msg;
 						state   := 7;
 					elsif out2.msg.adr(30 downto 29) = "10" then
-						report "tousb3, snop response";	
+						---report "tousb3, snop response";	
 						tousb3 <= out2.msg;
 						state  := 8;
 					elsif out2.msg.adr(30 downto 29) = "11" then
-						report "toaudio3, snop response";	
+						---report "toaudio3, snop response";	
 						toaudio3 <= out2.msg;
 						state    := 14;
 					end if;
 				-- it's a hit, return to the source ip
 				elsif out2.msg.val = '1' then
-				report "else if";
+				---report "else if";
 					if dst_eq(out2.msg, GFX_TAG) then
 						gfx_upres6 <= out2.msg;
 						state      := 9;
@@ -1443,7 +1448,7 @@ begin
 				end if;
 			elsif state = 5 then
 				if mem_ack3 = '1' then
-					report "3 ack";
+					---report "3 ack";
 					state  := 0;
 					tomem3 <= ZERO_MSG;
 				end if;

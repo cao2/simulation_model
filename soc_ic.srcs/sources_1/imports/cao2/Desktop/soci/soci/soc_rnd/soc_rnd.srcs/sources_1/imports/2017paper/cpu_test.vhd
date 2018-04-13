@@ -26,6 +26,7 @@ architecture rwt of cpu_test is
   signal sim_end : std_logic := '0';
   signal r : std_logic_vector(31 downto 0);
   signal tag: IPTAG_T:= ZERO_TAG;
+  constant overall_delay: positive := 10;
 begin
 
 
@@ -87,11 +88,11 @@ begin
     variable dflg : boolean := true;
     
     variable t7_f : boolean := true;
-    variable t7_s : natural := nat(id_i);
+    variable t7_s : natural := nat(id_i)+17;
     variable t7_tc, t7_c, t7_r : natural := 0;
     variable t7_cmd : CMD_T;
     variable t7_adr : ADR_T;
-
+    variable d_cnt: natural := nat(id_i)+overall_delay-5;
     -- HACKS
     variable c1: integer := 0;
     variable c2: integer := 200; -- offset so that cpus do not req same adr
@@ -106,29 +107,32 @@ begin
     elsif en = '1' and (rising_edge(clk)) then
       --dbg_chg("rwt_p, st: ", st, st_prev);
       if st = 0 then -- DELAY
-        rnd_dlay(t7_f, t7_s, t7_c, st, st_nxt);
+        ---rnd_dlay(t7_f, t7_s, t7_c, st, st_nxt);
         --delay(sint(r) mod RWT_MAXDELAY, dflg, dcnt, st, st_nxt);
+       --- t7_s := nat(id_i) +10;
+      --- report "delay num is d_cnt "& integer'image(d_cnt);
+        delay(d_cnt, st, st_nxt);
+
       elsif st = 1 then -- START
+       --- report "state is "& integer'image(st);
         if t7_tc < RWT_CNT then
           t7_tc := t7_tc + 1;
-          st_nxt := 3;
-          st := 0;
+          st := 3;
           --report "delay is " & str(uint(r));
         else
           st := 2;
         end if;
       elsif st = 2 then -- DONE
+      
         sim_end <= '1';
         cpu_req_o <= ZERO_MSG;
-
       elsif st = 3 then -- SND (r|w req)
-
+       --- report "state is "& integer'image(st);
         -- get a random number
         t7_s := t7_s + 1;
         -- rndmz cmd
         t7_r := to_integer(unsigned(r)) + t7_s;
         --report str(id_i) & ", r is " & integer'image(t7_r);
-
         -- if read and write are enabled, randomly select one of them
         if RWT_CMD = (READ_CMD or WRITE_CMD) then
           if (t7_r mod 2) = 1 then
@@ -169,15 +173,20 @@ begin
                      t7_adr, t7_adr);
         st := 4;
       elsif st = 4 then
+        ---report "state is "& integer'image(st);
         if cpu_req_ack_i = '1' then
           cpu_req_o <= ZERO_MSG;
+          
           st := 5;
+          
         end if;
       elsif st = 5 then -- WAIT_RES
+        ---report "state is "& integer'image(st);
         cpu_req_o <= ZERO_MSG;
         if (not RWT_WAITRES) or -- if no need to wait for resp
           is_rw_cmd(cpu_res_i) then -- or need to wait for resp and resp has arrived
           st_nxt := 1;
+          d_cnt := nat(id_i);
           --dbg("000" & cpu_res_i);
           st := 0;
         end if;

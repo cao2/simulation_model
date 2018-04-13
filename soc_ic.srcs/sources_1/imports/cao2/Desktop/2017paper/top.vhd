@@ -436,10 +436,10 @@ signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t         
     signal cmd_en_8,cmd_en_9,cmd_en_10,cmd_en_11,cmd_en_12,cmd_en_13,cmd_en_14,cmd_en_15: std_logic_vector(4 downto 0):= "11111";
     signal cmd_en_16,cmd_en_17,cmd_en_18,cmd_en_19,cmd_en_20,cmd_en_21,cmd_en_22,cmd_en_23: std_logic_vector(4 downto 0):= "11111";
     signal cmd_en_24,cmd_en_25,cmd_en_26,cmd_en_27,cmd_en_28,cmd_en_29,cmd_en_30,cmd_en_31: std_logic_vector(4 downto 0):= "11111";
-    signal tag_en_0,tag_en_1,tag_en_2,tag_en_3,tag_en_4,tag_en_5,tag_en_6,tag_en_7: std_logic_vector(7 downto 0):= "11111111";
-    signal tag_en_8,tag_en_9,tag_en_10,tag_en_11,tag_en_12,tag_en_13,tag_en_14,tag_en_15: std_logic_vector(7 downto 0):= "11111111";
-    signal tag_en_16,tag_en_17,tag_en_18,tag_en_19,tag_en_20,tag_en_21,tag_en_22,tag_en_23: std_logic_vector(7 downto 0):= "11111111";
-    signal tag_en_24,tag_en_25,tag_en_26,tag_en_27,tag_en_28,tag_en_29,tag_en_30,tag_en_31: std_logic_vector(7 downto 0):= "11111111";
+    signal tag_en_0,tag_en_1,tag_en_2,tag_en_3,tag_en_4,tag_en_5,tag_en_6,tag_en_7: std_logic_vector(7 downto 0):= "00000001";
+    signal tag_en_8,tag_en_9,tag_en_10,tag_en_11,tag_en_12,tag_en_13,tag_en_14,tag_en_15: std_logic_vector(7 downto 0):= "00000001";
+    signal tag_en_16,tag_en_17,tag_en_18,tag_en_19,tag_en_20,tag_en_21,tag_en_22,tag_en_23: std_logic_vector(7 downto 0):= "00000001";
+    signal tag_en_24,tag_en_25,tag_en_26,tag_en_27,tag_en_28,tag_en_29,tag_en_30,tag_en_31: std_logic_vector(7 downto 0):= "00000001";
     signal id_en_0,id_en_1,id_en_2,id_en_3,id_en_4,id_en_5,id_en_6,id_en_7: std_logic_vector(7 downto 0):= "11111111";
     signal id_en_8,id_en_9,id_en_10,id_en_11,id_en_12,id_en_13,id_en_14,id_en_15: std_logic_vector(7 downto 0):= "11111111";
     signal id_en_16,id_en_17,id_en_18,id_en_19,id_en_20,id_en_21,id_en_22,id_en_23: std_logic_vector(7 downto 0):= "11111111";
@@ -448,6 +448,8 @@ signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t         
 
     signal data_dropped: std_logic_vector (4 downto 0);
     
+    
+    signal upsnp_req_full: std_logic;
     signal ranks: rank_list;
 begin
      rank_set: process(reset)
@@ -503,7 +505,7 @@ begin
                    end if;
                end if;
            end process; 
-  trace_ip: entity work.arbiter32(rtl)
+  trace_ip: entity work.arbiter32_12criti(rtl)
     generic map(
      FIFO_DEPTH => 8
     )
@@ -512,7 +514,7 @@ begin
              RST => reset,
              ranks => ranks,
              ranks_fifo => ranks,
-             critical => 12,
+             critical =>12,
              DataIn => mon_array,
              DataOut => monitor_data,
              data_dropped => data_dropped
@@ -527,20 +529,35 @@ begin
     mon_array_driver: process(tb_clk)
     begin
         if rising_edge(tb_clk) then
-             mon_array(0)<=mon_cpu_req1; ----1
-             mon_array(1)<=mon_cpu_res1; ----2
-             mon_array(2)<=mon_cpu_req2; ----3
-             mon_array(3)<=mon_cpu_res2; ----4
+--             mon_array(0)<=mon_cpu_res1; ----1
+--             mon_array(6)<=mon_cpu_req1; ----2
+--             mon_array(1)<=mon_cpu_res2; ----3
+--             mon_array(7)<=mon_cpu_req2; ----4
              
-             mon_array(4)<=mon_gfx_upreq; ----5
-             mon_array(5)<=mon_gfx_upres; ----6
-                          mon_array(6)<=mon_audio_upreq; ----7
-                          mon_array(7)<=mon_audio_upres; ----8
-              mon_array(8)<=mon_uart_upreq; ----9
-              mon_array(9)<=mon_uart_upres; ----10  
-              mon_array(10)<=mon_usb_upreq; ----9
-              mon_array(11)<=mon_usb_upres; ----10    
-                                        
+--             mon_array(2)<=mon_gfx_upres; ----5
+--             mon_array(8)<=mon_gfx_upreq; ----6
+--             mon_array(3)<=mon_audio_upres; ----7
+--             mon_array(9)<=mon_audio_upreq; ----8
+--              mon_array(4)<=mon_uart_upres; ----9
+--              mon_array(10)<=mon_uart_upreq; ----10  
+--              mon_array(5)<=mon_usb_upres; ----11
+--              mon_array(11)<=mon_usb_upreq; ----12   
+                mon_array(0)<=mon_cpu_req1; ----1
+             mon_array(6)<=mon_cpu_res1; ----2
+             mon_array(1)<=mon_cpu_req2; ----3
+             mon_array(7)<=mon_cpu_res2; ----4
+            
+             mon_array(2)<=mon_gfx_upreq; ----5
+             mon_array(8)<=mon_gfx_upres; ----6
+             mon_array(3)<=mon_audio_upreq; ----7
+             mon_array(9)<=mon_audio_upres; ----8
+              mon_array(4)<=mon_uart_upreq; ----9
+              mon_array(10)<=mon_uart_upres; ----10  
+              mon_array(5)<=mon_usb_upreq; ----11
+              mon_array(11)<=mon_usb_upres; ----12                            
+             
+             
+             
              mon_array(12)<=mon_bus_req1; ----11
                                                     mon_array(13)<=mon_bus_req2; ----12
                                                     mon_array(14)<=mon_bus_res1; ----13
@@ -1439,7 +1456,7 @@ begin
               bus_res_i     => bus_res11, -- mem or pwr resp from ic    
               full_cache_req_i =>'0',
                srf_full_i =>'0',
-             
+             upsnp_req_full => upsnp_req_full,
               --     wb_req_o      => wb_req1,
   
               -- for observation:
@@ -1496,7 +1513,7 @@ begin
   
       interconnect : entity work.ic(rtl)
           port map(
-          snp_req_full_i=>'0',
+          snp_req_full_i=>upsnp_req_full,
               Clock              => Clock,
               reset              => reset,
               gfx_upreq_i        => gfx_upreq1,

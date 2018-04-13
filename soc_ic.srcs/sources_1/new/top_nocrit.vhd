@@ -424,8 +424,8 @@ signal up_snp_req1          : MSG_T;
 signal mon_data: TST_TO;
 signal mon_full: std_logic;
 signal mon_mem_read_t, mon_mem_write_t, mon_audio_read_t, mon_audio_write_t, mon_uart_read_t, mon_uart_write_t                                  : TST_T;
-signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t                                                                     : TST_T;
-     signal mon_array: ALL_T;
+signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t  ,mon_emp                                                                  : TST_T;
+     signal mon_array: ALL_T:=(others =>('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),"00"));
     signal mem_rid, mem_rtag: std_logic_vector(7 downto 0);
     signal mem_wid, mem_wtag: std_logic_vector(7 downto 0);
     signal ZERO_TSTT: TST_TO:=('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),(others=>'0'),'0');
@@ -495,7 +495,7 @@ begin
        variable l: line;
      begin
                if GEN_TRACE1 then
-                   if rising_edge(tb_clk) then
+                   if rising_edge(tb_clk) or falling_edge(tb_clk) then
                        ---- cpu
                        write(l, monitor_data&data_dropped);     --35
                        
@@ -533,8 +533,8 @@ begin
                           mon_array(7)<=mon_audio_upres; ----8
               mon_array(8)<=mon_uart_upreq; ----9
               mon_array(9)<=mon_uart_upres; ----10  
-              mon_array(10)<=mon_usb_upreq; ----9
-              mon_array(11)<=mon_usb_upres; ----10    
+              mon_array(10)<=mon_usb_upreq; ----11
+              mon_array(11)<=mon_usb_upres; ----12  
                                         
              mon_array(12)<=mon_bus_req1; ----11
                                                     mon_array(13)<=mon_bus_req2; ----12
@@ -558,88 +558,6 @@ begin
              mon_array(31)<=mon_snp_res_2; ----8  
         end if;
     end process;
-	transaction_logger_p : process(tb_clk)
-		file trace_file : TEXT open write_mode is "trace.tst";
-		variable l      : line;
-		constant SEP    : String(1 to 1) := ",";
-	begin
-		if GEN_TRACE1 then
-			if rising_edge(tb_clk) then
-				---- cpu
-				write(l, slv(mon_array( 0))); ----1
-				write(l, SEP);
-				write(l, slv(mon_array( 1))); ----2
-				write(l, SEP);
-				write(l, slv(mon_array( 2))); ----3
-				write(l, SEP);
-				write(l, slv(mon_array(3 ))); ----4
-				write(l, SEP);
-				write(l, slv(mon_array(4 ))); ----5
-				write(l, SEP);
-				write(l, slv(mon_array(5 ))); ----6
-				write(l, SEP);
-				write(l, slv(mon_array(6 ))); ----7
-				write(l, SEP);
-				write(l, slv(mon_array( 7))); ----8
-				write(l, SEP);
-				write(l, slv(mon_array(8 ))); ----9
-				write(l, SEP);
-				write(l, slv(mon_array(9 ))); ----10
-				write(l, SEP);
-				write(l, slv(mon_array(10 ))); ----11
-				write(l, SEP);
-				write(l, slv(mon_array(11 ))); ----12
-				write(l, SEP);
-				write(l, slv(mon_array(12 ))); ----13
-				write(l, SEP);
-				write(l, slv(mon_array( 13))); ----14
-				write(l, SEP);
-				write(l, slv(mon_mem_read)); ----15
-				write(l, SEP);
-				write(l, slv(mon_mem_write)); ----16
-				write(l, SEP);
-				write(l, slv(mon_gfx_read)); ----17
-				write(l, SEP);
-				write(l, slv(mon_gfx_write)); ----18
-				write(l, SEP);
-				write(l, slv(mon_audio_read)); ----19
-				write(l, SEP);
-				write(l, slv(mon_audio_write)); ----20
-				write(l, SEP);
-				write(l, slv(mon_usb_read)); ----21
-				write(l, SEP);
-				write(l, slv(mon_usb_write)); ----22
-				write(l, SEP);
-				write(l, slv(mon_uart_read)); ----23
-				write(l, SEP);
-				write(l, slv(mon_uart_write)); ----24
-				write(l, SEP);
-				write(l, slv(mon_array(24 ))); ----25
-				write(l, SEP);
-				write(l, slv(mon_array(25 ))); ----26
-				write(l, SEP);
-				write(l, slv(mon_array(26 ))); ----27
-				write(l, SEP);
-				write(l, slv(mon_array(27 ))); ----28
-				write(l, SEP);
-				write(l, slv(mon_array(28 ))); ----29
-				write(l, SEP);
-				write(l, slv(mon_array(29 ))); ----30
-				write(l, SEP);
-				write(l, slv(mon_array(30 ))); ----31
-				write(l, SEP);
-				write(l, slv(mon_array(31 ))); ----32
-				write(l, SEP);
-                write(l, snp_hit1);     --33
-                write(l, SEP);
-                write(l, snp_hit2);     --34
-                write(l, SEP);
-                write(l, up_snp_hit);     --35
-                                                            
-				writeline(trace_file, l);
-			end if;
-		end if;
-	end process;
 	
     cpu_req1_monitor : entity work.monitor_customized(Behavioral)
         port map(

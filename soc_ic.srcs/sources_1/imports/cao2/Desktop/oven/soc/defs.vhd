@@ -10,6 +10,9 @@ package defs is
   constant ADR_WIDTH : positive := 32;
   constant DAT_WIDTH : positive := 32;
   constant IP_CT: positive := 4;
+ 
+  
+  
   type rank_list is array (0 to 31) of natural range 0 to 31;
  subtype IP_VECT_T is std_logic_vector(19 downto 0);
    type IP_T is (CPU0, CPU1, CACHE0, CACHE1,
@@ -156,11 +159,12 @@ constant ZERO_c : cacheline := ('0',
 
   subtype IPTAG_T is std_logic_vector(7 downto 0);
   constant CPU0_TAG  : IPTAG_T := x"00";
-  constant GFX_TAG   : IPTAG_T := x"01";
-  constant UART_TAG  : IPTAG_T := x"02";
-  constant USB_TAG   : IPTAG_T := x"03";
-  constant AUDIO_TAG : IPTAG_T := x"04";
-  constant CPU1_TAG  : IPTAG_T := x"05";
+  constant CPU1_TAG  : IPTAG_T := x"01";
+  constant GFX_TAG   : IPTAG_T := x"02";
+  constant UART_TAG  : IPTAG_T := x"03";
+  constant USB_TAG   : IPTAG_T := x"04";
+  constant AUDIO_TAG : IPTAG_T := x"05";
+  
   -- TODO ips should b in order but b careful changing as it may break stg else!
 
  

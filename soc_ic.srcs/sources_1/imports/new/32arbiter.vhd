@@ -10,7 +10,7 @@ use UNISIM.vcomponents.all;
 Library UNIMACRO;
 use UNIMACRO.vcomponents.all;
 
-entity arbiter32 is
+entity arbiter32_half is
 	Generic(
 		constant FIFO_DEPTH : positive := 3
 	);
@@ -26,9 +26,9 @@ entity arbiter32 is
 		--control_full : out std_logic;
 		data_dropped : out std_logic_vector(4 downto 0) := (others => '0')
 	);
-end arbiter32;
+end arbiter32_half;
 
-architecture rtl of arbiter32 is
+architecture rtl of arbiter32_half is
 
 	signal in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, in16, in17, in18, in19, in20, in21, in22, in23, in24, in25, in26, in27, in28, in29, in30, in31                                 : std_logic_vector(31 downto 0);
 	signal tts0, tts1, tts2, tts3, tts4, tts5, tts6, tts7, tts8, tts9, tts10, tts11, tts12, tts13, tts14, tts15, tts16, tts17, tts18, tts19, tts20, tts21, tts22, tts23, tts24, tts25, tts26, tts27, tts28, tts29, tts30, tts31 : std_logic_vector(31 downto 0);
@@ -38,10 +38,12 @@ architecture rtl of arbiter32 is
 	signal re, full, emp, we, half                                                                                                                                                                                              : std_logic_vector(31 downto 0) := (others => '0');
 	signal count                                                                                                                                                                                                                : integer                       := 0;
 
-	constant depth                                             : positive := 8;
+	constant depth                                             : positive := 4;
+	constant cri:natural := 6;
 	signal control_in, control_out                             : std_logic_vector(36 downto 0);
 	signal control_re, control_we, control_empty, control_full : std_logic;
-
+    signal critical_zero: std_logic_vector((cri-1) downto 0) := (others =>'0');
+    signal critical_one: std_logic_vector((cri-1) downto 0) := (others =>'1');
 	signal ack : std_logic_vector(31 downto 0);
 begin
 
@@ -351,36 +353,34 @@ begin
 	fifo_control_p : process(RST, CLK)
 		variable tmp_in, tmp_d    : std_logic_vector(31 downto 0);
 		variable num_drop         : natural range 0 to 31 := 0;
-		variable tmp_emp, tmp_val : std_logic_vector(11 downto 0);
+		variable tmp_emp, tmp_val: std_logic_vector((cri-1) downto 0):=(others=>'0');
+		variable tmp_others : std_logic_vector(25 downto 0):=(others=>'0');
 		---variable tmp_ful
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				control_we <= '0';
 			else
-				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val & DataIn(ranks(28)).val & DataIn(ranks(27)).val & DataIn(ranks(26)).val & DataIn(ranks(25)).val & DataIn(ranks(24)).val & DataIn(ranks(23)).val & DataIn(ranks(22)).val & DataIn(ranks(21)).val & DataIn(ranks(20)).val & DataIn(ranks(19)).val & DataIn(ranks(18)).val & DataIn(ranks(17)).val & DataIn(ranks(16)).val & DataIn(ranks(15)).val & DataIn(ranks(14)).val & DataIn(ranks(13)).val & DataIn(ranks(12)).val & DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				tmp_in := DataIn(ranks(31)).val & DataIn(ranks(30)).val & DataIn(ranks(29)).val & DataIn(ranks(28)).val & DataIn(ranks(27)).val & DataIn(ranks(26)).val & DataIn(ranks(25)).val & DataIn(ranks(24)).val & DataIn(ranks(23)).val & DataIn(ranks(22)).val & DataIn(ranks(21)).val & DataIn(ranks(20)).val & DataIn(ranks(19)).val & DataIn(ranks(18)).val & DataIn(ranks(17)).val & DataIn(ranks(16)).val & DataIn(ranks(15)).val & DataIn(ranks(14)).val & DataIn(ranks(13)).val & DataIn(ranks(12)).val & DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(cri-1)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
 				if (tmp_in /= "00000000000000000000000000000000" and control_full /= '1') then
 					--if (control_full /='1') then
 					----check numbers of drops
-					tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-					tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-					if (tmp_emp = "111111111111" or tmp_val = "000000000000" ) then
-
+					tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+					tmp_val := DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+					if (tmp_emp = critical_one or tmp_val = critical_zero ) then
 						--report "full 4 "& integer'image(to_integer(unsigned(full(4 downto 4))));
-
 						tmp_d    := full and tmp_in;
 						num_drop := count_ones(tmp_d);
 						tmp_in   := tmp_in and (not full);
 						--report "tmp_in 4 "& integer'image(to_integer(unsigned(tmp_in(4 downto 4))));
 					else
 						--tmp_in   := tmp_in and (not full);
-						num_drop := count_ones(tmp_in(31 downto critical)) + count_ones(full((critical - 1) downto 0));
-						tmp_in   := "00000000000000000000" & (tmp_in(11 downto 0) and (not full(11 downto 0)));
+						num_drop := count_ones(tmp_in(31 downto critical)) + count_ones( full((critical - 1) downto 0) and tmp_in((critical-1) downto 0));
+						tmp_in   := tmp_others & (tmp_in(5 downto 0) and (not full(5 downto 0)));
 					end if;
 
 					control_in <= std_logic_vector(to_unsigned(num_drop, 5)) & tmp_in;
-					--report "tmp_in_2 4 "& integer'image(to_integer(unsigned(tmp_in(4 downto 4))));
-					--report "control_in 4 "& integer'image(to_integer(unsigned(control_in(4 downto 4))));
+			
 					control_we <= '1';
 					--end if;
 				else
@@ -390,8 +390,8 @@ begin
 		end if;
 	end process;
 
-	FIFO0 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO0 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(0),
 		         wr     => we(0),
@@ -402,16 +402,17 @@ begin
 		         r_data => tts0
 		        );
 	fifo0_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val : std_logic_vector((cri-1) downto 0) :=(others=>'0');
+		
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(0) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -419,14 +420,16 @@ begin
 				if ( DataIn(0).val = '1' and full(0) = '0' and (critical_mode = '0' or ranks_fifo(0) < critical)) then
 					in0   <= slv(DataIn(0));
 					we(0) <= '1';
+				elsif (DataIn(0).val='1') then
+				    report "0 is not write even if it is valid";
 				else
 					we(0) <= '0';
 				end if;
 			end if;
 		end if;
 	end process;
-	FIFO1 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO1 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(1),
 		         wr     => we(1),
@@ -437,16 +440,16 @@ begin
 		         r_data => tts1
 		        );
 	fifo1_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(1) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -460,8 +463,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO2 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO2 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(2),
 		         wr     => we(2),
@@ -472,16 +475,16 @@ begin
 		         r_data => tts2
 		        );
 	fifo2_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(2) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -495,8 +498,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO3 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO3 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(3),
 		         wr     => we(3),
@@ -507,16 +510,16 @@ begin
 		         r_data => tts3
 		        );
 	fifo3_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(3) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -530,8 +533,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO4 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO4 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(4),
 		         wr     => we(4),
@@ -542,16 +545,16 @@ begin
 		         r_data => tts4
 		        );
 	fifo4_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(4) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -565,43 +568,43 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO5 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO5 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
-		         rd     => re(5),
-		         wr     => we(5),
+		         rd     => re(cri-1),
+		         wr     => we(cri-1),
 		         w_data => in5,
-		         empty  => emp(5),
-		         full   => full(5),
-		         half   => half(5),
+		         empty  => emp(cri-1),
+		         full   => full(cri-1),
+		         half   => half(cri-1),
 		         r_data => tts5
 		        );
 	fifo5_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
-				we(5) <= '0';
+				we(cri-1) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
 				end if;
-				if ( DataIn(5).val = '1' and full(5) = '0' and (critical_mode = '0' or ranks_fifo(5) < critical)) then
-					in5   <= slv(DataIn(5));
-					we(5) <= '1';
+				if ( DataIn(cri-1).val = '1' and full(cri-1) = '0' and (critical_mode = '0' or ranks_fifo(cri-1) < critical)) then
+					in5   <= slv(DataIn(cri-1));
+					we(cri-1) <= '1';
 				else
-					we(5) <= '0';
+					we(cri-1) <= '0';
 				end if;
 			end if;
 		end if;
 	end process;
-	FIFO6 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO6 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(6),
 		         wr     => we(6),
@@ -612,16 +615,16 @@ begin
 		         r_data => tts6
 		        );
 	fifo6_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(6) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -635,8 +638,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO7 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO7 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(7),
 		         wr     => we(7),
@@ -647,16 +650,16 @@ begin
 		         r_data => tts7
 		        );
 	fifo7_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(7) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -670,8 +673,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO8 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO8 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(8),
 		         wr     => we(8),
@@ -682,16 +685,16 @@ begin
 		         r_data => tts8
 		        );
 	fifo8_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(8) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -705,8 +708,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO9 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO9 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(9),
 		         wr     => we(9),
@@ -717,16 +720,16 @@ begin
 		         r_data => tts9
 		        );
 	fifo9_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(9) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -740,8 +743,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO10 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO10 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(10),
 		         wr     => we(10),
@@ -752,16 +755,16 @@ begin
 		         r_data => tts10
 		        );
 	fifo10_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(10) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -775,8 +778,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO11 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO11 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(11),
 		         wr     => we(11),
@@ -787,16 +790,16 @@ begin
 		         r_data => tts11
 		        );
 	fifo11_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(11) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -810,8 +813,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO12 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO12 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(12),
 		         wr     => we(12),
@@ -822,16 +825,16 @@ begin
 		         r_data => tts12
 		        );
 	fifo12_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(12) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -845,8 +848,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO13 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO13 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(13),
 		         wr     => we(13),
@@ -857,16 +860,16 @@ begin
 		         r_data => tts13
 		        );
 	fifo13_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(13) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -880,8 +883,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO14 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO14 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(14),
 		         wr     => we(14),
@@ -892,16 +895,16 @@ begin
 		         r_data => tts14
 		        );
 	fifo14_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(14) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -915,8 +918,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO15 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO15 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(15),
 		         wr     => we(15),
@@ -927,16 +930,16 @@ begin
 		         r_data => tts15
 		        );
 	fifo15_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(15) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -950,8 +953,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO16 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO16 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(16),
 		         wr     => we(16),
@@ -962,16 +965,16 @@ begin
 		         r_data => tts16
 		        );
 	fifo16_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(16) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -985,8 +988,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO17 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO17 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(17),
 		         wr     => we(17),
@@ -997,16 +1000,16 @@ begin
 		         r_data => tts17
 		        );
 	fifo17_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(17) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1020,8 +1023,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO18 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO18 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(18),
 		         wr     => we(18),
@@ -1032,16 +1035,16 @@ begin
 		         r_data => tts18
 		        );
 	fifo18_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(18) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1055,8 +1058,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO19 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO19 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(19),
 		         wr     => we(19),
@@ -1067,16 +1070,16 @@ begin
 		         r_data => tts19
 		        );
 	fifo19_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(19) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1090,8 +1093,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO20 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO20 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(20),
 		         wr     => we(20),
@@ -1102,16 +1105,16 @@ begin
 		         r_data => tts20
 		        );
 	fifo20_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(20) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1125,8 +1128,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO21 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO21 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(21),
 		         wr     => we(21),
@@ -1137,16 +1140,16 @@ begin
 		         r_data => tts21
 		        );
 	fifo21_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(21) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1160,8 +1163,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO22 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO22 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(22),
 		         wr     => we(22),
@@ -1172,16 +1175,16 @@ begin
 		         r_data => tts22
 		        );
 	fifo22_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(22) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1195,8 +1198,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO23 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO23 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(23),
 		         wr     => we(23),
@@ -1207,16 +1210,16 @@ begin
 		         r_data => tts23
 		        );
 	fifo23_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(23) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1230,8 +1233,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO24 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO24 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(24),
 		         wr     => we(24),
@@ -1242,16 +1245,16 @@ begin
 		         r_data => tts24
 		        );
 	fifo24_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(24) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1265,8 +1268,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO25 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO25 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(25),
 		         wr     => we(25),
@@ -1277,16 +1280,16 @@ begin
 		         r_data => tts25
 		        );
 	fifo25_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(25) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1300,8 +1303,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO26 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO26 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(26),
 		         wr     => we(26),
@@ -1312,16 +1315,16 @@ begin
 		         r_data => tts26
 		        );
 	fifo26_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(26) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1335,8 +1338,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO27 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO27 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(27),
 		         wr     => we(27),
@@ -1347,16 +1350,16 @@ begin
 		         r_data => tts27
 		        );
 	fifo27_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(27) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1370,8 +1373,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO28 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO28 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(28),
 		         wr     => we(28),
@@ -1382,16 +1385,16 @@ begin
 		         r_data => tts28
 		        );
 	fifo28_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(28) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1405,8 +1408,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO29 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO29 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(29),
 		         wr     => we(29),
@@ -1417,16 +1420,16 @@ begin
 		         r_data => tts29
 		        );
 	fifo29_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(29) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1440,8 +1443,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO30 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO30 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(30),
 		         wr     => we(30),
@@ -1452,16 +1455,16 @@ begin
 		         r_data => tts30
 		        );
 	fifo30_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(30) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';
@@ -1475,8 +1478,8 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO31 : entity work.fifo_uart(arch)
-		generic map(B => 32, W => 4)
+	FIFO31 : entity work.fifo_gen(rtl)
+		generic map(B => 32, W => depth)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(31),
 		         wr     => we(31),
@@ -1487,16 +1490,16 @@ begin
 		         r_data => tts31
 		        );
 	fifo31_p : process(CLK)
-		variable tmp_emp, tmp_val : std_logic_vector(3 downto 0);
+		variable tmp_emp, tmp_val,tmp_zero : std_logic_vector((cri-1) downto 0) :=(others=>'0');
 		variable critical_mode    : std_logic;
 	begin
 		if rising_edge(CLK) then
 			if RST = '1' then
 				we(31) <= '0';
 			elsif rising_edge(CLK) then
-				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5)) & half(ranks(6)) & half(ranks(7)) & half(ranks(8)) & half(ranks(9)) & half(ranks(10)) & half(ranks(11));
-				tmp_val := DataIn(ranks(11)).val & DataIn(ranks(10)).val & DataIn(ranks(9)).val & DataIn(ranks(8)).val & DataIn(ranks(7)).val & DataIn(ranks(6)).val & DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
-				if (tmp_emp = "111111111111" or tmp_val = "000000000000") then
+				tmp_emp := half(ranks(0)) & half(ranks(1)) & half(ranks(2)) & half(ranks(3)) & half(ranks(4)) & half(ranks(5))  ;
+				tmp_val :=    DataIn(ranks(5)).val & DataIn(ranks(4)).val & DataIn(ranks(3)).val & DataIn(ranks(2)).val & DataIn(ranks(1)).val & DataIn(ranks(0)).val;
+				if (tmp_emp = critical_one or tmp_val = critical_zero) then
 					critical_mode := '0';
 				else
 					critical_mode := '1';

@@ -59,7 +59,6 @@ begin
       elsif din2.val  = '1' and s_ack2='0' and full='0' then
           tdout <= din2;
           s_ack2 <= '1';
-        
       elsif din3.val  = '1' and s_ack3='0' and full='0' then
           tdout <= din3;
           s_ack3 <= '1';
@@ -81,13 +80,11 @@ begin
         s_ack4 <= '0';
         s_ack5 <= '0';
         s_ack6 <= '0';
-        st := two;
+      st := two;
       end if;
     elsif st =two then
-        st:=three;
-    elsif st= three then
-        st := four;
-    elsif st= four then
+--        st:=three;
+--    elsif st= three then
         st := one;
     end if;
     dout<= tdout;

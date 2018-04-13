@@ -39,7 +39,7 @@ entity proc is
     ---snp request full input
     srf_full_o: out std_logic;
     ---bur snp request full
-    brf_full_o: out std_logic;
+    
     upsnp_req_full :out std_logic
     );
 

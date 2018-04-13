@@ -17,6 +17,7 @@ entity fifo_gen is
     r_data	: out std_logic_vector(B-1 downto 0);
     Empty	: out STD_LOGIC;
     half: out std_logic;
+    percent_i: in integer;
     Full	: out STD_LOGIC := '0'
 	);
 end fifo_gen;
@@ -113,23 +114,37 @@ begin
           r_data <= (others=>'0');
         end if;
         
-        if num_data < 2**(W-1) then
+        if num_data < percent_i+1 then
             half <='1';
         else
             half <='0';
         end if;
+        
+        if num_data > 2**W-3 then
+            full <= '1';
+        else
+            full <='0';
+        end if;
+        
+        if num_data =0 then
+            Empty <='1';
+        else    
+            Empty <='0';
+        end if;
+        
+           --- end if;
         -- Update Empty and Full flags
         --if (tmp_head = Tail or Head=Tail) then
-          if ( (tmp_head=Tail or Head=Tail) and (tmp_looped or Looped) )then
-            Full <= '1';
+--          if ( (tmp_head=Tail or Head=Tail) and (tmp_looped or Looped) )then
+--            Full <= '1';
        
-          elsif (Head=Tail and (not looped)) then
-            Empty <= '1';
-         -- end if;
-        else
-          Empty	<= '0';
-          Full	<= '0';
-        end if;
+--          elsif (Head=Tail and (not looped)) then
+--            Empty <= '1';
+--         -- end if;
+--        else
+--          Empty	<= '0';
+--          Full	<= '0';
+--        end if;
       end if;
     end if;
   end process;

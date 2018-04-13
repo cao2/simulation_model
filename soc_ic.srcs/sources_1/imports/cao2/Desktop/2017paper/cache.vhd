@@ -141,9 +141,9 @@ signal tmp_res    : MSG_T;
 begin
 
 	
-	ureq_fifo : entity work.fifo(rtl)   -- req from device
+	ureq_fifo :  entity work.fifo(rtl)   -- req from device
 		generic map(
-			FIFO_DEPTH => 32
+			FIFO_DEPTH => 300
 		)
 		port map(
 			CLK     => Clock,
@@ -172,7 +172,7 @@ begin
 
 	snp_req_fifo : entity work.fifo(rtl)
 		generic map(
-			FIFO_DEPTH => 18
+			FIFO_DEPTH => 64
 		)
 		port map(
 			CLK     => Clock,
@@ -549,7 +549,7 @@ begin
 				end if;
 			elsif state = 1 then        -- access
 				brf_re <= '0';
-				if readreq3.val='1' then
+				if readreq3.val='1'   then
 					treadreq3 <= readreq3;
 				end if;
 				if rdack3 = '1' then

@@ -37,7 +37,7 @@ architecture rtl of arbiter32_2 is
 	type tts_a is array (0 to 31) of std_logic_vector(31 downto 0);
 	signal empty_data                                                                                                                                                                                                           : std_logic_vector(31 downto 0) := (others => '0');
 	signal tts_array                                                                                                                                                                                                            : tts_a;
-	signal re, full, emp, we                                                                                                                                                                                                    : std_logic_vector(31 downto 0) := (others => '0');
+	signal re, full, emp, we  ,half                                                                                                                                                                                                  : std_logic_vector(31 downto 0) := (others => '0');
 	signal count                                                                                                                                                                                                                : integer                       := 0;
 	constant depth                                                                                                                                                                                                              : positive                      := 5;
 	signal control_in, control_out                                                                                                                                                                                              : std_logic_vector(36 downto 0);
@@ -418,7 +418,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO0 : entity work.fifo_uart(arch)
+	FIFO0 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(0),
@@ -453,7 +453,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO1 : entity work.fifo_uart(arch)
+	FIFO1 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(1),
@@ -488,7 +488,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO2 : entity work.fifo_uart(arch)
+	FIFO2 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(2),
@@ -523,7 +523,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO3 : entity work.fifo_uart(arch)
+	FIFO3 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(3),
@@ -558,7 +558,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO4 : entity work.fifo_uart(arch)
+	FIFO4 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(4),
@@ -593,7 +593,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO5 : entity work.fifo_uart(arch)
+	FIFO5 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(5),
@@ -628,7 +628,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO6 : entity work.fifo_uart(arch)
+	FIFO6 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(6),
@@ -663,7 +663,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO7 : entity work.fifo_uart(arch)
+	FIFO7 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(7),
@@ -698,7 +698,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO8 : entity work.fifo_uart(arch)
+	FIFO8 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(8),
@@ -733,7 +733,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO9 : entity work.fifo_uart(arch)
+	FIFO9 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(9),
@@ -768,7 +768,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO10 : entity work.fifo_uart(arch)
+	FIFO10 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(10),
@@ -803,7 +803,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO11 : entity work.fifo_uart(arch)
+	FIFO11 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(11),
@@ -838,7 +838,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO12 : entity work.fifo_uart(arch)
+	FIFO12 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(12),
@@ -873,7 +873,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO13 : entity work.fifo_uart(arch)
+	FIFO13 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(13),
@@ -908,7 +908,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO14 : entity work.fifo_uart(arch)
+	FIFO14 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(14),
@@ -943,7 +943,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO15 : entity work.fifo_uart(arch)
+	FIFO15 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(15),
@@ -978,7 +978,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO16 : entity work.fifo_uart(arch)
+	FIFO16 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(16),
@@ -1013,7 +1013,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO17 : entity work.fifo_uart(arch)
+	FIFO17 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(17),
@@ -1048,7 +1048,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO18 : entity work.fifo_uart(arch)
+	FIFO18 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(18),
@@ -1083,7 +1083,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO19 : entity work.fifo_uart(arch)
+	FIFO19 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(19),
@@ -1118,7 +1118,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO20 : entity work.fifo_uart(arch)
+	FIFO20 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(20),
@@ -1153,7 +1153,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO21 : entity work.fifo_uart(arch)
+	FIFO21 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(21),
@@ -1188,7 +1188,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO22 : entity work.fifo_uart(arch)
+	FIFO22 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(22),
@@ -1223,7 +1223,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO23 : entity work.fifo_uart(arch)
+	FIFO23 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(23),
@@ -1258,7 +1258,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO24 : entity work.fifo_uart(arch)
+	FIFO24 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(24),
@@ -1293,7 +1293,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO25 : entity work.fifo_uart(arch)
+	FIFO25 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(25),
@@ -1328,7 +1328,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO26 : entity work.fifo_uart(arch)
+	FIFO26 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(26),
@@ -1363,7 +1363,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO27 : entity work.fifo_uart(arch)
+	FIFO27 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(27),
@@ -1398,7 +1398,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO28 : entity work.fifo_uart(arch)
+	FIFO28 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(28),
@@ -1433,7 +1433,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO29 : entity work.fifo_uart(arch)
+	FIFO29 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(29),
@@ -1468,7 +1468,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO30 : entity work.fifo_uart(arch)
+	FIFO30 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(30),
@@ -1503,7 +1503,7 @@ begin
 			end if;
 		end if;
 	end process;
-	FIFO31 : entity work.fifo_uart(arch)
+	FIFO31 : entity work.fifo_gen(rtl)
 		generic map(B => 32, W => 4)
 		port map(clk    => clk, reset => rst,
 		         rd     => re(31),
