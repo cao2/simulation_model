@@ -107,6 +107,7 @@ begin
       --dbg_chg("rwt_p, st: ", st, st_prev);
       if st = 0 then -- DELAY
         rnd_dlay(t7_f, t7_s, t7_c, st, st_nxt);
+        --st := 1;
         --delay(sint(r) mod RWT_MAXDELAY, dflg, dcnt, st, st_nxt);
       elsif st = 1 then -- START
         if t7_tc < RWT_CNT then

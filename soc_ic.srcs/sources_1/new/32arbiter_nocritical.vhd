@@ -38,7 +38,7 @@ architecture rtl of arbiter32_nocritical is
 	signal re, full, emp, we,half                                                                                                                                                                                                    : std_logic_vector(31 downto 0) := (others => '0');
 	signal count                                                                                                                                                                                                                : integer                       := 0;
 
-	constant depth                         : positive                      := 4;
+	constant depth                         : positive                      := 3;
 	signal control_in, control_out                                                                                                                                                                                              : std_logic_vector(36 downto 0);
 	signal control_re, control_we, control_empty, control_full                                                                                                                                                                  : std_logic;
 	signal percent_i : integer:=0;

@@ -31,7 +31,7 @@ package test is
   --* UREQ: peripherals send UREQT_CNT up rnd(r/w) requests
 
   --********* GLOBAL TEST OPTS ***************
-  constant MEM_DELAY : natural := 10;
+  constant MEM_DELAY : natural := 7;
   -- test delay flag, used by rnd_dlay fun to re-enable rndmz_flg 
   constant TDLAY_FLG : boolean := false;
 
@@ -46,7 +46,7 @@ package test is
   constant RWT_SRC : IP_VECT_T := ip_enc(CPU0) or ip_enc(CPU1);
   --constant RWT_DST : IP_VECT_T := ip_enc(GFX); -- NOT IMPLEMENTED YET
   --constant RWT_MAXDELAY : natural := 10;  -- NOT IMPLEMENTED YET
-  constant RWT_WAITRES : boolean := true;
+  constant RWT_WAITRES : boolean := false;
   constant RWT_CMD : CMD_T := READ_CMD or
                               WRITE_CMD;
 
