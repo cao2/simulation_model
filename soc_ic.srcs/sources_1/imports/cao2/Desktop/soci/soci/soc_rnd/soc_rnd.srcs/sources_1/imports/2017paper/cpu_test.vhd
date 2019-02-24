@@ -26,21 +26,9 @@ architecture rwt of cpu_test is
   signal sim_end : std_logic := '0';
   signal r : std_logic_vector(31 downto 0);
   signal tag: IPTAG_T:= ZERO_TAG;
+  constant overall_delay: positive := 20;
 begin
-
-
-
-  rnd_gen: entity work.rndgen(rtl)
-  port map(
-    clk => clk, -- TODO connect clock, rst, and enable signals
-    rst => rst,
-    en => en,
-    seed_i => 0
-    --rnd_o => 
-  );
-  
-  
-	set_tag: process(rst)
+  set_tag: process(rst)
 	begin
 		if rst='1' then
 			if id_i = CPU0 then
@@ -55,7 +43,7 @@ begin
      clk    => clk,
      rst    => rst,
      en     => en,
-     seed_i => to_integer(unsigned(TEST(RW))),
+     seed_i => to_integer(unsigned(TEST(RW))) + seed_set,
      rnd_o  => r
      );
 
@@ -87,11 +75,11 @@ begin
     variable dflg : boolean := true;
     
     variable t7_f : boolean := true;
-    variable t7_s : natural := nat(id_i);
-    variable t7_tc, t7_c, t7_r : natural := 0;
+    variable t7_s : natural := nat(id_i) + seed_set;
+    variable t7_ct, t7_c, t7_r : natural := 0;
     variable t7_cmd : CMD_T;
     variable t7_adr : ADR_T;
-
+    variable d_cnt: natural := nat(id_i)+15;
     -- HACKS
     variable c1: integer := 0;
     variable c2: integer := 200; -- offset so that cpus do not req same adr
@@ -102,19 +90,19 @@ begin
     if en = '1' and rst = '1' then
       cpu_req_o <= ZERO_MSG;
       st := 1;
-      
     elsif en = '1' and (rising_edge(clk)) then
       --dbg_chg("rwt_p, st: ", st, st_prev);
       if st = 0 then -- DELAY
         rnd_dlay(t7_f, t7_s, t7_c, st, st_nxt);
-        --st := 1;
+        st := 1;
         --delay(sint(r) mod RWT_MAXDELAY, dflg, dcnt, st, st_nxt);
+        delay(d_cnt, st, st_nxt);
+       st := st_nxt;
       elsif st = 1 then -- START
-        if t7_tc < RWT_CNT then
-          t7_tc := t7_tc + 1;
+        if t7_ct < RWT_CNT then
+          t7_ct := t7_ct + 1;
           st_nxt := 3;
           st := 0;
-          --report "delay is " & str(uint(r));
         else
           st := 2;
         end if;
@@ -140,19 +128,14 @@ begin
         else
           t7_cmd := RWT_CMD;
         end if;
-          
-        -- rndmz adr
-        --t7_adr := rnd_adr(t7_r);
-
         -- HACK1 force each cpu to request different addresses
         if id_i = CPU0 then
-          t7_adr := std_logic_vector(to_unsigned(c1, t7_adr'length));
+          t7_adr :=  std_logic_vector(to_unsigned(t7_r mod 7, 3)) &  std_logic_vector(to_unsigned(c1, t7_adr'length - 3));
           c1 := c1 + 1;
         else
-          t7_adr := std_logic_vector(to_unsigned(c2, t7_adr'length));
+          t7_adr := std_logic_vector(to_unsigned(t7_r mod 7, 3)) &  std_logic_vector(to_unsigned(c2, t7_adr'length - 3));
           c2 := c2 + 1;
-        end if;
-        
+        end if; 
         -- HACK2 force them to go to memory or gfx
         --if (t7_r mod 2) = 1 then
           t7_adr := t7_adr or X"80000000"; -- mem
@@ -176,6 +159,7 @@ begin
         end if;
       elsif st = 5 then -- WAIT_RES
         cpu_req_o <= ZERO_MSG;
+        delay(d_cnt, st, st_nxt);
         if (not RWT_WAITRES) or -- if no need to wait for resp
           is_rw_cmd(cpu_res_i) then -- or need to wait for resp and resp has arrived
           st_nxt := 1;
@@ -244,7 +228,7 @@ begin  -- architecture pwrtx
    -- t6 vars
    variable t6_f : boolean := true;
    variable t6_c, t6_tc, t6_r : natural := 0;
-   variable t6_s : natural := nat(id_i);
+   variable t6_s : natural := nat(id_i) + seed_set;
    -- _s is seed, _c is cnt, _tc is tot cnt
    variable t6_cpuid : IPTAG_T;
    variable t6_cmd : CMD_T;

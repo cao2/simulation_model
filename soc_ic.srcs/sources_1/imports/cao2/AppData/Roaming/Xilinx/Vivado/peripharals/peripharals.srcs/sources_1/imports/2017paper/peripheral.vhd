@@ -65,15 +65,16 @@ architecture rtl of peripheral is
   signal sim_end : std_logic := '0';
   signal tag: IPTAG_T:= ZERO_TAG;
   signal r: std_logic_vector(31 downto 0);
+  constant overall_delay: positive := 15;
 begin
 
--- rndgen_ent : entity work.rndgen(rtl) port map (
---     clk    => Clock,
---     rst    => reset,
---     en     => '1',
---     seed_i => nat(id_i),
---     rnd_o  => r
---     );
+ rndgen_ent : entity work.rndgen(rtl) port map (
+     clk    => Clock,
+     rst    => reset,
+     en     => '1',
+     seed_i => seed_set,
+     rnd_o  => r
+     );
 
 set_tag: process(Clock)
 	begin
@@ -108,7 +109,7 @@ set_tag: process(Clock)
         wrsp_o    <= "10";
         if wvalid_i = '1' then
           wready_o     <= '0';
-          address    := to_integer(unsigned(waddr_i(31 downto 29)));
+          address    := to_integer(unsigned(waddr_i(2 downto 0)));
           len        := to_integer(unsigned(wlen_i));
           size       := wsize_i;
           state      := 2;
@@ -222,28 +223,30 @@ set_tag: process(Clock)
   
   ureqt_p : process(clock) -- up read test
     variable dc, tc, st_nxt : natural := 0;
-    variable s : natural := nat(id_i);
+    variable s : natural := nat(id_i) + seed_set;
     variable st : natural := 0;
-    variable b : boolean := true;
+    variable b : boolean := false;
     variable t_adr : ADR_T;
     variable tcmd : CMD_T;
     variable offset : ADR_T;
     variable seqid : integer := -1;
-    
+    variable c_delay: natural:= 17;
     --HACKS
     variable c1 : integer := 900;
     variable c2 : integer := 400;
     variable c3 : integer := 800;
     variable c4 : integer := 600;
-    
+    variable adr_space: std_logic_vector(2 downto 0) := "100";
   begin
       if(rising_edge(clock)) then
         if reset = '1' then
               upreq_o <= ZERO_MSG;
               --ct := rand_nat(to_integer(unsigned(TEST(UREQ))));
               st := 0;
-            elsif st = 1 then -- delay
+        elsif st = 1 then -- delay
+          dc := (to_integer(unsigned(r)) + s) mod 20;
           rnd_dlay(b, s, dc, st, st_nxt);
+          --delay(c_delay, st, st_nxt);
         elsif st = 2 then -- done
           upreq_o <= ZERO_MSG;
           sim_end <= '1';
@@ -265,33 +268,46 @@ set_tag: process(Clock)
           s := s + nat(id_i);
           --t_adr := std_logic_vector(to_unsigned(rand_nat(s), t_adr'length));
           --t_adr := rnd_adr(s);
-
+          adr_space := std_logic_vector(to_unsigned(to_integer(unsigned(r)), 3));
           -- HACK 1 : force devices to request different addresses
           if id_i = GFX then
-            t_adr := std_logic_vector(to_unsigned(c1, t_adr'length));
+            if (adr_space = "000") then
+                adr_space := "001";
+            end if;
+            t_adr := adr_space & std_logic_vector(to_unsigned(c1, t_adr'length-3));
             c1 := c1 + 1;
             --t_adr := t_adr and X"000000FF";
           elsif id_i = USB then
-            t_adr := std_logic_vector(to_unsigned(c2, t_adr'length));
+            if (adr_space = "010") then
+                adr_space := "011";
+            end if;
+            t_adr := adr_space & std_logic_vector(to_unsigned(c2, t_adr'length - 3));
             c2 := c2 + 1;
             --t_adr := t_adr and X"0000FF00";
           elsif id_i = UART then
-            t_adr := std_logic_vector(to_unsigned(c3, t_adr'length));
+            if (adr_space = "001") then
+              adr_space := "010";
+            end if;          
+            t_adr := adr_space & std_logic_vector(to_unsigned(c3, t_adr'length - 3));
             c3 := c3 + 1;
             --t_adr := t_adr and X"00FF0000";
           elsif id_i = AUDIO then
-            t_adr := std_logic_vector(to_unsigned(c4, t_adr'length));
+            if (adr_space = "011") then
+              adr_space := "100";
+            end if;         
+            t_adr := adr_space & std_logic_vector(to_unsigned(c4, t_adr'length - 3));
             c4 := c4 + 1;
             --t_adr := t_adr and X"FF000000";
           end if;
           
             
-          t_adr := t_adr or X"80000000"; -- HACK 2 to make it go to memory
+          t_adr := t_adr;
+          -- or X"80000000"; -- HACK 2 to make it go to memory
                    
           -- rmz cmd
           if (id_i = USB) or
             (id_i = UART) or
-            (to_integer(unsigned(r)) mod 2) = 1 then
+            ((to_integer(unsigned(r))) mod 2) = 1 then
             tcmd := READ_CMD;
           else
             tcmd := WRITE_CMD;
@@ -307,9 +323,12 @@ set_tag: process(Clock)
           end if;
         elsif st = 4 then
           upreq_o <= ZERO_MSG;
-          -- do not wait for response
-          st_nxt := 0;
-          st := 1; -- delay next check
+          if (not UPRQT_WAITRES) or -- if no need to wait for resp
+              is_rw_cmd(upres_i) then -- or need to wait for resp and resp has arrived
+                    st_nxt := 0;
+                    --dbg("000" & cpu_res_i);
+                    st := 1;
+          end if;
         end if;
       end if;
   end process;  

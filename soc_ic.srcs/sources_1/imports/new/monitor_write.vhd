@@ -83,14 +83,14 @@ begin
 
 					---------see what to do
 					---tmp_transaction.adr      := "00";
-					if waddr_i = adr then
-						tmp_transaction.adr := "00";
-					elsif unsigned(waddr_i) - unsigned(adr) = 1 or unsigned(adr) - unsigned(waddr_i) = 1 then
-						tmp_transaction.adr := "01";
-					else
-						tmp_transaction.adr := "10";
-					end if;
-
+--					if waddr_i = adr then
+--						tmp_transaction.adr := "00";
+--					elsif unsigned(waddr_i) - unsigned(adr) = 1 or unsigned(adr) - unsigned(waddr_i) = 1 then
+--						tmp_transaction.adr := "01";
+--					else
+--						tmp_transaction.adr := "10";
+--					end if;
+                    tmp_transaction.adr := waddr_i(31 downto 29);
 					--					if id_i = id then
 					--						tmp_transaction.id := "00";
 					--					elsif unsigned(id_i) - unsigned(id) = 1 or unsigned(id) - unsigned(id_i) = 1 then

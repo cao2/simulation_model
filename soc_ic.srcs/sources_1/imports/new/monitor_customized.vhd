@@ -33,13 +33,14 @@ begin
 				tmp_t.cmd      := msg_i.cmd;
 				tmp_t.linkID   := link_id;
 				tmp_t.tag := msg_i.tag;
-				if msg_i.adr = adr then
-					tmp_t.adr := "00";
-				elsif unsigned(msg_i.adr) - unsigned(adr) = 1 or unsigned(adr) - unsigned(msg_i.adr) = 1 then
-					tmp_t.adr := "01";
-				else
-					tmp_t.adr := "10";
-				end if;
+--				if msg_i.adr = adr then
+--					tmp_t.adr := "00";
+--				elsif unsigned(msg_i.adr) - unsigned(adr) = 1 or unsigned(adr) - unsigned(msg_i.adr) = 1 then
+--					tmp_t.adr := "01";
+--				else
+--					tmp_t.adr := "10";
+--				end if;
+                tmp_t.adr := msg_i.adr(31 downto 29);
                 tmp_t.id := msg_i.id;
                 if (((msg_i.tag and tag_en)=msg_i.tag) 
                                and ((msg_i.id and id_en)=msg_i.id) and

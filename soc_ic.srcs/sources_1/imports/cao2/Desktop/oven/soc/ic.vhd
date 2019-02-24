@@ -378,7 +378,7 @@ begin
 			toper_i           => toaudio_p,
 			bus_res_c0_o      => bus_res1_5,
 			bus_res_c1_o      => bus_res2_5,
-			gfx_upres_ack_i   => '0',
+			gfx_upres_ack_i   => gfx_upres_ack5,
 			usb_upres_ack_i   => usb_upres_ack5,
 			uart_upres_ack_i  => uart_upres_ack5,
 			audio_upres_ack_i => audio_upres_ack5,
@@ -417,7 +417,7 @@ begin
 			gfx_upres_ack_i   => gfx_upres_ack3,
 			usb_upres_ack_i   => usb_upres_ack3,
 			uart_upres_ack_i  => '0',
-			audio_upres_ack_i => audio_upres_ack4,
+			audio_upres_ack_i => audio_upres_ack3,
 			gfx_upres_o       => gfx_upres3,
 			usb_upres_o       => usb_upres3,
 			-- uart_upres_o => uart_upres3,
@@ -1074,28 +1074,44 @@ begin
 
       );  
 
-	toaudio_arbiter : entity work.arbiter2_ack(rtl)
+	toaudio_arbiter : entity work.arbiter6_ack(rtl)
 		port map(
 			clock => Clock,
 			reset => reset,
 			din1  => toaudio1,
-			ack1  => audio_ack1,
+			ack1_o  => audio_ack1,
 			din2  => toaudio2,
-			ack2  => audio_ack2,
+			ack2_o  => audio_ack2,
 			dout  => toaudio_p,
-			ack   => audio_ack
+			ack_i   => audio_ack,
+            din3   => toaudio3,           -- up response 
+            ack3_o => audio_ack3,
+                    -- NOT IMPLEMENTED:
+                    din4   => ZERO_MSG,       
+                    din5   => ZERO_MSG,        
+                    din6   => ZERO_MSG			
 		);
 
-	tousb_arbiter : entity work.arbiter2_ack(rtl)
+	tousb_arbiter : entity work.arbiter6_ack(rtl)
 		port map(
+			
+        din3   => tousb3,           -- up response 
+        ack3_o => usb_ack3,
+        -- NOT IMPLEMENTED:
+        din4   => ZERO_MSG,         -- togfx4,
+        -- ack4_o  => gfx_ack4,
+        din5   => ZERO_MSG,         -- togfx5,
+        -- ack5_o  => gfx_ack5,
+        din6   => ZERO_MSG,         -- togfx6,
+        -- ack6_o  => gfx_ack6, 		
 			clock => Clock,
 			reset => reset,
 			din1  => tousb1,
-			ack1  => usb_ack1,
+			ack1_o  => usb_ack1,
 			din2  => tousb2,
-			ack2  => usb_ack2,
+			ack2_o  => usb_ack2,
 			dout  => tousb_p,
-			ack   => usb_ack
+			ack_i   => usb_ack
 		);
 
 	audio_write_p : entity work.per_write_m(rtl)
@@ -1166,16 +1182,24 @@ begin
 
       );  
 
-	touart_arbiter : entity work.arbiter2_ack(rtl)
+	touart_arbiter : entity work.arbiter6_ack(rtl)
 		port map(
+din3   => touart3,           -- up response 
+                ack3_o => uart_ack3,
+                -- NOT IMPLEMENTED:
+                din4   => ZERO_MSG,         -- togfx4,
+                -- ack4_o  => gfx_ack4,
+                din5   => ZERO_MSG,         -- togfx5,
+                -- ack5_o  => gfx_ack5,
+                din6   => ZERO_MSG,         -- togfx6,		
 			clock => Clock,
 			reset => reset,
 			din1  => touart1,
-			ack1  => uart_ack1,
+			ack1_o  => uart_ack1,
 			din2  => touart2,
-			ack2  => uart_ack2,
+			ack2_o  => uart_ack2,
 			dout  => touart_p,
-			ack   => uart_ack
+			ack_i   => uart_ack
 		);
 
 	toproc1_res_arbiter : entity work.b_arbiter6(rtl)
@@ -1419,6 +1443,8 @@ begin
 					elsif out2.msg.adr(30 downto 29) = "01" then
 						---report "touart3, snop response";	
 						touart3 <= out2.msg;
+--						tomem3 <= out2.msg;
+--						state := 5;
 						state   := 7;
 					elsif out2.msg.adr(30 downto 29) = "10" then
 						---report "tousb3, snop response";	
@@ -1462,12 +1488,12 @@ begin
 					state   := 0;
 					touart3 <= ZERO_MSG;
 				end if;
-			elsif state = 8 then
+			elsif state = 14 then
 				if audio_ack3 = '1' then
 					state    := 0;
 					toaudio3 <= ZERO_MSG;
 				end if;
-			elsif state = 14 then
+			elsif state = 8 then
 				if usb_ack3 = '1' then
 					state  := 0;
 					tousb3 <= ZERO_MSG;

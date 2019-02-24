@@ -44,7 +44,7 @@ type TST_T is record
    cmd       : std_logic_vector(7 downto 0);
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id
-   adr       : std_logic_vector(1 downto 0);
+   adr       : std_logic_vector(2 downto 0);
 end record TST_T;
 
 
@@ -59,7 +59,7 @@ type TST_TTS is record
    cmd       : std_logic_vector(7 downto 0);
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id
-   adr       : std_logic_vector(1 downto 0);
+   adr       : std_logic_vector(2 downto 0);
    tim      : INTEGER;
    channel: integer;
 end record TST_TTS;
@@ -78,7 +78,7 @@ type AXI_T is record
    cmd       : std_logic;
    tag       : std_logic_vector(7 downto 0);  -- src
    id        : std_logic_vector(7 downto 0);  --sequence id
-   adr       : std_logic_vector(1 downto 0);
+   adr       : std_logic_vector(2 downto 0);
 end record AXI_T;
 
 type cacheline is record
@@ -183,6 +183,7 @@ constant ZERO_c : cacheline := ('0',
   constant MSG_ADR_IDX : natural := 32;  
   constant MSG_DAT_IDX : natural := 0;
 
+  constant seed_set: positive := 13;
   -- PWRCMD is:
   --  a total of 73 bits:
   --     valid_bit & cmd[8] & src[8] & dst[8] & unused[24] 

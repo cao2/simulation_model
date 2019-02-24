@@ -6,7 +6,7 @@ use work.defs.all;
 entity fifo_gen is
   Generic (
     constant B	: positive := 32;
-    constant W: positive := 32
+    constant W  : positive := 3
 	);
   Port ( 
     clk		: in  STD_LOGIC;

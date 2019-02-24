@@ -42,6 +42,8 @@ entity toper_chan_m is
     uart_upres_o : out MSG_T;
     audio_upres_o : out MSG_T;
 
+
+
     per_write_o : out MSG_T;
     per_write_ack_i : in std_logic;
     per_ack_o : out std_logic
@@ -84,6 +86,7 @@ begin
           st   := 6;
         elsif (toper_i.val = '1' and
                toper_i.cmd = WRITE_CMD) then
+          tep_gfx1 := toper_i;
           per_write_o<=toper_i;
           st   := 9;
         end if;
@@ -125,12 +128,13 @@ begin
           else
             rdready_o <= '1';
             sdata       := rdata_i;
-            st :=3;
+            st := 3;
           end if;
 
         end if;
       elsif st = 3 then -- forward read response from device
         --per_ack_o <= '1';
+        per_ack_o <='1';
         if tep_gfx1.tag = CPU0_TAG then
           bus_res_c0_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
                                tep_gfx1.id, tep_gfx1.adr, tdata);
@@ -149,7 +153,7 @@ begin
         elsif tep_gfx1.tag = UART_TAG then
           uart_upres_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
                           tep_gfx1.id, tep_gfx1.adr, sdata);
-          st := 6;
+          st := 10;
         elsif tep_gfx1.tag = USB_TAG then
           usb_upres_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
                           tep_gfx1.id, tep_gfx1.adr, sdata);
@@ -161,6 +165,7 @@ begin
         end if;
 
       elsif st = 4 then -- wait for ack from bus_resX_arbitor
+      
         if bus_res_c1_ack_i = '1' then
           bus_res_c1_o <= nullreq;
           st      := 0;
@@ -173,7 +178,7 @@ begin
           gfx_upres_o <= ZERO_MSG;
           st       := 0;
         end if;        
-      elsif st = 6 then
+      elsif st = 10 then
         if uart_upres_ack_i = '1' then
           uart_upres_o <= ZERO_MSG;
           st       := 0;
@@ -191,11 +196,29 @@ begin
       elsif st = 9 then
         if per_write_ack_i = '1' then
           per_ack_o <='1';
+			     if tep_gfx1.tag = GFX_TAG then
+                      gfx_upres_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
+                                     tep_gfx1.id, tep_gfx1.adr, sdata);
+                               st := 5;
+                  elsif tep_gfx1.tag = UART_TAG then
+                      uart_upres_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
+                                      tep_gfx1.id, tep_gfx1.adr, sdata);
+                                      st:=10;
+                  elsif tep_gfx1.tag = USB_TAG then
+                      usb_upres_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
+                                     tep_gfx1.id, tep_gfx1.adr, sdata);
+                                     st:= 7;
+                  elsif tep_gfx1.tag = AUDIO_TAG then
+                      audio_upres_o <= (tep_gfx1.val, tep_gfx1.cmd, tep_gfx1.tag,
+                                       tep_gfx1.id, tep_gfx1.adr, sdata);
+                                       st := 8;
+                  end if;         
           --bus_res_c0_o <= (per_write_o.val, per_write_o.cmd, per_write_o.tag,
           --                      per_write_o.id, per_write_o.adr, tdata); -- TODO check if tdata has
           --                                         -- correct value
+          
           per_write_o <= ZERO_MSG;
-          st := 4;
+          --st := 4;
         end if;
       end if;
     end if;

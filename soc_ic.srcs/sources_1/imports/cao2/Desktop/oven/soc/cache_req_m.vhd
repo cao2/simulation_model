@@ -79,9 +79,9 @@ begin
 				-- dbg("00" & tmp_cache_req1(62 downto 61));
 				-- Adding tag so that we know where msg came from
 				-- tmp_cache_req1.tag := cache_req_i.tag;
-				if is_mem_req(tmp_cache_req1) then
+				if tmp_cache_req1.adr(31 downto 31) = "1" then
+				--is_mem_req(tmp_cache_req1) then
 					tomem_o <= tmp_cache_req1; -- TODO hard-coded cpu1 id?
-
 					state := 5;
 				elsif tmp_cache_req1.adr(30 downto 29) = "00" then
 					togfx_o <= tmp_cache_req1;

@@ -83,7 +83,7 @@ package body util is
                   constant next_st : in natural) is
   begin
     if cnt > 0 then
-   --- report "delay now "& integer'Image(cnt);
+    report "delay now "& integer'Image(cnt);
       cnt := cnt - 1;
     else
       st := next_st;

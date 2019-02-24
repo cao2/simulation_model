@@ -85,6 +85,9 @@ begin
         tx_out<=tx;
     end if;
  end process;
+ 
+ 
+ 
   write_req_p : process(Clock)
     variable address : integer;
     variable len     : integer;

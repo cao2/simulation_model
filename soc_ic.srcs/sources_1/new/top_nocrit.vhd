@@ -425,11 +425,11 @@ signal mon_data: TST_TO;
 signal mon_full: std_logic;
 signal mon_mem_read_t, mon_mem_write_t, mon_audio_read_t, mon_audio_write_t, mon_uart_read_t, mon_uart_write_t                                  : TST_T;
 signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t  ,mon_emp                                                                  : TST_T;
-     signal mon_array: ALL_T:=(others =>('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),"00"));
+     signal mon_array: ALL_T:=(others =>('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),"000"));
     signal mem_rid, mem_rtag: std_logic_vector(7 downto 0);
     signal mem_wid, mem_wtag: std_logic_vector(7 downto 0);
     signal ZERO_TSTT: TST_TO:=('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),(others=>'0'),'0');
-    signal monitor_data: std_logic_vector(32 downto 0);
+    signal monitor_data: std_logic_vector(33 downto 0);
     
     ----Configuration for monitors
     signal cmd_en_0,cmd_en_1,cmd_en_2,cmd_en_3,cmd_en_4,cmd_en_5,cmd_en_6,cmd_en_7: std_logic_vector(4 downto 0) := "11111";
@@ -878,8 +878,8 @@ begin
               ----AXI interface
               link_id           => "10010",
               ---slave_id   => GFX,
-              tag_i => mem_rtag,
-                          id_i          => mem_rid,
+              tag_i => "UUUUUUUU",
+              id_i => "UUUUUUUU",
               ---write address channel
   
               ---read address channel
@@ -923,8 +923,8 @@ begin
               ----AXI interface
               link_id           => "10011",
               ---slave_id   => GFX,
-              tag_i => mem_wtag,
-                          id_i          => mem_wid,
+              tag_i => "UUUUUUUU",
+                          id_i => "UUUUUUUU",
               ---write address channel
               waddr_i       => waddr_gfx,
               wlen_i        => wlen_gfx,
@@ -967,13 +967,13 @@ begin
               clk           => Clock,
               rst           => reset,
               cmd_en        => cmd_en_20,
-                       id_en         => id_en_20,
-                       tag_en        => tag_en_20,
+              id_en         => id_en_20,
+              tag_en        => tag_en_20,
               ----AXI interface
               link_id           => "10100",
               ---slave_id   => AUDIO,
-              tag_i => mem_rtag,
-                          id_i          => mem_rid,
+              tag_i => "UUUUUUUU",
+              id_i => "UUUUUUUU",
               ---write address channel
   
               ---read address channel
@@ -1017,8 +1017,8 @@ begin
               ----AXI interface
               link_id           => "10101",
               ---slave_id   => MEM,
-              tag_i => mem_wtag,
-                          id_i          => mem_wid,
+              tag_i => "UUUUUUUU",
+                          id_i => "UUUUUUUU",
               ---write address channel
               waddr_i       => waddr_audio,
               wlen_i        => wlen_audio,
@@ -1066,8 +1066,8 @@ begin
               ----AXI interface
               link_id           => "10110",
               ---slave_id   => MEM,
-              tag_i => mem_rtag,
-                          id_i          => mem_rid,
+              tag_i => "UUUUUUUU",
+              id_i => "UUUUUUUU",
               ---write address channel
   
               ---read address channel
@@ -1111,8 +1111,8 @@ begin
               ----AXI interface
               link_id           => "10111",
               ---slave_id   => MEM,
-              tag_i => mem_wtag,
-                          id_i          => mem_wid,
+              tag_i => "UUUUUUUU",
+                          id_i => "UUUUUUUU",
               ---write address channel
               waddr_i       => waddr_usb,
               wlen_i        => wlen_usb,
@@ -1160,8 +1160,8 @@ begin
               ----AXI interface
               link_id           => "11000",
               ---slave_id   => MEM,
-              tag_i => mem_rtag,
-                          id_i          => mem_rid,
+              tag_i => "UUUUUUUU",
+                          id_i => "UUUUUUUU",
               ---write address channel
   
               ---read address channel
@@ -1205,8 +1205,8 @@ begin
               ----AXI interface
               link_id           => "11001",
               ---slave_id   => MEM,
-              tag_i => mem_wtag,
-                          id_i          => mem_wid,
+              tag_i => "UUUUUUUU",
+                          id_i => "UUUUUUUU",
               ---write address channel
               waddr_i       => waddr_uart,
               wlen_i        => wlen_uart,
@@ -1703,13 +1703,13 @@ begin
               done_o       => usb_done
           );
   
-      uart_entity : entity work.uart_peripheral(rtl)
+      uart_entity : entity work.peripheral(rtl)
           port map(
               Clock        => Clock,
               reset        => reset,
               id_i         => UART,
-              tx_out       => tx_out,
-              rx_in        => rx_in,
+              --tx_out       => tx_out,
+              --rx_in        => rx_in,
               -- write address channel
               waddr_i      => waddr_uart1,
               wlen_i       => wlen_uart1,
