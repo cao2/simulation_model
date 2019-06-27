@@ -80,13 +80,14 @@ begin
 					tmp_transaction.cmd      := '0';
                     tmp_transaction.tag :=tag_i;
                     tmp_transaction.id:= id_i;
-					if raddr_i = adr then
-						tmp_transaction.adr := "00";
-					elsif unsigned(raddr_i) - unsigned(adr) = 1 or unsigned(adr) - unsigned(raddr_i) = 1 then
-						tmp_transaction.adr := "01";
-					else
-						tmp_transaction.adr := "10";
-					end if;
+                    tmp_transaction.adr := raddr_i(31 downto 0);
+--					if raddr_i = adr then
+--						tmp_transaction.adr := "00";
+--					elsif unsigned(raddr_i) - unsigned(adr) = 1 or unsigned(adr) - unsigned(raddr_i) = 1 then
+--						tmp_transaction.adr := "01";
+--					else
+--						tmp_transaction.adr := "10";
+--					end if;
 					st                  := three;
 					if (((tag_i and tag_en)=tag_i) and ((id_i and id_en)=id_i) and cmd_en(1)='1') then
 					   transaction_o<= tmp_transaction;

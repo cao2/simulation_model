@@ -12,7 +12,7 @@ entity proc is
     reset        : in  std_logic;
 
     id_i         : in IP_T;
-    
+    restart_i    : in std_logic;
     snp_req_i    : in  MSG_T;
     bus_res_i    : in  BMSG_T;
     snp_hit_o    : out std_logic;
@@ -28,7 +28,7 @@ entity proc is
     wb_req_o     : out BMSG_T;
 
     bus_req_o    : out MSG_T := ZERO_MSG; -- a down req
-    
+    seed_i       : in natural;
     -- for observation only:
     done_o       : out std_logic;
     cpu_req_o    : out MSG_T;
@@ -101,7 +101,8 @@ begin
    rst     => reset,
    clk     => Clock,
    en      => is_tset(RW),
-   
+   restart_i => restart_i,
+   seed_i   => seed_i,
    id_i      => id_i,
     
    cpu_res_i => rwt_res,
@@ -115,7 +116,8 @@ begin
    rst     => reset,
    clk     => Clock,
    en      => is_tset(PWR),
-
+   restart_i => restart_i,
+   seed_i   => seed_i,
    id_i      => id_i,
     
    cpu_res_i => pwrt_res,
@@ -148,5 +150,5 @@ begin
   rwt_res <= cpu_res when is_rw_cmd(cpu_res) else ZERO_MSG;
   pwrt_res <= cpu_res when is_pwr_cmd(cpu_res) else ZERO_MSG;
 
-  done_o <= '0';
+  done_o <= rwt_done;
 end rtl;

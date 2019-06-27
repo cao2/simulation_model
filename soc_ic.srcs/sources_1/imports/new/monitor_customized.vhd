@@ -32,7 +32,7 @@ begin
 				tmp_t.val      := '1';
 				tmp_t.cmd      := msg_i.cmd;
 				tmp_t.linkID   := link_id;
-				tmp_t.tag := msg_i.tag;
+				tmp_t.              tag := msg_i.tag;
 --				if msg_i.adr = adr then
 --					tmp_t.adr := "00";
 --				elsif unsigned(msg_i.adr) - unsigned(adr) = 1 or unsigned(adr) - unsigned(msg_i.adr) = 1 then
@@ -40,7 +40,7 @@ begin
 --				else
 --					tmp_t.adr := "10";
 --				end if;
-                tmp_t.adr := msg_i.adr(31 downto 29);
+                tmp_t.adr := msg_i.adr(31 downto 0);
                 tmp_t.id := msg_i.id;
                 if (((msg_i.tag and tag_en)=msg_i.tag) 
                                and ((msg_i.id and id_en)=msg_i.id) and

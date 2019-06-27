@@ -42,7 +42,7 @@ begin
 --				else
 --					tmp_t.adr := "10";
 --				end if;
-                tmp_t.adr := msg_i.adr(31 downto 29);
+                tmp_t.adr := msg_i.adr(31 downto 0);
 --				if msg_i.id = id then
 --					tmp_t.id := "00";
 --				elsif unsigned(msg_i.id) - unsigned(id) = 1 or unsigned(id) - unsigned(msg_i.id) = 1 then

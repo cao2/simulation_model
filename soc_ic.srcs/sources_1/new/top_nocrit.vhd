@@ -425,11 +425,11 @@ signal mon_data: TST_TO;
 signal mon_full: std_logic;
 signal mon_mem_read_t, mon_mem_write_t, mon_audio_read_t, mon_audio_write_t, mon_uart_read_t, mon_uart_write_t                                  : TST_T;
 signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t  ,mon_emp                                                                  : TST_T;
-     signal mon_array: ALL_T:=(others =>('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),"000"));
+     signal mon_array: ALL_T:=(others =>('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),(others=>'0')));
     signal mem_rid, mem_rtag: std_logic_vector(7 downto 0);
     signal mem_wid, mem_wtag: std_logic_vector(7 downto 0);
     signal ZERO_TSTT: TST_TO:=('0',"00000",(others=>'0'),(others=>'0'),(others=>'0'),(others=>'0'),'0');
-    signal monitor_data: std_logic_vector(33 downto 0);
+    signal monitor_data: std_logic_vector(62 downto 0);
     
     ----Configuration for monitors
     signal cmd_en_0,cmd_en_1,cmd_en_2,cmd_en_3,cmd_en_4,cmd_en_5,cmd_en_6,cmd_en_7: std_logic_vector(4 downto 0) := "11111";
@@ -447,8 +447,9 @@ signal mon_usb_read_t, mon_usb_write_t, mon_gfx_read_t, mon_gfx_write_t  ,mon_em
     
 
     signal data_dropped: std_logic_vector (4 downto 0);
-    
+    signal restart : std_logic := '0';
     signal ranks: rank_list;
+    signal seed:natural := 1;
 begin
      rank_set: process(reset)
      begin
@@ -490,16 +491,37 @@ begin
      
      
      
-      trace_output_logger: process(tb_clk)
-       file trace_file: TEXT open write_mode is "trace_output.tstt";
+    trace_output_logger: process(tb_clk)
+      --constant filename:string(10 downto 0) := integer'image(seed_set) & ".tstt";
+       --file f_trace_file: TEXT open write_mode is integer'image(seed) & ".tstt";
+       file trace_file : TEXT;
        variable l: line;
+       variable state: natural := 1;
      begin
                if GEN_TRACE1 then
-                   if rising_edge(tb_clk) or falling_edge(tb_clk) then
-                       ---- cpu
-                       write(l, monitor_data&data_dropped);     --35
+                   if (reset = '1') then
+                       file_open(trace_file, integer'image(seed) & ".tstt", write_mode);
+                       state := 1;
+                   elsif rising_edge(tb_clk)  then
                        
-                       writeline(trace_file, l);
+                       if state = 1 then
+                            write(l, monitor_data&data_dropped); 
+                            writeline(trace_file, l);
+                            if (tb_sim_ended = '1') then
+                                file_close(trace_file);
+                                restart <= '1';
+                                seed <= seed + 1;
+                                state := 2;
+                            else 
+                                restart <= '0';
+                            end if;
+                       elsif state = 2 then
+                            restart <= '0';
+                            file_open(trace_file, integer'image(seed) & ".tstt", write_mode);
+                            write(l, monitor_data&data_dropped); 
+                            writeline(trace_file, l);
+                            state := 1;
+                       end if;
                    end if;
                end if;
            end process; 
@@ -1338,6 +1360,8 @@ begin
               reset         => reset,
               Clock         => Clock,
               id_i          => CPU0,
+              restart_i     => restart,
+              seed_i   => seed,
               snp_req_i     => snp_req11, -- snoop req from cache 2
               snp_hit_o     => snp_hit1,
               snp_res_o     => snp_res1,
@@ -1366,6 +1390,8 @@ begin
               reset         => reset,
               Clock         => Clock,
               id_i          => CPU1,
+              restart_i     => restart,
+              seed_i   => seed,
               snp_req_i     => snp_req21, -- snoop req from cache 2
               snp_hit_o     => snp_hit2,
               snp_res_o     => snp_res2,
@@ -1576,6 +1602,8 @@ begin
               Clock        => Clock,
               reset        => reset,
               id_i         => GFX,
+              restart_i    => restart,
+              seed_i   => seed,
               -- write address channel
               waddr_i      => waddr_gfx1,
               wlen_i       => wlen_gfx1,
@@ -1620,6 +1648,8 @@ begin
               Clock        => Clock,
               reset        => reset,
               id_i         => AUDIO,
+              restart_i    => restart,
+              seed_i   => seed,
               -- write address channel
               waddr_i      => waddr_audio1,
               wlen_i       => wlen_audio1,
@@ -1664,6 +1694,8 @@ begin
               Clock        => Clock,
               reset        => reset,
               id_i         => USB,
+              restart_i    => restart,
+              seed_i   => seed,
               -- write address channel
               waddr_i      => waddr_usb1,
               wlen_i       => wlen_usb1,
@@ -1708,6 +1740,8 @@ begin
               Clock        => Clock,
               reset        => reset,
               id_i         => UART,
+              restart_i    => restart,
+              seed_i   => seed,
               --tx_out       => tx_out,
               --rx_in        => rx_in,
               -- write address channel
@@ -1780,7 +1814,8 @@ begin
           );
   
       -- -- Clock generation, starts at 0
-      tb_clk <= not tb_clk after tb_period/2 when tb_sim_ended /= '1' else '0';
+      tb_clk <= not tb_clk after tb_period/2;
+--       when tb_sim_ended /= '1' else '0';
       --tb_clk <= not tb_clk after tb_period/2;
       Clock  <= tb_clk;
   
@@ -1996,15 +2031,15 @@ begin
           end if;
       end process;
   
-
-      stimuli : process
-      begin
-          reset <= '1';
-          wait for 15 ps;
-          reset <= '0';
-          wait until tb_sim_ended = '1';
-          report "SIM END";
-      end process;
+    reset <= '1', '0' after 15ps;
+--      stimuli : process
+--      begin
+--          reset <= '1';
+--          wait for 15 ps;
+--          reset <= '0';
+--          --wait until tb_sim_ended = '1';
+--          --report "SIM END";
+--      end process;
   
       tb_sim_ended <= proc0_done and proc1_done and usb_done and uart_done and gfx_done and audio_done;
   end tb;

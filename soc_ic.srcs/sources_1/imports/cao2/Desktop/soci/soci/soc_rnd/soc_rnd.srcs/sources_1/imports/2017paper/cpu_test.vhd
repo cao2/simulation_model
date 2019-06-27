@@ -17,6 +17,8 @@ entity cpu_test is
     cpu_req_o    : out MSG_T;
     cpu_res_i    : in MSG_T;
     cpu_req_ack_i: in std_logic;
+    restart_i    : in std_logic;
+    seed_i       : in natural;
     done_o       : out std_logic
     );
 
@@ -27,6 +29,7 @@ architecture rwt of cpu_test is
   signal r : std_logic_vector(31 downto 0);
   signal tag: IPTAG_T:= ZERO_TAG;
   constant overall_delay: positive := 20;
+  constant seed: integer := to_integer(unsigned(TEST(RW))) + seed_i;
 begin
   set_tag: process(rst)
 	begin
@@ -43,7 +46,7 @@ begin
      clk    => clk,
      rst    => rst,
      en     => en,
-     seed_i => to_integer(unsigned(TEST(RW))) + seed_set,
+     seed_i => seed,
      rnd_o  => r
      );
 
@@ -75,7 +78,7 @@ begin
     variable dflg : boolean := true;
     
     variable t7_f : boolean := true;
-    variable t7_s : natural := nat(id_i) + seed_set;
+    variable t7_s : natural := nat(id_i) + seed_i;
     variable t7_ct, t7_c, t7_r : natural := 0;
     variable t7_cmd : CMD_T;
     variable t7_adr : ADR_T;
@@ -91,6 +94,11 @@ begin
       cpu_req_o <= ZERO_MSG;
       st := 1;
     elsif en = '1' and (rising_edge(clk)) then
+      if (restart_i = '1') then
+            t7_ct := 0;
+            sim_end <= '0';
+            st := 1;
+      end if;
       --dbg_chg("rwt_p, st: ", st, st_prev);
       if st = 0 then -- DELAY
         rnd_dlay(t7_f, t7_s, t7_c, st, st_nxt);
@@ -109,7 +117,7 @@ begin
       elsif st = 2 then -- DONE
         sim_end <= '1';
         cpu_req_o <= ZERO_MSG;
-
+        
       elsif st = 3 then -- SND (r|w req)
 
         -- get a random number
@@ -228,7 +236,7 @@ begin  -- architecture pwrtx
    -- t6 vars
    variable t6_f : boolean := true;
    variable t6_c, t6_tc, t6_r : natural := 0;
-   variable t6_s : natural := nat(id_i) + seed_set;
+   variable t6_s : natural := nat(id_i) + seed_i;
    -- _s is seed, _c is cnt, _tc is tot cnt
    variable t6_cpuid : IPTAG_T;
    variable t6_cmd : CMD_T;

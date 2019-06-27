@@ -694,7 +694,7 @@ begin
 					state   := 16;
 					--report "read )::::::::::::::::::::::::::::::tomemp i's ag info: " & integer'image(to_integer(unsigned(tomem_p.tag)));
           
-        			elsif tomem_p.val = '1' and tomem_p.cmd = WRITE_CMD then
+        		elsif tomem_p.val = '1' and tomem_p.cmd = WRITE_CMD then
 					-- if (dst_eq(tomem_p, GFX_TAG) or
 					-- dst_eq(tomem_p, USB_TAG)  or
 					-- dst_eq(tomem_p, UART_TAG)  or
@@ -925,7 +925,6 @@ begin
 					waddr  <= tep_mem.adr;
 					wlen   <= "00000" & "00001"; -- MERGE durw: [10000/00001]
 					wsize  <= "00001" & "00000";
-					
 					-- wdata_audio := tep_mem.dat;
 					state := 2;
 				else
@@ -960,7 +959,7 @@ begin
 			elsif state = 4 then
 				if wready = '1' then    -- MERGE durw: [1/0]
 					wvalid <= '1';
-					waddr  <= mem_wb.adr;
+					waddr  <= tep_mem_l.adr;
 					wlen   <= "00000" & "10000";
 					wsize  <= "00001" & "00000";
 					tdata  := tep_mem_l.dat;

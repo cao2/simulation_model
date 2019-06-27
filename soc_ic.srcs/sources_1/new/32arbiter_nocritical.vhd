@@ -18,7 +18,7 @@ entity arbiter32_nocritical is
 		CLK          : in  STD_LOGIC;
 		RST          : in  STD_LOGIC;
 		DataIn       : in  ALL_T;
-		DataOut      : out std_logic_vector(33 downto 0);
+		DataOut      : out std_logic_vector(62 downto 0);
 		ranks        : in  rank_list;
 		ranks_fifo   : in  rank_list;
 		critical     : in  positive;
@@ -30,10 +30,10 @@ end arbiter32_nocritical;
 
 architecture rtl of arbiter32_nocritical is
 
-	signal in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, in16, in17, in18, in19, in20, in21, in22, in23, in24, in25, in26, in27, in28, in29, in30, in31                                 : std_logic_vector(32 downto 0);
-	signal tts0, tts1, tts2, tts3, tts4, tts5, tts6, tts7, tts8, tts9, tts10, tts11, tts12, tts13, tts14, tts15, tts16, tts17, tts18, tts19, tts20, tts21, tts22, tts23, tts24, tts25, tts26, tts27, tts28, tts29, tts30, tts31 : std_logic_vector(32 downto 0);
-	type tts_a is array (0 to 31) of std_logic_vector(32 downto 0);
-	signal empty_data                                                                             : std_logic_vector(32 downto 0) := (others => '0');
+	signal in0, in1, in2, in3, in4, in5, in6, in7, in8, in9, in10, in11, in12, in13, in14, in15, in16, in17, in18, in19, in20, in21, in22, in23, in24, in25, in26, in27, in28, in29, in30, in31                                 : std_logic_vector(61 downto 0);
+	signal tts0, tts1, tts2, tts3, tts4, tts5, tts6, tts7, tts8, tts9, tts10, tts11, tts12, tts13, tts14, tts15, tts16, tts17, tts18, tts19, tts20, tts21, tts22, tts23, tts24, tts25, tts26, tts27, tts28, tts29, tts30, tts31 : std_logic_vector(61 downto 0);
+	type tts_a is array (0 to 31) of std_logic_vector(61 downto 0);
+	signal empty_data                                                                             : std_logic_vector(61 downto 0) := (others => '0');
 	signal tts_array                                                                                : tts_a;
 	signal re, full, emp, we,half                                                                                                                                                                                                    : std_logic_vector(31 downto 0) := (others => '0');
 	signal count                                                                                                                                                                                                                : integer                       := 0;
@@ -114,7 +114,7 @@ begin
 				emp_msg.cmd := "11111111";
 				emp_msg.tag := "11111111";
 				emp_msg.id := "11111111";
-				emp_msg.adr :="000";
+				emp_msg.adr :="00000000000000000000000000000000";
 				emp_msg.linkID :="00000";
 				
 			else
@@ -309,7 +309,7 @@ begin
 				      state := six;
 				elsif (state = six) then
 					re(val_chan(i)) <= '0';
-					if tts_array(val_chan(i))(32 downto 32) = "1" then
+					if tts_array(val_chan(i))(61 downto 61) = "1" then
 						DataOut      <= tts_array(val_chan(i)) & '1';
 						data_dropped <= contro_v(36 downto 32);
 						---now the first data is out, check if it reaches the size
@@ -328,7 +328,7 @@ begin
                     state := eight;
 				elsif (state = eight) then
 				    
-					if tts_array(val_chan(i))(32 downto 32) = "1" then
+					if tts_array(val_chan(i))(61 downto 61) = "1" then
 						DataOut <= tts_array(val_chan(i)) & '0';
 						if i + 1 = num_val then
 							state := one;
@@ -386,7 +386,7 @@ begin
 	end process;
 
 	FIFO0 : entity work.fifo_gen(rtl)
-		generic map(B => 33, W => depth)
+		generic map(B => 62, W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(0),
 		         wr     => we(0),
@@ -414,7 +414,7 @@ begin
 		end if;
 	end process;
 	FIFO1 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(1),
 		         wr     => we(1),
@@ -442,7 +442,7 @@ begin
 		end if;
 	end process;
 	FIFO2 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(2),
 		         wr     => we(2),
@@ -470,7 +470,7 @@ begin
 		end if;
 	end process;
 	FIFO3 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(3),
 		         wr     => we(3),
@@ -498,7 +498,7 @@ begin
 		end if;
 	end process;
 	FIFO4 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(4),
 		         wr     => we(4),
@@ -525,7 +525,7 @@ begin
 		end if;
 	end process;
 	FIFO5 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(5),
 		         wr     => we(5),
@@ -553,7 +553,7 @@ begin
 		end if;
 	end process;
 	FIFO6 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(6),
 		         wr     => we(6),
@@ -581,7 +581,7 @@ begin
 		end if;
 	end process;
 	FIFO7 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(7),
 		         wr     => we(7),
@@ -609,7 +609,7 @@ begin
 		end if;
 	end process;
 	FIFO8 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(8),
 		         wr     => we(8),
@@ -637,7 +637,7 @@ begin
 		end if;
 	end process;
 	FIFO9 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(9),
 		         wr     => we(9),
@@ -665,7 +665,7 @@ begin
 		end if;
 	end process;
 	FIFO10 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(10),
 		         wr     => we(10),
@@ -693,7 +693,7 @@ begin
 		end if;
 	end process;
 	FIFO11 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(11),
 		         wr     => we(11),
@@ -721,7 +721,7 @@ begin
 		end if;
 	end process;
 	FIFO12 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(12),
 		         wr     => we(12),
@@ -749,7 +749,7 @@ begin
 		end if;
 	end process;
 	FIFO13 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(13),
 		         wr     => we(13),
@@ -777,7 +777,7 @@ begin
 		end if;
 	end process;
 	FIFO14 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(14),
 		         wr     => we(14),
@@ -805,7 +805,7 @@ begin
 		end if;
 	end process;
 	FIFO15 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(15),
 		         wr     => we(15),
@@ -833,7 +833,7 @@ begin
 		end if;
 	end process;
 	FIFO16 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(16),
 		         wr     => we(16),
@@ -861,7 +861,7 @@ begin
 		end if;
 	end process;
 	FIFO17 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(17),
 		         wr     => we(17),
@@ -888,7 +888,7 @@ begin
 		end if;
 	end process;
 	FIFO18 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(18),
 		         wr     => we(18),
@@ -916,7 +916,7 @@ begin
 		end if;
 	end process;
 	FIFO19 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(19),
 		         wr     => we(19),
@@ -944,7 +944,7 @@ begin
 		end if;
 	end process;
 	FIFO20 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(20),
 		         wr     => we(20),
@@ -972,7 +972,7 @@ begin
 		end if;
 	end process;
 	FIFO21 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(21),
 		         wr     => we(21),
@@ -1000,7 +1000,7 @@ begin
 		end if;
 	end process;
 	FIFO22 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(22),
 		         wr     => we(22),
@@ -1028,7 +1028,7 @@ begin
 		end if;
 	end process;
 	FIFO23 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(23),
 		         wr     => we(23),
@@ -1056,7 +1056,7 @@ begin
 		end if;
 	end process;
 	FIFO24 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(24),
 		         wr     => we(24),
@@ -1084,7 +1084,7 @@ begin
 		end if;
 	end process;
 	FIFO25 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(25),
 		         wr     => we(25),
@@ -1112,7 +1112,7 @@ begin
 		end if;
 	end process;
 	FIFO26 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(26),
 		         wr     => we(26),
@@ -1158,7 +1158,7 @@ begin
 		end if;
 	end process;
 	FIFO27 : entity work.fifo_gen(rtl)
-		generic map(B => 33,W => depth)
+		generic map(B => 62,W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(27),
 		         wr     => we(27),
@@ -1186,7 +1186,7 @@ begin
 		end if;
 	end process;
 	FIFO28 : entity work.fifo_gen(rtl)
-		generic map(B => 33, W => depth)
+		generic map(B => 62, W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(28),
 		         wr     => we(28),
@@ -1214,7 +1214,7 @@ begin
 		end if;
 	end process;
 	FIFO29 : entity work.fifo_gen(rtl)
-		generic map(B => 33, W => depth)
+		generic map(B => 62, W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(29),
 		         wr     => we(29),
@@ -1242,7 +1242,7 @@ begin
 		end if;
 	end process;
 	FIFO30 : entity work.fifo_gen(rtl)
-		generic map(B => 33, W => depth)
+		generic map(B => 62, W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(30),
 		         wr     => we(30),
@@ -1270,7 +1270,7 @@ begin
 		end if;
 	end process;
 	FIFO31 : entity work.fifo_gen(rtl)
-		generic map(B => 33, W => depth)
+		generic map(B => 62, W => depth)
 		port map(clk    => clk, reset => rst, percent_i => percent_i,
 		         rd     => re(31),
 		         wr     => we(31),

@@ -10,7 +10,8 @@ entity peripheral is
        reset      : in  std_logic;
 
        id_i       : in IP_T;
-       
+       restart_i  : in std_logic;
+       seed_i       :in natural;
        ---write address channel
        waddr_i      : in  ADR_T;
        wlen_i       : in  std_logic_vector(9 downto 0);
@@ -72,7 +73,7 @@ begin
      clk    => Clock,
      rst    => reset,
      en     => '1',
-     seed_i => seed_set,
+     seed_i => seed_i,
      rnd_o  => r
      );
 
@@ -223,7 +224,7 @@ set_tag: process(Clock)
   
   ureqt_p : process(clock) -- up read test
     variable dc, tc, st_nxt : natural := 0;
-    variable s : natural := nat(id_i) + seed_set;
+    variable s : natural := nat(id_i) + seed_i;
     variable st : natural := 0;
     variable b : boolean := false;
     variable t_adr : ADR_T;
@@ -239,6 +240,11 @@ set_tag: process(Clock)
     variable adr_space: std_logic_vector(2 downto 0) := "100";
   begin
       if(rising_edge(clock)) then
+        if restart_i = '1' then
+            tc := 0;
+            sim_end <= '0';
+            st := 0;
+        end if;
         if reset = '1' then
               upreq_o <= ZERO_MSG;
               --ct := rand_nat(to_integer(unsigned(TEST(UREQ))));
